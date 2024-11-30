@@ -1,16 +1,20 @@
 import Header from "../Components/Header.jsx";
 import Footer from "../Components/Footer/Footer";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 function Root() {
+    const location = useLocation(); // Obtiene la ruta actual
+    const hideHeaderRoutes = ["/mangas", "/manager"]; // Rutas donde no se mostrará el Header
+
     return (
         <div className="max-w-screen min-h-screen flex flex-col">
-            <Header />
+            {/* Renderiza el Header solo si la ruta actual no está en `hideHeaderRoutes` */}
+            {!hideHeaderRoutes.includes(location.pathname) && <Header />}
             {/* Aquí irán las rutas hijas */}
             <main className="flex-grow">
                 <Outlet />
             </main>
-            {/* Agregar el Footer */}
+            {/* Footer permanece visible */}
             <Footer />
         </div>
     );
