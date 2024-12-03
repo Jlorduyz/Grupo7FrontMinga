@@ -33,12 +33,7 @@ const Footer = () => {
                         Manager
                     </a>
 
-                    <a href="/RegisterPage" className="hover:text-pink-500">
-                        RegisterPage
-                    </a>
-                    <a href="/LoginPage" className="hover:text-pink-500">
-                        LoginPage
-                    </a>
+
                 </div>
 
                 {/* Logo Central */}

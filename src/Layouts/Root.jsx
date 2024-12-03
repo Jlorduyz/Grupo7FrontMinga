@@ -4,7 +4,7 @@ import { Outlet, useLocation } from "react-router-dom";
 
 function Root() {
     const location = useLocation(); // Obtiene la ruta actual
-    const hideHeaderRoutes = ["/mangas", "/manager", "/RegisterPage", "/LoginPage"]; // Añadido "/LoginPage"
+    const hideHeaderRoutes = ["/mangas", "/manager"];
 
     return (
         <div className="max-w-screen min-h-screen flex flex-col">
