@@ -33,6 +33,10 @@ const Footer = () => {
                         Manager
                     </a>
 
+                    <a href="/EditChapter" className="hover:text-pink-500">
+                        EditChapter
+                    </a>
+
 
                 </div>
 

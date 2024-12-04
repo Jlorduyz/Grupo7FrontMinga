@@ -5,6 +5,8 @@ import Root from "./Layouts/Root.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Mangas from "./Pages/Mangas.jsx";
 import Manager from "./Pages/Manager.jsx";
+import EditChapter from "./Pages/EditChapter.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "manager", // Ruta para Manager
         element: <Manager />,
+      },
+      {
+        path: "edit-chapter", // Ruta para EditChapter
+        element: <EditChapter />, // Componente EditChapter
       },
     ],
   },
