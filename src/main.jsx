@@ -7,6 +7,8 @@ import Mangas from "./Pages/Mangas.jsx";
 import Manager from "./Pages/Manager.jsx";
 import { Welcome } from "./Pages/Register.jsx";
 import { WelcomeBack } from "./Pages/RegisterBack.jsx";
+import ProfilePage from "./Pages/Profile.jsx";
+import '/app.css'
 
 const router = createBrowserRouter([
   {
@@ -22,13 +24,18 @@ const router = createBrowserRouter([
         element: <Manager />,
       },
       {
-        path: "welcome", // Ruta para Manager
+        path: "welcome", // Ruta para Register
         element: <Welcome></Welcome>,
       },
       {
-        path: "welcomeback", // Ruta para Manager
+        path: "welcomeback", // Ruta para RegisterBack
         element: <WelcomeBack></WelcomeBack>,
       },
+      {
+        path: "profile", // Ruta para Profile
+        element: <ProfilePage></ProfilePage>,
+      },
+      
     ],
   },
 ]);
