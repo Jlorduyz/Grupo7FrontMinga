@@ -5,6 +5,8 @@ import Root from "./Layouts/Root.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Mangas from "./Pages/Mangas.jsx";
 import Manager from "./Pages/Manager.jsx";
+import { Welcome } from "./Pages/Register.jsx";
+import { WelcomeBack } from "./Pages/RegisterBack.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
       {
         path: "manager", // Ruta para Manager
         element: <Manager />,
+      },
+      {
+        path: "welcome", // Ruta para Manager
+        element: <Welcome></Welcome>,
+      },
+      {
+        path: "welcomeback", // Ruta para Manager
+        element: <WelcomeBack></WelcomeBack>,
       },
     ],
   },
