@@ -102,4 +102,5 @@ const Mangas = () => {
     );
 };
 
+
 export default Mangas;
