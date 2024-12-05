@@ -1,12 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit'
-import categorySlice from "./actions/carrouselSlice.js"
-import { mangaSlice } from './actions/mangaSlice.js';
+import { configureStore } from "@reduxjs/toolkit";  
+import authReducer from "./reducer/authReducer";
 
 const store = configureStore({
     reducer: {
-      categories: categorySlice.reducer,
-      mangas: mangaSlice.reducer,
-    },
-  });
+        authStore: authReducer
+    }
+})
 
-  export default store;
+export default store
