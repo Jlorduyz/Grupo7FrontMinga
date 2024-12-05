@@ -7,6 +7,7 @@ import Mangas from "./Pages/Mangas.jsx";
 import Manager from "./Pages/Manager.jsx";
 import { Welcome } from "./Pages/Register.jsx";
 import { WelcomeBack } from "./Pages/RegisterBack.jsx";
+
 import ProfilePage from "./Pages/Profile.jsx";
 import '/app.css'
 
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
         element: <ProfilePage></ProfilePage>,
       },
       
+       
     ],
   },
 ]);
