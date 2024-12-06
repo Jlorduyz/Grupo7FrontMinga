@@ -7,6 +7,7 @@ import entitiesReducer from "./entitiesSlice";
 import authReducer from "./reducer/authReducer";
 import categoryReducer from "./actions/carrouselSlice";
 import mangaSliceReducer from "./actions/mangaSlice";
+import categoriesReducer from "./actions/carrouselSlice";
 
 const store = configureStore({
     reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
         authStore: authReducer,
         categoryStore: categoryReducer,
         mangaStore: mangaSliceReducer,
+        categories: categoriesReducer
     },
 
 });

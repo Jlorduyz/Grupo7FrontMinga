@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { setUser } from '../Store/actions/AuthActions.js';
+import Carousel from '../Components/carrousel.jsx';
 
 const loginWithToken = async (token) => {
   try {
@@ -21,6 +22,10 @@ const loginWithToken = async (token) => {
     console.log("error", error);
   }
 }
+
+
+
+
 const Home = () => {
 
   const navigate = useNavigate();
@@ -38,8 +43,10 @@ const Home = () => {
     navigate("/home");
   },[dispatch])
 
+
   return (
     <div>
+      <Carousel/>
       <div className="bg-gray-100 py-16">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row items-center">
@@ -56,7 +63,7 @@ const Home = () => {
               <h4 className="text-lg mt-4">
                 Explore our extensive collection of manga series and stay up-to-date with the latest releases.
               </h4>
-              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-8">
+              <button onClick={() => navigate("/welcomeback")}className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-8">
                 Sign In
               </button>
             </div>

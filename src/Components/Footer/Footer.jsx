@@ -10,7 +10,6 @@ import {
 const Footer = () => {
     return (
         <footer className="relative bg-white pb-12">
-            {/* Imagen de Fondo */}
             <div className="footer-background">
                 <img
                     src="/images/footer.png"
@@ -23,7 +22,7 @@ const Footer = () => {
             <div className="footer-content relative mt-12 px-4 sm:px-8 lg:px-12 flex flex-col lg:flex-row justify-between items-center space-y-8 lg:space-y-0">
                 {/* Navegación (Home y Mangas) - Izquierda */}
                 <div className="footer-navigation flex flex-col lg:flex-row lg:space-x-8 text-gray-700 text-sm sm:text-base lg:text-lg font-medium items-center lg:items-start space-y-4 lg:space-y-0">
-                    <a href="#home" className="hover:text-pink-500">
+                    <a href="/home" className="hover:text-pink-500">
                         Home
                     </a>
                     <a href="/mangas" className="hover:text-pink-500">

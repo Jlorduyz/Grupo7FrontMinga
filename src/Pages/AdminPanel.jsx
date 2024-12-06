@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSelection } from "../Store/entitiesSlice";
 import SidebarMenu from "../Components/SidebarMenu";
+import Footer from "../Components/Footer/Footer";
 
 const AdminPanel = () => {
     const dispatch = useDispatch();
@@ -97,6 +98,7 @@ const AdminPanel = () => {
                     </table>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 };
