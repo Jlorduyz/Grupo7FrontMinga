@@ -14,10 +14,9 @@ import DetailsManga from "./Pages/DetailsManga.jsx";
 
 const router = createBrowserRouter([
   
-    {
-        path: "/",
-        element: <Root />,
+    {element: <Root />,
         children: [
+            { path: "/", element: <Home /> },
             { path: "/home", element: <Home /> },
             { path: "/mangas", element: <Mangas /> },
             { path: "/manager", element: <Manager /> },
@@ -26,6 +25,7 @@ const router = createBrowserRouter([
             { path: "/welcome", element: <Welcome /> },
             { path: "/welcomeback", element: <WelcomeBack /> },
             { path: "/detailManga", element: <DetailsManga /> },
+            {path:"/*",element:<NotFound></NotFound>},
         ],
     },
 ]);
