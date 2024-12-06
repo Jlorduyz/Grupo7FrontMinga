@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SidebarMenu from "../Components/SidebarMenu";
 import { fetchMangas } from "../Store/reducers/mangaReducer";
+import { useNavigate } from "react-router-dom";
 
 const Mangas = () => {
     const dispatch = useDispatch();
@@ -11,6 +12,11 @@ const Mangas = () => {
         dispatch(fetchMangas());
     }, [dispatch]);
 
+    const navigate = useNavigate();
+
+    const handleClick = (id) => {
+        navigate(`/detailManga?id=${id}`);
+    }
     // Filtrado de mangas (si lo deseas)
     const filteredMangas = filter === "All" 
         ? mangas 
@@ -75,7 +81,8 @@ const Mangas = () => {
                                             {manga.category}
                                         </p>
                                     </div>
-                                    <button className="mt-4 px-4 py-2 bg-green-400 text-white font-semibold rounded-full hover:bg-green-500 transition text-xs sm:text-sm lg:text-base">
+                                    <button className="mt-4 px-4 py-2 bg-green-400 text-white font-semibold rounded-full hover:bg-green-500 transition text-xs sm:text-sm lg:text-base"
+                                    onClick={() => handleClick(manga._id)}>
                                         Read
                                     </button>
                                 </div>

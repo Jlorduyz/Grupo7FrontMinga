@@ -10,6 +10,7 @@ import Home from "./Pages/Home.jsx";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "./Store/actions/AuthActions.js";
+import DetailsManga from "./Pages/DetailsManga.jsx";
 
 const router = createBrowserRouter([
   
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
             { path: "/admin-panel", element: <AdminPanel /> },
             { path: "/welcome", element: <Welcome /> },
             { path: "/welcomeback", element: <WelcomeBack /> },
+            { path: "/detailManga", element: <DetailsManga /> },
         ],
     },
 ]);
