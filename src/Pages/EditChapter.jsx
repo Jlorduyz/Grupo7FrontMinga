@@ -13,7 +13,6 @@ const EditChapter = () => {
     const { mangaList, selectedManga, chapterList, selectedChapter, editData } =
         useSelector((state) => state.editChapter);
 
-    // Simula la carga inicial de datos
     useEffect(() => {
         const fetchMangaData = async () => {
             const mangas = [
@@ -23,22 +22,20 @@ const EditChapter = () => {
                 "Dragon Ball",
 
             ];
-            dispatch(setMangaList(mangas)); // Carga la lista de mangas
+            dispatch(setMangaList(mangas)); 
         };
         fetchMangaData();
     }, [dispatch]);
 
-    // Actualiza la lista de capítulos según el manga seleccionado
     useEffect(() => {
         if (selectedManga) {
             const chapters = ["Chapter 1", "Chapter 2", "Chapter 3"];
-            dispatch(setChapterList(chapters)); // Carga capítulos dinámicamente
+            dispatch(setChapterList(chapters)); 
         }
     }, [selectedManga, dispatch]);
 
     return (
         <div className="min-h-screen flex flex-col sm:flex-row justify-center items-center bg-gray-100 px-4 sm:px-8">
-            {/* Formulario */}
             <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg sm:mr-8">
                 <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center">Edit Chapter</h1>
                 <form className="space-y-6">
@@ -98,7 +95,6 @@ const EditChapter = () => {
                 </form>
             </div>
 
-            {/* Imagen (visible solo en pantallas grandes) */}
             <div className="hidden sm:flex sm:flex-col sm:items-center sm:w-1/3">
                 <h2 className="text-lg font-semibold text-gray-700 mb-4 text-center">
                     Chapter #{selectedChapter || "N/A"} - {selectedManga || "Select a manga"}
