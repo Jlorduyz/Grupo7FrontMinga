@@ -21,6 +21,7 @@ const EditChapter = () => {
                 "Attack on Titan",
                 "Sailor Moon",
                 "Dragon Ball",
+
             ];
             dispatch(setMangaList(mangas)); // Carga la lista de mangas
         };
