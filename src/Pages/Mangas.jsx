@@ -18,7 +18,6 @@ const Mangas = () => {
     const handleClick = (id) => {
         navigate(`/detailManga?id=${id}`);
     }
-    // Filtrado de mangas (si lo deseas)
     const filteredMangas = filter === "All" 
         ? mangas 
         : mangas.filter((manga) => manga.category === filter);
@@ -63,15 +62,13 @@ const Mangas = () => {
                         ))}
                     </div>
 
-                    {/* Mostramos estado de carga o error */}
                     {isLoading && <p>Loading mangas...</p>}
                     {error && <p>{error}</p>}
 
-                    {/* Lista de mangas */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                         {filteredMangas.map((manga) => (
                             <div
-                                key={manga._id} // Ajustar la key según el campo único del manga
+                                key={manga._id} 
                                 className="bg-white shadow-lg rounded-lg flex flex-col lg:flex-row overflow-hidden"
                             >
                                 <div className="flex-1 p-4 flex flex-col justify-between">
@@ -90,7 +87,7 @@ const Mangas = () => {
                                 </div>
                                 <div className="w-full lg:w-1/2 relative">
                                     <img
-                                        src={manga.cover_photo} // Ajustar el campo según tu API
+                                        src={manga.cover_photo} 
                                         alt={manga.title}
                                         className="w-full h-40 sm:h-48 lg:h-full object-cover"
                                     />
