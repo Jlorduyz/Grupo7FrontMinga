@@ -18,6 +18,7 @@ const Mangas = () => {
         : mangas.filter((manga) => manga.category === filter);
 
     return (
+        <>
         <div className="bg-gray-100 min-h-screen flex">
             <SidebarMenu />
             <div className="flex-1 relative">
@@ -92,8 +93,9 @@ const Mangas = () => {
                     </div>
                 </div>
             </div>
-            <Footer></Footer>
         </div>
+        <Footer/>
+    </>
     );
 };
 

@@ -1,10 +1,18 @@
 import logo from '/images/logo.png'
-import menuImg from '/images/MenuImage.png'
+import SidebarMenu from './SidebarMenu';
+import { useNavigate } from 'react-router-dom';
+
+
 function Header(){
+    const navigate = useNavigate();
+
     return (
         <div className="w-full h-auto py-3.5 bg-transparent flex justify-between px-10 ">
-            <img className="h-14" src={menuImg} alt=""/>
-            <img className="h-14" src={logo} alt=""/>
+            <SidebarMenu>
+            </SidebarMenu>
+            <button onClick={() => navigate("/Home")}className="hover:bg-pink-600">
+              <img className="h-14" src={logo} alt=""/>
+              </button>
         </div>
     )
 }
