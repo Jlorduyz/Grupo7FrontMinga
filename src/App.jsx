@@ -7,6 +7,9 @@ import { Welcome } from "./Pages/Register.jsx";
 import { WelcomeBack } from "./Pages/SignIn.jsx";
 import Root from "./Layouts/Root.jsx";
 import Home from "./Pages/Home.jsx";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUser } from "./Store/actions/AuthActions.js";
 
 const router = createBrowserRouter([
   
@@ -25,7 +28,31 @@ const router = createBrowserRouter([
     },
 ]);
 
+const loginWithToken = async (token) => {
+  try {
+    const response = await axios.get("http://localhost:8080/api/users/validationToken",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      })
+    return (
+      response.data.response
+    )
+  } catch (error) {
+    console.log("error", error);
+    
+  }
+}
+
 function App() {
+  const dispatch = useDispatch();
+  let token = localStorage.getItem("token");
+  if (token) {
+    loginWithToken(token).then((user) => {
+      dispatch(setUser({ user, token }))
+    })
+  }
     return (
         <>
             <RouterProvider router={router}></RouterProvider>

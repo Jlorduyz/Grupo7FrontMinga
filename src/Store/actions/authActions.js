@@ -11,23 +11,6 @@ const logout = createAction("logout")
 
 
 
-// const login = createAsyncThunk("login", async({email, password}) => {
-//     console.log("entramos al login");
-    
-//     const credentials = {
-//         email: email,
-//         password: password
-//     }
-//     const response = await axios.post("https://grupo7backminga.onrender.com/api/auth/signIn", credentials)
-//     console.log("se proceso la solicitud de login");
-//     console.log(response.data);
-    
-    
-
-//     return response.data
- 
-//     })
-
 const login = createAsyncThunk("login", async({email, password}, thunkAPI) => {
     console.log("entramos al login");
     

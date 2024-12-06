@@ -1,26 +1,20 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setMangas, setFilter } from "../Store/actions/mangaActions"; // Importa las acciones desde el nuevo archivo
 import SidebarMenu from "../Components/SidebarMenu";
+import { fetchMangas } from "../Store/reducers/mangaReducer";
 
 const Mangas = () => {
     const dispatch = useDispatch();
-    const { list, filter } = useSelector((state) => state.mangas);
+    const { mangas, filter, isLoading, error } = useSelector((state) => state.mangas);
 
     useEffect(() => {
-        const fetchMangas = async () => {
-            const mangas = [
-                { id: 1, title: "Naruto Volume 41", type: "Shōnen", image: "/images/naruto.jpg" },
-                { id: 2, title: "Attack on Titan", type: "Seinen", image: "/images/manager.jpg" },
-            ];
-            dispatch(setMangas(mangas)); // Despacha la acción
-        };
-        fetchMangas();
+        dispatch(fetchMangas());
     }, [dispatch]);
 
-    const filteredMangas = list.filter((manga) =>
-        filter === "All" ? true : manga.type === filter
-    );
+    // Filtrado de mangas (si lo deseas)
+    const filteredMangas = filter === "All" 
+        ? mangas 
+        : mangas.filter((manga) => manga.category === filter);
 
     return (
         <div className="bg-gray-100 min-h-screen flex">
@@ -50,20 +44,26 @@ const Mangas = () => {
                         {["All", "Shōnen", "Seinen", "Shōjo", "Kodomo"].map((type) => (
                             <button
                                 key={type}
-                                onClick={() => dispatch(setFilter(type))}
-                                className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base ${filter === type
+                                className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base ${
+                                    filter === type
                                         ? "bg-blue-500 text-white"
                                         : "bg-gray-200 text-gray-700"
-                                    }`}
+                                }`}
                             >
                                 {type}
                             </button>
                         ))}
                     </div>
+
+                    {/* Mostramos estado de carga o error */}
+                    {isLoading && <p>Loading mangas...</p>}
+                    {error && <p>{error}</p>}
+
+                    {/* Lista de mangas */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                         {filteredMangas.map((manga) => (
                             <div
-                                key={manga.id}
+                                key={manga._id} // Ajustar la key según el campo único del manga
                                 className="bg-white shadow-lg rounded-lg flex flex-col lg:flex-row overflow-hidden"
                             >
                                 <div className="flex-1 p-4 flex flex-col justify-between">
@@ -71,7 +71,9 @@ const Mangas = () => {
                                         <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-800">
                                             {manga.title}
                                         </h3>
-                                        <p className="text-xs sm:text-sm text-orange-500">{manga.type}</p>
+                                        <p className="text-xs sm:text-sm text-orange-500">
+                                            {manga.category}
+                                        </p>
                                     </div>
                                     <button className="mt-4 px-4 py-2 bg-green-400 text-white font-semibold rounded-full hover:bg-green-500 transition text-xs sm:text-sm lg:text-base">
                                         Read
@@ -79,7 +81,7 @@ const Mangas = () => {
                                 </div>
                                 <div className="w-full lg:w-1/2 relative">
                                     <img
-                                        src={manga.image}
+                                        src={manga.cover_photo} // Ajustar el campo según tu API
                                         alt={manga.title}
                                         className="w-full h-40 sm:h-48 lg:h-full object-cover"
                                     />
