@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    list: [], // Lista de mangas
-    filter: 'All', // Filtro activo
+    list: [], 
+    filter: 'All', 
 };
 
 const mangaSlice = createSlice({

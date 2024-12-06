@@ -25,11 +25,9 @@ export default function SignIn() {
 
   return (<>
     <div className="h-screen flex">
-      {/* Left: Background Image */}
       <div className="flex w-1/2 justify-around items-center bg-cover bg-center" style={{ backgroundImage: 'url(https://s3-alpha-sig.figma.com/img/cd7b/cfec/c07083cef0707bd5864b287bac613f2b?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Aa72~qaQ-Re8JBUPxzkxXnEmKnF~Nksubt4JQlzlSyaNzCKI0yOFHb4M3jaIdNjawWVO7VvkTsBWhTN03z4KsmZA8WhV2jMxWVM2PJAnD0piJN30WPlc~QnVykKFP4CwvEbbwihCfqj9VoAAHWocAqPpcZDmnlZvtbifXp5LaI6iv8fUVn5-MuCjlzaYt1mRYVISghahbU3i2vVtbPt5V7gYm5Kq6vJX4et7u36v8lwqsnUviMfvNVJlj3t1c8l6vYcPmsBFDMzEU~6r3HAvc-IIchLyEBooDoJHVTy9IaK2pFeS-Gwe3nW6UApCQiKHRAitgbRjVrp7MqrZqRXw4g__' }}>
       </div>
 
-      {/* Right: Login Form */}
       <div className="flex w-1/2 justify-center items-center bg-white">
         <div className="bg-white relative">
           <div className="text-center">
@@ -57,7 +55,6 @@ export default function SignIn() {
             </div>
 
 
-            {/* Password Input */}
             <div className="relative mb-4">
               <div className="absolute top-[-8px] left-3 text-sm text-custom-pink bg-white px-1 ">Password</div>
               <div className="border-2 border-solid border-gray-400 rounded-2xl px-3 py-2 pt-6">
@@ -89,14 +86,12 @@ export default function SignIn() {
 
           <br />
 
-          {/* Google Sign In Button */}
           <button className="flex items-center justify-center w-full py-4 mb-6 text-sm font-medium text-opacity-80 transition duration-300 rounded-2xl border-2 border-grey-500 text-grey-900 bg-grey-300 hover:bg-grey-400 focus:ring-4 focus:ring-grey-300"
           onClick={()=> loginWithGoogle()}>
             <img className="h-5 mr-2" src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/logos/logo-google.png" alt="Google logo" />
             Sign in with Google
           </button>
 
-          {/* Already Have an Account? Log In */}
           <div className="text-center mb-4">
             <span className="text-sm text-gray-600">
               you don't have an account yet?
@@ -104,7 +99,6 @@ export default function SignIn() {
             </span>
           </div>
 
-          {/* Go Back to Home Page */}
           <div className="text-center">
             <span className="text-sm text-gray-600">
               Go back to

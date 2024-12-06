@@ -1,9 +1,9 @@
 const initialState = {
-    mangaList: [], // Lista de mangas disponibles
-    selectedManga: null, // Manga seleccionado
-    chapterList: [], // Lista de capítulos disponibles
-    selectedChapter: null, // Capítulo seleccionado
-    editData: "", // Contenido editable
+    mangaList: [], 
+    selectedManga: null, 
+    chapterList: [], 
+    selectedChapter: null, 
+    editData: "", 
 };
 
 const editChapterReducer = (state = initialState, action) => {

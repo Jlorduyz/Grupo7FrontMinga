@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    filter: "All", // Filtro activo
-    data: [], // Lista específica del Manager
+    filter: "All", 
+    data: [], 
 };
 
 const managerSlice = createSlice({
@@ -10,10 +10,10 @@ const managerSlice = createSlice({
     initialState,
     reducers: {
         setFilter: (state, action) => {
-            state.filter = action.payload; // Cambia el filtro
+            state.filter = action.payload; 
         },
         setData: (state, action) => {
-            state.data = action.payload; // Actualiza los datos del Manager
+            state.data = action.payload; 
         },
     },
 });
