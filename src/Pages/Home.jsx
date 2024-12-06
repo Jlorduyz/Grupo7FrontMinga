@@ -45,6 +45,7 @@ const Home = () => {
 
 
   return (
+      <>
     <div>
       <Carousel/>
       <div className="bg-gray-100 py-16">
@@ -70,8 +71,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
+      <Footer />
+      </>
   );
 };
 

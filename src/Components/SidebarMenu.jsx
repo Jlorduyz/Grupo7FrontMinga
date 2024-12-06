@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SidebarMenu = () => {
-    const [isOpen, setIsOpen] = useState(false); // Predeterminado como cerrado
+    const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -9,19 +11,17 @@ const SidebarMenu = () => {
 
     return (
         <div>
-            {/* Botón del menú hamburguesa */}
             <button
                 onClick={toggleMenu}
-                className="fixed top-4 left-4 z-50 focus:outline-none"
+                className={`fixed top-4 left-4 z-50 focus:outline-none transition-transform duration-300 ${isOpen ? "hidden" : "block"}`}
             >
                 <img
-                    src="/images/MenuImage.png" // Usa la imagen de la hamburguesa
+                    src="/images/MenuImage.png"
                     alt="Menu"
                     className="w-12 h-12 sm:w-16 sm:h-16 lg:w-[88px] lg:h-[88px]"
                 />
             </button>
 
-            {/* Fondo del menú desplegable - Versión móvil */}
             <div
                 className={`fixed top-0 left-0 w-full h-full bg-pink-300 z-40 transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"
                     } lg:hidden`}
@@ -33,20 +33,27 @@ const SidebarMenu = () => {
                     >
                         ×
                     </button>
-                    <div className="text-lg font-bold">lucasezequielsilva@gmail.com</div>
-                    <a href="#home" className="bg-white text-pink-500 px-6 py-2 rounded-full">
+                    <button
+                        onClick={() => navigate("/Home")}
+                        className="bg-white text-pink-500 px-6 py-2 rounded-full"
+                    >
                         Home
-                    </a>
-                    <a href="#register" className="text-white text-lg">
+                    </button>
+                    <button
+                        onClick={() => navigate("/welcome")}
+                        className="bg-white text-pink-500 px-6 py-2 rounded-full"
+                    >
                         Register
-                    </a>
-                    <a href="#signin" className="text-white text-lg">
+                    </button>
+                    <button
+                        onClick={() => navigate("/welcomeback")}
+                        className="bg-white text-pink-500 px-6 py-2 rounded-full"
+                    >
                         Sign In
-                    </a>
+                    </button>
                 </div>
             </div>
 
-            {/* Menú desplegable - Versión escritorio */}
             <div
                 className={`fixed top-0 left-0 h-full bg-pink-300 z-40 transition-transform duration-300 ${isOpen ? "w-64" : "w-0"
                     } hidden lg:block`}
@@ -61,16 +68,24 @@ const SidebarMenu = () => {
                     >
                         ×
                     </button>
-                    <div className="text-lg font-bold">lucasezequielsilva@gmail.com</div>
-                    <a href="#home" className="block bg-white text-pink-500 px-4 py-2 rounded-full">
+                    <button
+                        onClick={() => navigate("/Home")}
+                        className="bg-white text-pink-500 px-6 py-2 rounded-full"
+                    >
                         Home
-                    </a>
-                    <a href="#register" className="block text-white text-lg">
+                    </button>
+                    <button
+                        onClick={() => navigate("/welcome")}
+                        className="bg-white text-pink-500 px-6 py-2 rounded-full"
+                    >
                         Register
-                    </a>
-                    <a href="#signin" className="block text-white text-lg">
+                    </button>
+                    <button
+                        onClick={() => navigate("/welcomeback")}
+                        className="bg-white text-pink-500 px-6 py-2 rounded-full"
+                    >
                         Sign In
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -78,3 +93,4 @@ const SidebarMenu = () => {
 };
 
 export default SidebarMenu;
+
