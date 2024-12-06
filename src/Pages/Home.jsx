@@ -1,9 +1,13 @@
 import React from 'react';
 import Footer from '../Components/Footer/Footer.jsx';
 import Carousel from '../Components/carrousel.jsx';
+import { useNavigate } from "react-router-dom";
+
 
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <Carousel/>
@@ -23,7 +27,7 @@ const Home = () => {
               <h4 className="text-lg mt-4">
                 Explore our extensive collection of manga series and stay up-to-date with the latest releases.
               </h4>
-              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-8">
+              <button onClick={() => navigate("/welcomeback")}className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-8">
                 Sign In
               </button>
             </div>
