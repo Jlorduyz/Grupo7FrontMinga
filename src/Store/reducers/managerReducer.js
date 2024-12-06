@@ -18,6 +18,8 @@ const managerSlice = createSlice({
     },
 });
 
+
+
 export const { setFilter, setData } = managerSlice.actions;
 
 export default managerSlice.reducer;
