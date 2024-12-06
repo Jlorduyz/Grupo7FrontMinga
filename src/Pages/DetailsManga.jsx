@@ -51,6 +51,7 @@ const DetailsManga = () => {
                     <p>Loading...</p>
                 )}
             </div>
+            
         </div>
     );
 };

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import SidebarMenu from "../Components/SidebarMenu";
 import { fetchMangas } from "../Store/reducers/mangaReducer";
 import { useNavigate } from "react-router-dom";
+import Footer from "../Components/Footer/Footer";
 
 const Mangas = () => {
     const dispatch = useDispatch();
@@ -98,6 +99,7 @@ const Mangas = () => {
                     </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 };

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setData, setFilter } from "../Store/actions/managerActions"; // Importa las acciones
 import SidebarMenu from "../Components/SidebarMenu";
+import Footer from "../Components/Footer/Footer";
 
 const Manager = () => {
     const dispatch = useDispatch();
@@ -86,6 +87,7 @@ const Manager = () => {
                     ))}
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 };
