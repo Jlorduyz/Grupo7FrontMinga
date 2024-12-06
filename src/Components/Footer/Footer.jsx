@@ -29,9 +29,7 @@ const Footer = () => {
                     <a href="/mangas" className="hover:text-pink-500">
                         Mangas
                     </a>
-                    <a href="/manager" className="hover:text-pink-500">
-                        Manager
-                    </a>
+                    
 
 
                 </div>
