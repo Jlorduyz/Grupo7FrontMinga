@@ -1,10 +1,12 @@
 import React from 'react';
 import Footer from '../Components/Footer/Footer.jsx';
+import Carousel from '../Components/carrousel.jsx';
 
 
 const Home = () => {
   return (
     <div>
+      <Carousel/>
       <div className="bg-gray-100 py-16">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row items-center">

@@ -28,6 +28,7 @@ const DetailsManga = () => {
                     <p className="text-sm text-gray-500 mt-2">{manga.description || "No description available."}</p>
                 </div>
             </div>
+            
         </div>
     );
 };

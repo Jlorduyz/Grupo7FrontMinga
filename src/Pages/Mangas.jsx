@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setMangas, setFilter } from "../Store/actions/mangaActions"; // Importa las acciones desde el nuevo archivo
 import SidebarMenu from "../Components/SidebarMenu";
+import Footer from "../Components/Footer/Footer";
 
 const Mangas = () => {
     const dispatch = useDispatch();
@@ -89,6 +90,7 @@ const Mangas = () => {
                     </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 };
