@@ -1,36 +1,14 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import Root from "./Layouts/Root.jsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Mangas from "./Pages/Mangas.jsx";
-import Manager from "./Pages/Manager.jsx";
-import EditChapter from "./Pages/EditChapter.jsx";
-
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    children: [
-      {
-        path: "mangas",
-        element: <Mangas />,
-      },
-      {
-        path: "manager", // Ruta para Manager
-        element: <Manager />,
-      },
-      {
-        path: "edit-chapter", // Ruta para EditChapter
-        element: <EditChapter />, // Componente EditChapter
-      },
-    ],
-  },
-]);
+import App from "./App.jsx"; // Importa el nuevo App.jsx
+import { Provider } from "react-redux"; // Importa el Provider
+import store from "./Store/Store"; // Importa el store de Redux
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <App /> {/* Usa el nuevo App.jsx */}
+    </Provider>
   </StrictMode>
 );
