@@ -14,3 +14,4 @@ const mangaSlice = createSlice({
   });
 
   export const { setMangas } = mangaSlice.actions;
+  export default mangaSlice.reducer;

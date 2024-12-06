@@ -1,17 +1,16 @@
 import React from 'react';
-import Carousel from '../Components/carrousel.jsx';
+import Footer from '../Components/Footer/Footer.jsx';
 
 
 const Home = () => {
   return (
     <div>
-      <Carousel />
       <div className="bg-gray-100 py-16">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2">
               <img
-                src="https://via.placeholder.com/1258x551"
+                src="/images/home.jpg"
                 alt="Banner"
                 className="w-full"
               />
