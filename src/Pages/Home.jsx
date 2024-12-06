@@ -1,8 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Footer from '../Components/Footer/Footer.jsx';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { setUser } from '../Store/actions/AuthActions.js';
 
+const loginWithToken = async (token) => {
+  try {
+    console.log("se ejecuto loginWithToken");
 
+    const response = await axios.get("http://localhost:8080/api/users/validationToken",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      })
+    return response.data.response
+
+  } catch (error) {
+    console.log("error", error);
+  }
+}
 const Home = () => {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    if (token) {
+      localStorage.setItem('token', token);
+      loginWithToken(token).then((user) => {
+        dispatch(setUser({ user, token }))
+      })
+    }
+    navigate("/home");
+  },[dispatch])
+
   return (
     <div>
       <div className="bg-gray-100 py-16">

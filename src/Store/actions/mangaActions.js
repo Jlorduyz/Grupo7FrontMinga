@@ -1,4 +1,3 @@
-import { setMangas, setFilter } from "../reducers/mangaReducer";
+import { createAction } from "@reduxjs/toolkit";
 
-// Reexporta las acciones generadas por createSlice
-export { setMangas, setFilter };
+export const getMangas = createAction("GET_MANGAS");

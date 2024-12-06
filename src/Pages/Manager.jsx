@@ -17,6 +17,7 @@ const Manager = () => {
             dispatch(setData(managerData)); // Despacha la acción
             console.log("Fetched data:", managerData); // Verifica la carga
         };
+        
         fetchData();
     }, [dispatch]);
 
