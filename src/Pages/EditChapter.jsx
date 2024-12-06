@@ -6,7 +6,7 @@ import {
     setChapterList,
     setSelectedChapter,
     setEditData,
-} from "../Store/editChapterSlice";
+} from "../Store/actions/editChapterActions";
 
 const EditChapter = () => {
     const dispatch = useDispatch();

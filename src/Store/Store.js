@@ -1,17 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import mangaReducer from "./mangaSlice";
-import managerReducer from "./managerSlice";
-import editChapterReducer from "./editChapterSlice";
+import managerReducer from "./reducers/managerReducer";
+import mangaReducer from "./reducers/mangaReducer";
+import editChapterReducer from "./reducers/editChapterReducer";
 import entitiesReducer from "./entitiesSlice";
-
 
 const store = configureStore({
     reducer: {
-        mangas: mangaReducer,
         manager: managerReducer,
+        mangas: mangaReducer,
         editChapter: editChapterReducer,
         entities: entitiesReducer,
-
     },
 });
 

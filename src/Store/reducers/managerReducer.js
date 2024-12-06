@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     filter: "All", // Filtro activo
-    data: [], // Lista específica del Manager (si es diferente a los mangas generales)
+    data: [], // Lista específica del Manager
 };
 
 const managerSlice = createSlice({
