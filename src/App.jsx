@@ -9,6 +9,7 @@ import Root from "./Layouts/Root.jsx";
 import Home from "./Pages/Home.jsx";
 
 const router = createBrowserRouter([
+  
     {
         path: "/",
         element: <Root />,
@@ -33,3 +34,4 @@ function App() {
 }
 
 export default App;
+
