@@ -1,0 +1,26 @@
+.text-custom-pink {
+    color: #F472B6;
+  }
+  
+  .hover\:text-custom-pink-dark:hover {
+    color: #F472B626;
+  }
+  
+
+/* styles.css */
+.bg-custom-pink {
+    background-color: #F472B6; /* Color de fondo rosa personalizado */
+  }
+  
+  .bg-custom-pink-dark {
+    background-color: #F472B626; /* Color de fondo rosa oscuro personalizado */
+  }
+  
+  .shadow-custom-yellow {
+    box-shadow: 0 10px 20px rgba(250, 204, 21, 1), 0 6px 6px rgba(250, 204, 21, 0.8); /* Sombra amarilla sólida y prominente */
+  }
+  
+  .focus\:ring-custom-yellow:focus {
+    --tw-ring-color: rgba(250, 204, 21, 0.4); /* Sombra amarilla al enfocarse */
+  }
+  
