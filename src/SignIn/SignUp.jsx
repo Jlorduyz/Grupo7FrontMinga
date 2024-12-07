@@ -1,14 +1,11 @@
-<<<<<<< HEAD
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-=======
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
->>>>>>> david
+
+
 const RegisterForm = () => {
-    const navigate = useNavigate();
-
+   
     const navigate = useNavigate();
     const LoginWithGoogle = () => {
         window.location.href = "http://localhost:8080/api/auth/signin/google";
@@ -19,11 +16,10 @@ const RegisterForm = () => {
         password: "",
         photo: "",
     });
-<<<<<<< HEAD
-    const [loading, setLoading] = useState(false);
-=======
+
+
     const [loading, setLoading] = useState(false); 
->>>>>>> david
+
     const [error, setError] = useState(null);
 
     const handleChange = (e) => {
@@ -35,10 +31,9 @@ const RegisterForm = () => {
         e.preventDefault();
         setError(null);
         setLoading(true);
-<<<<<<< HEAD
-=======
 
->>>>>>> david
+
+
         try {
             const response = await fetch("http://localhost:8080/api/users/register", {
                 method: "POST",
@@ -50,29 +45,26 @@ const RegisterForm = () => {
 
             if (!response.ok) {
                 const errorData = await response.json();
-<<<<<<< HEAD
+
                 setError(errorData.message || "Failed to register. if you have an account log in")
                 setLoading(false);
 
-=======
-                setError(errorData.message || "Failed to register. If you have an account, please log in.");
-                setLoading(false);
->>>>>>> david
+            
                 return;
             }
 
             const data = await response.json();
             alert("User registered successfully!");
             console.log("Success:", data);
-<<<<<<< HEAD
+
 
             setLoading(false);
 
 
             navigate("/new-role");
-=======
+
             navigate("/home"); 
->>>>>>> david
+
         } catch (err) {
             console.error("Network error:", err);
             setError("A network error occurred. Please try again.");
