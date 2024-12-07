@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faFacebookF,faTwitter,faVimeoV,faYoutube,} from "@fortawesome/free-brands-svg-icons";
+import { faFacebookF, faTwitter, faVimeoV, faYoutube, } from "@fortawesome/free-brands-svg-icons";
 
 
 const Footer = () => {
@@ -19,27 +19,29 @@ const Footer = () => {
 
             <div className="footer-content relative mt-12 px-4 sm:px-8 lg:px-12 flex flex-col lg:flex-row justify-between items-center space-y-8 lg:space-y-0">
                 <div className="footer-navigation flex flex-col lg:flex-row lg:space-x-8 text-gray-700 text-sm sm:text-base lg:text-lg font-medium items-center lg:items-start space-y-4 lg:space-y-0">
-                <button onClick={() => navigate("/home")}className="hover:text-pink-500">
-                Home
-              </button>
-              <button onClick={() => navigate("/mangas")}className="hover:text-pink-500">
-                Mangas
-              </button>
+                    <button onClick={() => navigate("/home")} className="hover:text-pink-500">
+                        Home
+                    </button>
+                    <button onClick={() => navigate("/mangas")} className="hover:text-pink-500">
+                        Mangas
+                    </button>
 
-                    
+
+
+
 
 
 
                 </div>
 
                 <div className="footer-logo">
-                <button onClick={() => navigate("/home")}className="hover:text-pink-500">
-              <img
-                        src="/images/logo.png"
-                        alt="Minga Logo"
-                        className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto"
+                    <button onClick={() => navigate("/home")} className="hover:text-pink-500">
+                        <img
+                            src="/images/logo.png"
+                            alt="Minga Logo"
+                            className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto"
                         />
-                        </button>
+                    </button>
                 </div>
 
                 <div className="footer-social-donate flex flex-col items-center lg:items-end space-y-6">

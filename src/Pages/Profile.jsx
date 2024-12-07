@@ -1,103 +1,136 @@
-import React from 'react';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Footer from "../Components/Footer/Footer";
+import Header from "../Components/Header";
+import { updateProfile, deleteAccount } from "../Store/actions/profileActions";
 
+const Profile = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.profile.user);
 
-const ProfilePage = () => {
+  // Estados locales para manejar los inputs
+  const [formData, setFormData] = useState(user || {});
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    dispatch(updateProfile(formData)); // Despacha la acción para actualizar el perfil
+  };
+
+  const handleDelete = () => {
+    dispatch(deleteAccount()); // Despacha la acción para eliminar la cuenta
+  };
+
   return (
-    <div className="bg-gray-100 min-h-screen">
-      
-  {/* Banner */}
-  <div className="relative">
-  <img
-    src="https://s3-alpha-sig.figma.com/img/10b2/d5ee/20210b0eea83b4ff7cf04e7d9e72c1a2?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NK823jbakqxJ4VAwfZgCsQQt-aRhdKMwp65SMiVSLkGTgB~sPwtwJj~j78wYc7nHw1F0Q7DxN3tIYcojpUCr2tqdEk21fJLQNmK7TwYeDTjXfOLS361su3033WsKOylILzA8DOtvjQU9Bq3xuYKnwdMqiDWdm6YSq9YTMS8D3r6jZbKXZgen3af9JxpjgMzxB-lLNGCgL817~4Zak~2fMJsKSWb264wJXr7q4uOx1DtSCYHqs1qPi4JFY4fwsw9iPksACL9iPW0YEtWXn2Nzy9DYTRFp8VOVU~u9v1E0CQzvikTjTp~9k3WpJV353y~l1mxB45HKhxJU1TxaCsUm~A__"
-    alt="Manga Banner"
-    className="w-full h-16 sm:h-[300px] lg:h-[500px] object-cover"
-  />
-  {/* Menú Hamburguesa y Logo */}
-  <div className="absolute top-4 left-4 right-4 flex justify-between items-center">
-    {/* Menú Hamburguesa */}
-    <img
-      src="/images/MenuImage.png"
-      alt="Menu"
-      className="w-8 h-8 sm:w-12 sm:h-12 lg:w-[70px] lg:h-[70px]"
-    />
-    {/* Logo */}
-    <img
-      src="/images/logo.png"
-      alt="Logo"
-      className="w-8 h-8 sm:w-12 sm:h-12 lg:w-[70px] lg:h-[70px]"
-    />
-  </div>
+    <>
+      <Header />
+      <div className="bg-gray-100 min-h-screen">
+        <div className="relative">
+          <img
+            src="/images/profile.jpeg"
+            alt="Profile Background"
+            className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover"
+          />
+          <div className="absolute inset-0 flex justify-center items-center">
+            <h1 className="text-white text-3xl sm:text-5xl lg:text-6xl font-bold drop-shadow-lg">
+              Profile
+            </h1>
+          </div>
+        </div>
 
-  {/* Título Central */}
-  <div className="absolute inset-0 flex flex-col justify-center items-center px-4 text-center">
-    <h1 className="text-white text-2xl sm:text-4xl lg:text-5xl font-bold drop-shadow-lg mb-6 sm:mb-8">
-      Profile
-    </h1>
-  </div>
-</div>
+        <div className="-mt-20 mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-12 w-full max-w-4xl relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <form className="space-y-6" onSubmit={handleSave}>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">First Name</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName || ""}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Last Name</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName || ""}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">City, State</label>
+                  <input
+                    type="text"
+                    name="city"
+                    value={formData.city || ""}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Date of Birth</label>
+                  <input
+                    type="text"
+                    name="birthDate"
+                    value={formData.birthDate || ""}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">URL Profile Image</label>
+                  <input
+                    type="text"
+                    name="profileImage"
+                    value={formData.profileImage || ""}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-green-500 text-white py-2 px-4 rounded-lg shadow hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+                >
+                  Save
+                </button>
+              </form>
+            </div>
 
-
-  {/* Contenedor del formulario y la imagen */}
-  <div className="-mt-12 mx-auto bg-white rounded-2xl  shadow-lg p-6 sm:p-8 lg:p-10 w-full max-w-4xl relative z-10">
-    {/* Formulario de entrada (Izquierda) */}
-    <div className="grid md:grid-cols-2 gap-8">
-    <div className="flex flex-col items-center w-60 mx-auto space-y-4">
-  <div className="border-b pb-2 w-full">
-    <p className="text-gray-600">Lucas Ezequiel</p>
-  </div>
-  <div className="border-b pb-2 w-full">
-    <p className="text-gray-600">Silva</p>
-  </div>
-  <div className="border-b pb-2 w-full">
-    <p className="text-gray-600">Caseros, Buenos Aires</p>
-  </div>
-  <div className="border-b pb-2 w-full">
-    <p className="text-gray-600">20/12/2022</p>
-  </div>
-  <div className="border-b pb-2 w-full">
-    <p className="text-gray-600">URL Profile Image</p>
-  </div>
-  <div className="flex flex-col items-center space-y-4 w-full">
-    <button className="w-full bg-emerald-400 text-white py-4 px-8 rounded-full hover:bg-emerald-500 transition-colors font-semibold">
-      Save
-    </button>
-    <button className="w-full bg-red-200 text-red-500 py-4 px-8 rounded-full hover:bg-red-300 transition-colors font-semibold">
-      Delete Account
-    </button>
-  </div>
-</div>
-
-
-      {/* Imagen circular y nombre (Derecha) */}
-      <div className="flex flex-col justify-center items-center min-h-[200px]">
-  <div className="w-24 h-24 rounded-full overflow-hidden mb-4">
-    <img 
-      src="https://assets-prd.ignimgs.com/2022/08/17/3-naruto-1660778366362.png"
-      alt="Profile"
-      className="w-full h-full object-cover"
-    />
-  </div>
-  <h2 className="text-lg font-semibold">Lucas Ezequiel Silva</h2>
-  <p className="text-gray-500 text-sm">Caseros, Buenos Aires</p>
-  <p className="text-gray-500 text-sm">20/12/2022</p>
-</div>
-
+            <div className="text-center">
+              <img
+                src={formData.profileImage || "https://via.placeholder.com/150"}
+                alt="Profile"
+                className="w-32 h-32 rounded-full mx-auto"
+              />
+              <h2 className="text-lg font-semibold mt-4">
+                {formData.firstName} {formData.lastName}
+              </h2>
+              <p className="text-gray-500">{formData.city}</p>
+              <p className="text-gray-400 text-sm">{formData.birthDate}</p>
+              <button
+                onClick={handleDelete}
+                className="mt-4 w-full bg-red-500 text-white py-2 px-4 rounded-lg shadow hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+              >
+                Delete Account
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-
-
-
-
-  
+      <Footer />
+    </>
   );
 };
 
-export default ProfilePage;
-
-
-
-
-
-
-
+export default Profile;

@@ -10,7 +10,6 @@ const Mangas = () => {
     const dispatch = useDispatch();
     const { mangas, filter, isLoading, error } = useSelector((state) => state.mangas);
 
-
     const [searchText, setSearchText] = useState("");
 
     useEffect(() => {
@@ -23,9 +22,16 @@ const Mangas = () => {
         navigate(`/detailManga?id=${id}`);
     };
 
-    const filteredMangas = filter === "All"
-        ? mangas
-        : mangas.filter((manga) => manga.category === filter);
+    // Debugging logs
+    console.log("Current filter:", filter); // Verifica el valor del filtro
+    console.log("Current search text:", searchText); // Verifica el texto de búsqueda
+    console.log("Mangas:", mangas); // Verifica la lista de mangas
+
+    const filteredMangas = mangas.filter((manga) => {
+        const matchesCategory = filter === "All" || manga.category_id === filter;
+        const matchesSearch = manga.title.toLowerCase().includes(searchText.toLowerCase());
+        return matchesCategory && matchesSearch;
+    });
 
     return (
         <>
@@ -46,8 +52,8 @@ const Mangas = () => {
                                 <input
                                     type="text"
                                     placeholder="Find your manga here"
-                                    value={searchText} // Enlazamos el valor con el estado
-                                    onChange={(e) => setSearchText(e.target.value)} // Actualizamos el estado al escribir
+                                    value={searchText}
+                                    onChange={(e) => setSearchText(e.target.value)}
                                     className="w-full h-10 sm:h-12 lg:h-[57px] px-4 border border-gray-300 rounded-lg text-sm sm:text-base lg:text-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white"
                                 />
                             </div>
@@ -55,14 +61,15 @@ const Mangas = () => {
                     </div>
                     <div className="-mt-12 mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-2xl lg:max-w-7xl relative z-10">
                         <div className="flex flex-wrap justify-center sm:justify-between items-center mb-6">
-                            {["All", "Shōnen", "Seinen", "Shōjo", "Kodomo"].map((type) => (
+                            {["All", "shonen", "seinen", "comics", "shojo"].map((type) => (
                                 <button
                                     key={type}
-                                    onClick={() => dispatch(setFilter(type))} // Cambia el filtro global
-                                    className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base ${filter === type ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"
-                                        }`}
+                                    onClick={() => {
+                                        console.log("Filter clicked:", type);
+                                        dispatch(setFilter(type));
+                                    }}
                                 >
-                                    {type}
+                                    {type.charAt(0).toUpperCase() + type.slice(1)}
                                 </button>
                             ))}
                         </div>
@@ -81,9 +88,6 @@ const Mangas = () => {
                                             <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-800">
                                                 {manga.title}
                                             </h3>
-                                            <p className="text-xs sm:text-sm text-orange-500">
-                                                {manga.category}
-                                            </p>
                                         </div>
                                         <button
                                             className="mt-4 px-4 py-2 bg-green-400 text-white font-semibold rounded-full hover:bg-green-500 transition text-xs sm:text-sm lg:text-base"

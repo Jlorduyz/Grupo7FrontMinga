@@ -13,6 +13,8 @@ import { setUser } from "./Store/actions/AuthActions.js";
 import DetailsManga from "./Pages/DetailsManga.jsx";
 import NewRole from "./Pages/NewRole.jsx";
 import Error404 from "./Pages/Error404.jsx";
+import Profile from "./Pages/Profile";
+
 const router = createBrowserRouter([
   {
     element: <Root />,
@@ -28,12 +30,11 @@ const router = createBrowserRouter([
       { path: "/welcomeback", element: <WelcomeBack /> },
       { path: "/detailManga", element: <DetailsManga /> },
       { path: "/new-role", element: <NewRole /> },
-      // {path:"/*",element:<NotFound></NotFound>},
-    ],
+      { path: "/profile", element: <Profile /> },],
   },
   {
     path: "*",
-    element: <Error404 />, // Ruta para todas las páginas no encontradas
+    element: <Error404 />,
   },
 ]);
 
