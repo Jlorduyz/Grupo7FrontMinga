@@ -8,7 +8,8 @@ import Footer from "../Components/Footer/Footer";
 const Mangas = () => {
     const dispatch = useDispatch();
     const { mangas, filter, isLoading, error } = useSelector((state) => state.mangas);
-
+    console.log(mangas);
+    
     useEffect(() => {
         dispatch(fetchMangas());
     }, [dispatch]);
@@ -17,16 +18,15 @@ const Mangas = () => {
 
     const handleClick = (id) => {
         navigate(`/detailManga?id=${id}`);
-    }
+    };
+
     const filteredMangas = filter === "All" 
         ? mangas 
         : mangas.filter((manga) => manga.category === filter);
 
     return (
         <>
-        <div className="bg-gray-100 min-h-screen flex">
-            <SidebarMenu />
-            <div className="flex-1 relative">
+            <div className="bg-gray-100 min-h-screen flex flex-col">
                 <div className="relative">
                     <img
                         src="/images/manga.jpg"
@@ -46,15 +46,16 @@ const Mangas = () => {
                         </div>
                     </div>
                 </div>
+                
                 <div className="-mt-12 mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-2xl lg:max-w-7xl relative z-10">
-                    <div className="flex flex-wrap justify-center sm:justify-between items-center mb-6">
+                    <div className="flex flex-wrap justify-center sm:justify-between items-center mb-6 space-x-2">
                         {["All", "Shōnen", "Seinen", "Shōjo", "Kodomo"].map((type) => (
                             <button
                                 key={type}
-                                className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base ${
+                                className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${
                                     filter === type
                                         ? "bg-blue-500 text-white"
-                                        : "bg-gray-200 text-gray-700"
+                                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                                 }`}
                             >
                                 {type}
@@ -62,34 +63,29 @@ const Mangas = () => {
                         ))}
                     </div>
 
-                    {isLoading && <p>Loading mangas...</p>}
-                    {error && <p>{error}</p>}
+                    {isLoading && <p className="text-center">Loading mangas...</p>}
+                    {error && <p className="text-center text-red-500">{error}</p>}
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                         {filteredMangas.map((manga) => (
                             <div
-                                key={manga._id} 
-                                className="bg-white shadow-lg rounded-lg flex flex-col lg:flex-row overflow-hidden"
+                                key={manga._id}
+                                className="relative bg-white shadow-lg rounded-lg flex items-center cursor-pointer hover:shadow-xl transition-shadow h-48"
+                                onClick={() => handleClick(manga._id)}
                             >
-                                <div className="flex-1 p-4 flex flex-col justify-between">
-                                    <div>
-                                        <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-800">
-                                            {manga.title}
-                                        </h3>
-                                        <p className="text-xs sm:text-sm text-orange-500">
-                                            {manga.category}
-                                        </p>
-                                    </div>
-                                    <button className="mt-4 px-4 py-2 bg-green-400 text-white font-semibold rounded-full hover:bg-green-500 transition text-xs sm:text-sm lg:text-base"
-                                    onClick={() => handleClick(manga._id)}>
+
+                                <div className="flex-1 p-4 flex flex-col justify-center">
+                                    <h3 className="text-lg font-bold text-gray-800">{manga.title}</h3>
+                                    <p className="text-sm text-pink-500 mt-1">{manga.category}</p>
+                                    <button className="mt-2 px-4 py-1 bg-green-200 text-black rounded-full text-sm hover:bg-green-300">
                                         Read
                                     </button>
                                 </div>
-                                <div className="w-full lg:w-1/2 relative">
+                                <div className="w-[45%] h-full">
                                     <img
-                                        src={manga.cover_photo} 
+                                        src={manga.cover_photo}
                                         alt={manga.title}
-                                        className="w-full h-40 sm:h-48 lg:h-full object-cover"
+                                        className="object-cover w-full h-full rounded-l-full"
                                     />
                                 </div>
                             </div>
@@ -97,9 +93,8 @@ const Mangas = () => {
                     </div>
                 </div>
             </div>
-        </div>
-        <Footer/>
-    </>
+            <Footer/>
+        </>
     );
 };
 
