@@ -42,7 +42,9 @@ const Mangas = () => {
     });
     console.log(filteredMangas);
     console.log(categories);
+
     
+
 
     return (
         <>
@@ -72,6 +74,7 @@ const Mangas = () => {
                     </div>
                     <div className="-mt-12 mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-2xl lg:max-w-7xl relative z-10">
                         <div className="flex flex-wrap justify-center sm:justify-start items-center mb-6 space-x-2">
+
                             {/* Botón para "All" */}
                             <button
                                 className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${
@@ -86,6 +89,7 @@ const Mangas = () => {
                             {categories.map((type, index) => (
                                 <button
                                     key={index}
+
                                     className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${
                                         filter === type.name
                                             ? "bg-blue-500 text-white"
