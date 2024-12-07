@@ -15,6 +15,7 @@ import ReadManga from "./Pages/ReadManga.jsx";
 import NewRole from "./Pages/NewRole.jsx";
 import Error404 from "./Pages/Error404.jsx";
 import Profile from "./Pages/Profile";
+import Favourites from "./Pages/Favourites";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       { path: "/detailManga", element: <DetailsManga /> },
       { path: "/new-role", element: <NewRole /> },
       { path: "/readManga", element: <ReadManga /> },
+      { path: "/favourites", element: <Favourites /> },
       { path: "/profile", element: <Profile /> },],
   },
   {
