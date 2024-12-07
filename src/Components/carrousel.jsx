@@ -49,7 +49,7 @@ const Carousel = () => {
 
             <button
               onClick={handlePrev}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-xl md:text-2xl bg-white rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center shadow hover:bg-gray-200"
+              className="absolute text-black left-4 top-1/2 transform -translate-y-1/2 text-xl md:text-2xl bg-white rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center shadow hover:bg-gray-200"
             >
               &#8592;
             </button>
@@ -74,7 +74,7 @@ const Carousel = () => {
 
             <button
               onClick={handleNext}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-xl md:text-2xl bg-white rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center shadow hover:bg-gray-200"
+              className="absolute text-black right-4 top-1/2 transform -translate-y-1/2 text-xl md:text-2xl bg-white rounded-full w-8 h-8 md:w-10 md:h-10 flex items-center justify-center shadow hover:bg-gray-200"
             >
               &#8594;
             </button>
