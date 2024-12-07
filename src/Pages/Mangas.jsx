@@ -5,12 +5,24 @@ import { fetchMangas } from "../Store/reducers/mangaReducer";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer/Footer";
 import { setFilter } from "../Store/actions/mangaActions";
+import axios from "axios";
 
 const Mangas = () => {
     const dispatch = useDispatch();
     const { mangas, filter, isLoading, error } = useSelector((state) => state.mangas);
-
+    const [categories, setCategories] = useState([]);
     const [searchText, setSearchText] = useState("");
+
+    useEffect(() => {
+        axios
+            .get("http://localhost:8080/api/categories/all")
+            .then((response) => {
+                setCategories(response.data.response);
+            })
+            .catch((error) => {
+                console.error("Error fetching categories:", error);
+            });
+    }, []);
 
     useEffect(() => {
         dispatch(fetchMangas());
@@ -22,11 +34,14 @@ const Mangas = () => {
         navigate(`/detailManga?id=${id}`);
     };
 
+
     const filteredMangas = mangas.filter((manga) => {
         const matchesCategory = filter === "All" || manga.category_id === filter;
         const matchesSearch = manga.title.toLowerCase().includes(searchText.toLowerCase());
         return matchesCategory && matchesSearch;
     });
+    console.log(filteredMangas);
+    
 
     return (
         <>
@@ -43,7 +58,6 @@ const Mangas = () => {
                             <h1 className="text-white text-2xl sm:text-4xl lg:text-5xl font-bold drop-shadow-lg mb-6 sm:mb-8">
                                 Mangas
                             </h1>
-                            {/* Barra de búsqueda de Felipe */}
                             <div className="relative w-full max-w-xs sm:max-w-md lg:max-w-lg">
                                 <input
                                     type="text"
@@ -56,17 +70,29 @@ const Mangas = () => {
                         </div>
                     </div>
                     <div className="-mt-12 mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-2xl lg:max-w-7xl relative z-10">
-                        <div className="flex flex-wrap justify-center sm:justify-between items-center mb-6 space-x-2">
-                            {["All", "Shōnen", "Seinen", "Shōjo", "Kodomo"].map((type) => (
+                        <div className="flex flex-wrap justify-center sm:justify-start items-center mb-6 space-x-2">
+                            {/* Botón para "All" */}
+                            <button
+                                className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${
+                                    filter === "All"
+                                        ? "bg-blue-500 text-white"
+                                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                }`}
+                                onClick={() => dispatch(setFilter("All"))}
+                            >
+                                All
+                            </button>
+                            {categories.map((type, index) => (
                                 <button
-                                    key={type}
-                                    className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${filter === type
+                                    key={index}
+                                    className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${
+                                        filter === type.name
                                             ? "bg-blue-500 text-white"
                                             : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                                        }`}
-                                    onClick={() => dispatch(setFilter(type))}
+                                    }`}
+                                    onClick={() => dispatch(setFilter(type._id))}
                                 >
-                                    {type}
+                                    {type.name}
                                 </button>
                             ))}
                         </div>
@@ -83,7 +109,7 @@ const Mangas = () => {
                                 >
                                     <div className="flex-1 p-4 flex flex-col justify-center">
                                         <h3 className="text-lg font-bold text-gray-800">{manga.title}</h3>
-                                        <p className="text-sm text-pink-500 mt-1">{manga.category}</p>
+                                        <p className="text-sm text-pink-500 mt-1">{manga.category_id}</p>
                                         <button className="mt-2 px-4 py-1 bg-green-200 text-black rounded-full text-sm hover:bg-green-300">
                                             Read
                                         </button>
