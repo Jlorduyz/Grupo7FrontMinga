@@ -74,8 +74,8 @@ const Mangas = () => {
                             {/* BotÃ³n para "All" */}
                             <button
                                 className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${filter === "All"
-                                        ? "bg-blue-500 text-white"
-                                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                    ? "bg-pink-500 text-white"
+                                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                                     }`}
                                 onClick={() => dispatch(setFilter("All"))}
                             >
@@ -84,9 +84,9 @@ const Mangas = () => {
                             {categories.map((type, index) => (
                                 <button
                                     key={index}
-                                    className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${filter === type.name
-                                            ? "bg-blue-500 text-white"
-                                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                    className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${filter === type._id
+                                        ? "bg-pink-500 text-white"
+                                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                                         }`}
                                     onClick={() => dispatch(setFilter(type._id))}
                                 >
