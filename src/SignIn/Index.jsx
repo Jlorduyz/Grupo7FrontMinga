@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import { login } from "../Store/actions/AuthActions.js";
+import { useNavigate } from "react-router-dom"; // si no funciona devolverse
+
 
 
 export default function SignIn() {
@@ -10,14 +12,19 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const authStore = useSelector(state => state.authStore);
+  const navigate = useNavigate(); // si no funciona devolverse
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(login({ email, password }))
-  }
+    const resultAction = await dispatch(login({ email, password }));
+    if (login.fulfilled.match(resultAction)) {
+      // Si el inicio de sesión es exitoso, redirige a "/home"
+      navigate("/home");
+    }
+  };
 
-  const loginWithGoogle = ()=>{
+  const loginWithGoogle = () => {
     window.location.href = "http://localhost:8080/api/auth/signin/google"
   }
   const loading = authStore.loading
@@ -87,7 +94,7 @@ export default function SignIn() {
           <br />
 
           <button className="flex items-center justify-center w-full py-4 mb-6 text-sm font-medium text-opacity-80 transition duration-300 rounded-2xl border-2 border-grey-500 text-grey-900 bg-grey-300 hover:bg-grey-400 focus:ring-4 focus:ring-grey-300"
-          onClick={()=> loginWithGoogle()}>
+            onClick={() => loginWithGoogle()}>
             <img className="h-5 mr-2" src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/logos/logo-google.png" alt="Google logo" />
             Sign in with Google
           </button>

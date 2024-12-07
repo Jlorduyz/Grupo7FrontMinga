@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const RegisterForm = () => {
 
+    const navigate = useNavigate();
     const LoginWithGoogle = () => {
         window.location.href = "http://localhost:8080/api/auth/signin/google";
     };
@@ -9,7 +11,7 @@ const RegisterForm = () => {
         password: "",
         photo: "",
     });
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const handleChange = (e) => {
@@ -21,6 +23,7 @@ const RegisterForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
+        setLoading(true);
         try {
             const response = await fetch("http://localhost:8080/api/users/register", {
                 method: "POST",
@@ -33,6 +36,7 @@ const RegisterForm = () => {
             if (!response.ok) {
                 const errorData = await response.json();
                 setError(errorData.message || "Failed to register. if you have an account log in")
+                setLoading(false);
 
                 return;
             }
@@ -40,9 +44,15 @@ const RegisterForm = () => {
             const data = await response.json();
             alert("User registered successfully!");
             console.log("Success:", data);
+
+            setLoading(false);
+
+
+            navigate("/new-role");
         } catch (err) {
             console.error("Network error:", err);
             setError("A network error occurred. Please try again.");
+            setLoading(false);
         }
     };
 
@@ -129,7 +139,7 @@ const RegisterForm = () => {
                     </form>
 
                     <button className="flex items-center justify-center w-full py-4 mb-6 text-sm font-medium text-opacity-80 transition duration-300 rounded-2xl border-2 border-grey-500 text-grey-900 bg-grey-300 hover:bg-grey-400 focus:ring-4 focus:ring-grey-300"
-                    onClick={() => LoginWithGoogle()}>
+                        onClick={() => LoginWithGoogle()}>
                         <img className="h-5 mr-2" src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/logos/logo-google.png" alt="Google logo" />
                         Sign in with Google
                     </button>
