@@ -25,7 +25,7 @@ const router = createBrowserRouter([
             { path: "/welcome", element: <Welcome /> },
             { path: "/welcomeback", element: <WelcomeBack /> },
             { path: "/detailManga", element: <DetailsManga /> },
-            {path:"/*",element:<NotFound></NotFound>},
+            // {path:"/*",element:<NotFound></NotFound>},
         ],
     },
 ]);
