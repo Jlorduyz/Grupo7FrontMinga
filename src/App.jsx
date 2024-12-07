@@ -11,7 +11,9 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "./Store/actions/AuthActions.js";
 import DetailsManga from "./Pages/DetailsManga.jsx";
-
+import ReadManga from "./Pages/ReadManga.jsx";
+import NewRole from "./Pages/NewRole.jsx";
+import Error404 from "./Pages/Error404.jsx";
 const router = createBrowserRouter([
   
     {element: <Root />,
@@ -25,7 +27,9 @@ const router = createBrowserRouter([
             { path: "/welcome", element: <Welcome /> },
             { path: "/welcomeback", element: <WelcomeBack /> },
             { path: "/detailManga", element: <DetailsManga /> },
-            {path:"/*",element:<NotFound></NotFound>},
+            {path: "/readManga", element: <ReadManga />},
+            { path: "/new-role", element: <NewRole /> },
+            {path:"/*",element:<Error404/>},
         ],
     },
 ]);
@@ -43,7 +47,7 @@ const loginWithToken = async (token) => {
     )
   } catch (error) {
     console.log("error", error);
-    
+
   }
 }
 
@@ -55,11 +59,11 @@ function App() {
       dispatch(setUser({ user, token }))
     })
   }
-    return (
-        <>
-            <RouterProvider router={router}></RouterProvider>
-        </>
-    );
+  return (
+    <>
+      <RouterProvider router={router}></RouterProvider>
+    </>
+  );
 }
 
 export default App;
