@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Chapters from "../Components/Chapters";
+import { useNavigate } from "react-router-dom";
 
 const DetailsManga = () => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
 
     const [manga, setManga] = useState(null);
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         let config = {
@@ -45,7 +48,9 @@ const DetailsManga = () => {
                        lg:max-w-[600px] lg:max-h-full lg:mx-auto"
                     />
                     <div className="absolute top-4 left-4 bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                        {manga.category || 'Category'}
+                        <button onClick={() => navigate(-1)}>
+                            Return
+                        </button>
                     </div>
                 </div>
 
