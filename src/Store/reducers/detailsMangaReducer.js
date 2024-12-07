@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    manga: null, // Información del manga actual
+    manga: null, 
 };
 
 const detailsMangaSlice = createSlice({
@@ -9,7 +9,7 @@ const detailsMangaSlice = createSlice({
     initialState,
     reducers: {
         setMangaDetails: (state, action) => {
-            state.manga = action.payload; // Actualiza el manga actual
+            state.manga = action.payload; 
         },
     },
 });

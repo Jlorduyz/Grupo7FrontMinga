@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setData, setFilter } from "../Store/actions/managerActions"; // Importa las acciones
+import { setData, setFilter } from "../Store/actions/managerActions"; 
 import SidebarMenu from "../Components/SidebarMenu";
 import Footer from "../Components/Footer/Footer";
 
 const Manager = () => {
     const dispatch = useDispatch();
-    const { data, filter } = useSelector((state) => state.manager); // Accede al estado del Manager
+    const { data, filter } = useSelector((state) => state.manager); 
 
     useEffect(() => {
         const fetchData = async () => {
@@ -15,8 +15,8 @@ const Manager = () => {
                 { id: 2, title: "Attack on Titan", type: "Seinen", image: "/images/manager.jpg" },
                 { id: 3, title: "Sailor Moon", type: "Shōjo", image: "/images/manga.jpg" },
             ];
-            dispatch(setData(managerData)); // Despacha la acción
-            console.log("Fetched data:", managerData); // Verifica la carga
+            dispatch(setData(managerData)); 
+            console.log("Fetched data:", managerData);
         };
 
         fetchData();
@@ -33,7 +33,6 @@ const Manager = () => {
             <div className="bg-gray-100 min-h-screen relative">
                 <SidebarMenu />
 
-                {/* Banner superior */}
                 <div className="relative z-0">
                     <img
                         src="/images/manager.jpg"
@@ -47,9 +46,7 @@ const Manager = () => {
                     </div>
                 </div>
 
-                {/* Contenido principal */}
                 <div className="relative -mt-20 mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-2xl lg:max-w-7xl z-10">
-                    {/* Filtros */}
                     <div className="flex flex-wrap justify-center sm:justify-between items-center mb-6">
                         {["All", "Shōnen", "Seinen", "Shōjo"].map((type) => (
                             <button
@@ -65,7 +62,6 @@ const Manager = () => {
                         ))}
                     </div>
 
-                    {/* Lista de datos filtrados */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                         {filteredData.map((item) => (
                             <div

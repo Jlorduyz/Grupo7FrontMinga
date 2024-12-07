@@ -4,7 +4,7 @@ import managerReducer from "./reducers/managerReducer";
 import { mangaReducer } from "./reducers/mangaReducer";
 import editChapterReducer from "./reducers/editChapterReducer";
 import entitiesReducer from "./entitiesSlice";
-import authReducer from "./reducer/authReducer";
+import authReducer from "./reducers/authReducer";
 import categoryReducer from "./actions/carrouselSlice";
 import mangaSliceReducer from "./actions/mangaSlice";
 import categoriesReducer from "./actions/carrouselSlice";

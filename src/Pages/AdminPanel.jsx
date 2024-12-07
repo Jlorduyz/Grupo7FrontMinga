@@ -9,11 +9,10 @@ const AdminPanel = () => {
     const entities = useSelector((state) => state.entities.entities);
 
     return (
+<>
         <div className="bg-gray-100 min-h-screen flex">
-            {/* Sidebar Menu */}
             <SidebarMenu />
 
-            {/* Contenido principal */}
             <div className="flex-1 relative">
                 <div className="relative">
                     <img
@@ -98,8 +97,9 @@ const AdminPanel = () => {
                     </table>
                 </div>
             </div>
-            <Footer></Footer>
         </div>
+            <Footer></Footer>
+            </>
     );
 };
 
