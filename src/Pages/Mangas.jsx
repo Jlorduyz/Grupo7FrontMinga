@@ -34,15 +34,11 @@ const Mangas = () => {
         navigate(`/detailManga?id=${id}`);
     };
 
-
     const filteredMangas = mangas.filter((manga) => {
         const matchesCategory = filter === "All" || manga.category_id === filter;
         const matchesSearch = manga.title.toLowerCase().includes(searchText.toLowerCase());
         return matchesCategory && matchesSearch;
     });
-    console.log(filteredMangas);
-
-
 
     return (
         <>
@@ -72,13 +68,12 @@ const Mangas = () => {
                     </div>
                     <div className="-mt-12 mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-2xl lg:max-w-7xl relative z-10">
                         <div className="flex flex-wrap justify-center sm:justify-start items-center mb-6 space-x-2">
-                            {/* BotÃ³n para "All" */}
+                            {/* Botón para "All" */}
                             <button
                                 className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${filter === "All"
-                                    ? "bg-pink-500 text-white"
-                                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                        ? "bg-pink-500 text-white"
+                                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                                     }`}
-
                                 onClick={() => dispatch(setFilter("All"))}
                             >
                                 All
@@ -87,10 +82,9 @@ const Mangas = () => {
                                 <button
                                     key={index}
                                     className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${filter === type._id
-                                        ? "bg-pink-500 text-white"
-                                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                            ? "bg-pink-500 text-white"
+                                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                                         }`}
-
                                     onClick={() => dispatch(setFilter(type._id))}
                                 >
                                     {type.name}
@@ -110,7 +104,10 @@ const Mangas = () => {
                                 >
                                     <div className="flex-1 p-4 flex flex-col justify-center">
                                         <h3 className="text-lg font-bold text-gray-800">{manga.title}</h3>
-                                        <p className="text-sm text-pink-500 mt-1">{manga.category_id}</p>
+                                        {/* Mostrar el nombre de la categoría en lugar del ID */}
+                                        <p className="text-sm text-pink-500 mt-1">
+                                            {categories.find((cat) => cat._id === manga.category_id)?.name || "Unknown"}
+                                        </p>
                                         <button className="mt-2 px-4 py-1 bg-green-200 text-black rounded-full text-sm hover:bg-green-300">
                                             Read
                                         </button>
