@@ -14,27 +14,22 @@ import DetailsManga from "./Pages/DetailsManga.jsx";
 import NewRole from "./Pages/NewRole.jsx";
 import Error404 from "./Pages/Error404.jsx";
 const router = createBrowserRouter([
-  {
-    element: <Root />,
-    errorElement: <Error404 />,
-    children: [
-      { path: "/", element: <Home /> },
-      { path: "/home", element: <Home /> },
-      { path: "/mangas", element: <Mangas /> },
-      { path: "/manager", element: <Manager /> },
-      { path: "/edit-chapter", element: <EditChapter /> },
-      { path: "/admin-panel", element: <AdminPanel /> },
-      { path: "/welcome", element: <Welcome /> },
-      { path: "/welcomeback", element: <WelcomeBack /> },
-      { path: "/detailManga", element: <DetailsManga /> },
-      { path: "/new-role", element: <NewRole /> },
-      // {path:"/*",element:<NotFound></NotFound>},
-    ],
-  },
-  {
-    path: "*",
-    element: <Error404 />, // Ruta para todas las páginas no encontradas
-  },
+  
+    {element: <Root />,
+        children: [
+            { path: "/", element: <Home /> },
+            { path: "/home", element: <Home /> },
+            { path: "/mangas", element: <Mangas /> },
+            { path: "/manager", element: <Manager /> },
+            { path: "/edit-chapter", element: <EditChapter /> },
+            { path: "/admin-panel", element: <AdminPanel /> },
+            { path: "/welcome", element: <Welcome /> },
+            { path: "/welcomeback", element: <WelcomeBack /> },
+            { path: "/detailManga", element: <DetailsManga /> },
+            { path: "/new-role", element: <NewRole /> },
+            {path:"/*",element:<Error404/>},
+        ],
+    },
 ]);
 
 const loginWithToken = async (token) => {
