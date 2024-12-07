@@ -7,6 +7,40 @@ import Footer from "../Components/Footer/Footer";
 import { setFilter } from "../Store/actions/mangaActions";
 import axios from "axios";
 
+const categoryStyles = {
+  comics: {
+    button: 'bg-pink-200 text-pink-800 hover:bg-pink-300', 
+    selectedButton: 'bg-pink-500 text-white',
+    categoryText: 'text-pink-500',
+    line: 'bg-pink-500'
+  },
+  shojo: {
+    button: 'bg-rose-200 text-rose-800 hover:bg-rose-300', 
+    selectedButton: 'bg-rose-500 text-white',
+    categoryText: 'text-rose-500',
+    line: 'bg-rose-500'
+  },
+  seinen: {
+    button: 'bg-green-200 text-green-800 hover:bg-green-300',
+    selectedButton: 'bg-green-500 text-white',
+    categoryText: 'text-green-500',
+    line: 'bg-green-500'
+  },
+  shonen: {
+    button: 'bg-purple-200 text-purple-800 hover:bg-purple-300',
+    selectedButton: 'bg-purple-500 text-white',
+    categoryText: 'text-purple-500',
+    line: 'bg-purple-500'
+  }
+};
+
+const defaultStyles = {
+  button: 'bg-gray-200 text-gray-700 hover:bg-gray-300',
+  selectedButton: 'bg-gray-400 text-white',
+  categoryText: 'text-gray-500',
+  line: 'bg-gray-500'
+};
+
 const Mangas = () => {
     const dispatch = useDispatch();
     const { mangas, filter, isLoading, error } = useSelector((state) => state.mangas);
@@ -39,11 +73,6 @@ const Mangas = () => {
         const matchesSearch = manga.title.toLowerCase().includes(searchText.toLowerCase());
         return matchesCategory && matchesSearch;
     });
-    console.log(filteredMangas);
-    console.log(categories);
-
-    
-
 
     return (
         <>
@@ -73,59 +102,69 @@ const Mangas = () => {
                     </div>
                     <div className="-mt-12 mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-2xl lg:max-w-7xl relative z-10">
                         <div className="flex flex-wrap justify-center sm:justify-start items-center mb-6 space-x-2">
-                            {/* Botón para "All" */}
                             <button
-                                className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${filter === "All"
+                                className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${
+                                    filter === "All"
                                         ? "bg-pink-500 text-white"
                                         : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                                    }`}
+                                }`}
                                 onClick={() => dispatch(setFilter("All"))}
                             >
                                 All
                             </button>
-                            {categories.map((type, index) => (
-                                <button
-                                    key={index}
-                                    className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${filter === type._id
-                                            ? "bg-pink-500 text-white"
-                                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                            {categories.map((type, index) => {
+                                const catName = type.name.toLowerCase();
+                                const styles = categoryStyles[catName] || defaultStyles;
+                                const isSelected = filter === type._id;
+                                return (
+                                    <button
+                                        key={index}
+                                        className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${
+                                            isSelected ? styles.selectedButton : styles.button
                                         }`}
-                                    onClick={() => dispatch(setFilter(type._id))}
-                                >
-                                    {type.name}
-                                </button>
-                            ))}
+                                        onClick={() => dispatch(setFilter(type._id))}
+                                    >
+                                        {type.name}
+                                    </button>
+                                );
+                            })}
                         </div>
 
                         {isLoading && <p className="text-center">Loading mangas...</p>}
                         {error && <p className="text-center text-red-500">{error}</p>}
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                            {filteredMangas.map((manga) => (
-                                <div
-                                    key={manga._id}
-                                    className="relative bg-white shadow-lg rounded-lg flex items-center cursor-pointer hover:shadow-xl transition-shadow h-48"
-                                    onClick={() => handleClick(manga._id)}
-                                >
-                                    <div className="flex-1 p-4 flex flex-col justify-center">
-                                        <h3 className="text-lg font-bold text-gray-800">{manga.title}</h3>
-                                        {/* Mostrar el nombre de la categoría en lugar del ID */}
-                                        <p className="text-sm text-pink-500 mt-1">
-                                            {categories.find((cat) => cat._id === manga.category_id)?.name || "Unknown"}
-                                        </p>
-                                        <button className="mt-2 px-4 py-1 bg-green-200 text-black rounded-full text-sm hover:bg-green-300">
-                                            Read
-                                        </button>
+                            {filteredMangas.map((manga) => {
+                                const cat = categories.find((cat) => cat._id === manga.category_id);
+                                const catName = cat?.name.toLowerCase() || 'unknown';
+                                const styles = categoryStyles[catName] || defaultStyles;
+
+                                return (
+                                    <div
+                                        key={manga._id}
+                                        className="relative bg-white shadow-lg rounded-lg flex items-center cursor-pointer hover:shadow-xl transition-shadow h-48"
+                                        onClick={() => handleClick(manga._id)}
+                                    >
+                                        <span className={`absolute left-0 top-0 bottom-0 w-1 ${styles.line} rounded-l-lg`}></span>
+                                        <div className="flex-1 p-4 flex flex-col justify-center pl-4">
+                                            <h3 className="text-lg font-bold text-gray-800">{manga.title}</h3>
+                                            <p className={`text-sm mt-1 ${styles.categoryText}`}>
+                                                {cat?.name || "Unknown"}
+                                            </p>
+                                            <button className="mt-2 px-4 py-1 bg-green-200 text-black rounded-full text-sm hover:bg-green-300">
+                                                Read
+                                            </button>
+                                        </div>
+                                        <div className="w-[45%] h-full">
+                                            <img
+                                                src={manga.cover_photo}
+                                                alt={manga.title}
+                                                className="object-cover w-full h-full rounded-l-full"
+                                            />
+                                        </div>
                                     </div>
-                                    <div className="w-[45%] h-full">
-                                        <img
-                                            src={manga.cover_photo}
-                                            alt={manga.title}
-                                            className="object-cover w-full h-full rounded-l-full"
-                                        />
-                                    </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
