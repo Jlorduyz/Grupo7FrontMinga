@@ -11,6 +11,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "./Store/actions/AuthActions.js";
 import DetailsManga from "./Pages/DetailsManga.jsx";
+import ReadManga from "./Pages/ReadManga.jsx";
 
 const router = createBrowserRouter([
   
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
             { path: "/welcome", element: <Welcome /> },
             { path: "/welcomeback", element: <WelcomeBack /> },
             { path: "/detailManga", element: <DetailsManga /> },
-            {path:"/*",element:<NotFound></NotFound>},
+            {path: "/readManga", element: <ReadManga />},
         ],
     },
 ]);

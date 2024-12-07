@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Chapters from "../Components/Chapters";
 
 const DetailsManga = () => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
 
-    const [manga, setManga] = useState(null);
+     const [manga, setManga] = useState(null);
     const [infoOrChapters, setInfoOrChapters] = useState(false);
 
     useEffect(() => {
@@ -28,7 +29,7 @@ const DetailsManga = () => {
 
     return (
         <div className="bg-gray-100 min-h-screen flex flex-col items-center p-4">
-            <div className="w-full max-w-4xl bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="w-full max-w-4xl bg-white rounded-lg shadow-md overflow-hidden h-auto">
                 {manga ? (
                     <>
                         <div className="relative">
@@ -45,13 +46,16 @@ const DetailsManga = () => {
                             <h1 className="text-2xl font-bold text-gray-800">{manga.title}</h1>
                             <p className="text-sm text-gray-500 mt-2">{manga.description}</p>
                         </div>
+                        <Chapters />
+
                     </>
                     
+
                 ) : (
                     <p>Loading...</p>
                 )}
             </div>
-            
+
         </div>
     );
 };
