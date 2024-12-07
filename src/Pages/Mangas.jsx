@@ -41,6 +41,7 @@ const Mangas = () => {
         return matchesCategory && matchesSearch;
     });
     console.log(filteredMangas);
+    console.log(categories);
     
 
     return (
