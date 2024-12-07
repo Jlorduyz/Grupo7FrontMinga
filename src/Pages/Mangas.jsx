@@ -43,6 +43,7 @@ const Mangas = () => {
     console.log(filteredMangas);
 
 
+
     return (
         <>
             <div className="bg-gray-100 min-h-screen flex">
@@ -77,6 +78,7 @@ const Mangas = () => {
                                     ? "bg-pink-500 text-white"
                                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                                     }`}
+
                                 onClick={() => dispatch(setFilter("All"))}
                             >
                                 All
@@ -88,6 +90,7 @@ const Mangas = () => {
                                         ? "bg-pink-500 text-white"
                                         : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                                         }`}
+
                                     onClick={() => dispatch(setFilter(type._id))}
                                 >
                                     {type.name}
