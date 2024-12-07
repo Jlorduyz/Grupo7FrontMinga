@@ -46,6 +46,7 @@ const Home = () => {
 
   return (
       <>
+    
     <div className="relative m-5 h-3/6">
         <img
           src="/images/home.jpg"
