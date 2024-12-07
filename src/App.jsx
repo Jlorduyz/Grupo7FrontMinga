@@ -11,23 +11,30 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "./Store/actions/AuthActions.js";
 import DetailsManga from "./Pages/DetailsManga.jsx";
-
+import NewRole from "./Pages/NewRole.jsx";
+import Error404 from "./Pages/Error404.jsx";
 const router = createBrowserRouter([
-  
-    {element: <Root />,
-        children: [
-            { path: "/", element: <Home /> },
-            { path: "/home", element: <Home /> },
-            { path: "/mangas", element: <Mangas /> },
-            { path: "/manager", element: <Manager /> },
-            { path: "/edit-chapter", element: <EditChapter /> },
-            { path: "/admin-panel", element: <AdminPanel /> },
-            { path: "/welcome", element: <Welcome /> },
-            { path: "/welcomeback", element: <WelcomeBack /> },
-            { path: "/detailManga", element: <DetailsManga /> },
-            {path:"/*",element:<NotFound></NotFound>},
-        ],
-    },
+  {
+    element: <Root />,
+    errorElement: <Error404 />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/home", element: <Home /> },
+      { path: "/mangas", element: <Mangas /> },
+      { path: "/manager", element: <Manager /> },
+      { path: "/edit-chapter", element: <EditChapter /> },
+      { path: "/admin-panel", element: <AdminPanel /> },
+      { path: "/welcome", element: <Welcome /> },
+      { path: "/welcomeback", element: <WelcomeBack /> },
+      { path: "/detailManga", element: <DetailsManga /> },
+      { path: "/new-role", element: <NewRole /> },
+      // {path:"/*",element:<NotFound></NotFound>},
+    ],
+  },
+  {
+    path: "*",
+    element: <Error404 />, // Ruta para todas las páginas no encontradas
+  },
 ]);
 
 const loginWithToken = async (token) => {
@@ -43,7 +50,7 @@ const loginWithToken = async (token) => {
     )
   } catch (error) {
     console.log("error", error);
-    
+
   }
 }
 
@@ -55,11 +62,11 @@ function App() {
       dispatch(setUser({ user, token }))
     })
   }
-    return (
-        <>
-            <RouterProvider router={router}></RouterProvider>
-        </>
-    );
+  return (
+    <>
+      <RouterProvider router={router}></RouterProvider>
+    </>
+  );
 }
 
 export default App;
