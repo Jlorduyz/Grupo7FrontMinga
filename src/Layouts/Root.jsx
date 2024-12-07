@@ -3,10 +3,10 @@ import { Outlet, useLocation } from "react-router-dom";
 
 function Root() {
 
-    const location = useLocation();
+  const location = useLocation();
 
 
-    return (
+   return (
         <div className="max-w-screen min-h-screen flex flex-col">
             <Header />
             <main className="flex-grow">
