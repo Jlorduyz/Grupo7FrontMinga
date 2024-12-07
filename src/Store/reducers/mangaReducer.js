@@ -2,25 +2,23 @@ import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchMangas = createAsyncThunk(
-  'manga/fetchMangas', 
+  "manga/fetchMangas",
   async () => {
     try {
       const response = await axios.get("http://localhost:8080/api/mangas/all");
-      return response.data; 
+      return response.data;
     } catch (error) {
-      console.log("error fetching mangas", error);
-      
       throw error;
     }
   }
 );
 
 const initialState = {
-  mangas: [], 
+  mangas: [],
   search: "",
   isLoading: false,
   error: null,
-  filter: "All", 
+  filter: "All",
 };
 
 export const mangaReducer = createReducer(initialState, (builder) => {
@@ -30,15 +28,16 @@ export const mangaReducer = createReducer(initialState, (builder) => {
       state.error = null;
     })
     .addCase(fetchMangas.fulfilled, (state, action) => {
+      console.log("Fetched Mangas from API:", action.payload.response); // Verifica los datos
       state.mangas = action.payload.response;
       state.isLoading = false;
-      state.error = null;
     })
     .addCase(fetchMangas.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error.message;
     })
     .addCase("manga/setFilter", (state, action) => {
+      console.log("Filter updated to:", action.payload); // Verifica el nuevo valor del filtro
       state.filter = action.payload;
     })
     .addCase("manga/setSearch", (state, action) => {

@@ -14,25 +14,29 @@ import DetailsManga from "./Pages/DetailsManga.jsx";
 import ReadManga from "./Pages/ReadManga.jsx";
 import NewRole from "./Pages/NewRole.jsx";
 import Error404 from "./Pages/Error404.jsx";
-const router = createBrowserRouter([
-  
-    {element: <Root />,
-        children: [
-            { path: "/", element: <Home /> },
-            { path: "/home", element: <Home /> },
-            { path: "/mangas", element: <Mangas /> },
-            { path: "/manager", element: <Manager /> },
-            { path: "/edit-chapter", element: <EditChapter /> },
-            { path: "/admin-panel", element: <AdminPanel /> },
-            { path: "/welcome", element: <Welcome /> },
-            { path: "/welcomeback", element: <WelcomeBack /> },
-            { path: "/detailManga", element: <DetailsManga /> },
-            {path: "/readManga", element: <ReadManga />},
-            { path: "/new-role", element: <NewRole /> },
-            {path:"/*",element:<Error404/>},
+import Profile from "./Pages/Profile";
 
-        ],
-    },
+const router = createBrowserRouter([
+  {
+    element: <Root />,
+    errorElement: <Error404 />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/home", element: <Home /> },
+      { path: "/mangas", element: <Mangas /> },
+      { path: "/manager", element: <Manager /> },
+      { path: "/edit-chapter", element: <EditChapter /> },
+      { path: "/admin-panel", element: <AdminPanel /> },
+      { path: "/welcome", element: <Welcome /> },
+      { path: "/welcomeback", element: <WelcomeBack /> },
+      { path: "/detailManga", element: <DetailsManga /> },
+      { path: "/new-role", element: <NewRole /> },
+      { path: "/profile", element: <Profile /> },],
+  },
+  {
+    path: "*",
+    element: <Error404 />,
+  },
 ]);
 
 const loginWithToken = async (token) => {
