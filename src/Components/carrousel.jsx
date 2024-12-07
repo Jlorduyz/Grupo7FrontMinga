@@ -42,10 +42,10 @@ const Carousel = () => {
   const currentCategory = categories[currentIndex];
 
   return (
-    <div className="w-[100%] mx-auto mt-16 sm:block hidden">
+    <div className="w-[100%] mx-auto mt-16 sm:block hidden text-white">
       <div className="relative w-full flex items-center justify-center rounded-lg overflow-hidden h-auto md:h-96 p-4 md:p-0">
         <div className="flex items-center justify-center w-full md:px-8">
-          <div className="flex flex-col md:flex-row items-center bg-pink-200 rounded-lg shadow-lg relative w-full md:h-64 p-4 md:px-8 justify-around">
+          <div className="flex flex-col md:flex-row items-center bg-pink-400 rounded-lg shadow-lg relative w-full md:h-64 p-4 md:px-8 justify-around">
 
             <button
               onClick={handlePrev}

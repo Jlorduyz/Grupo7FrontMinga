@@ -41,34 +41,46 @@ const Home = () => {
       })
     }
     navigate("/home");
-  },[dispatch])
+  }, [dispatch])
 
 
   return (
-      <>
-            <Carousel />
-
-    <div className="relative m-5 h-3/6">
-    
-        <img
-          src="/images/home.jpg"
-          alt="Banner"
-          className="w-full h-[551px] object-cover animate-zoom"
-        />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black bg-opacity-50">
-          <h1 className="text-6xl font-bold mb-4">Live the emotion of the manga</h1>
-          <h3 className='text-left text-2xl'>Find the perfect manga for you</h3>
-          <h4 className='font-bold'>#MingaForever</h4>
-          <button
-            onClick={() => navigate("/welcomeback")}
-            className="m-5 p-5 w-1/4 text-xl bg-pink-600 rounded-lg hover:bg-slate-600"
-          >
-            Sign In
-          </button>
+    <>
+<Carousel />
+      <div className="relative m-5 h-3/6">
+        <div >
+          <img
+            src="/images/home.jpg"
+            alt="Banner"
+            className="w-full h-[600px] brightness-50 object-cover "
+          />
         </div>
-        </div>
+        
+        <div className="text-center mt-[70px] lg:text-start absolute sm:hidden md:block top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] lg:left-[10%] lg:translate-x-[-00%]">
+                    <div className="py-2 ">
+                        <h1 className="text-4xl lg:text-7xl font-bold 	leading-[60.92px]	 font-poppins text-white">
+                        Live the emotion of the manga
+                        </h1>
+                    </div>
+                    <div className="py-2">
+                        <h2 className="text-2xl font-normal font-poppins leading-[22.84px] text-white">
+                        Find the perfect manga for you
+                        </h2>
+                    </div>
+                    <div className="py-2">
+                        <h3 className="text-lg font-semibold	 font-poppins  text-white">
+                        #MingaForever
+                        </h3>
+                    </div>
+                    <div className="py-2">
+                        <button className="bg-pink-600 text-white rounded-md w-[240px] h-[55px] text-[24px] font-medium  font-poppins">
+                            Sign In
+                        </button>
+                    </div>
+                </div>
+      </div>
       <Footer />
-      </>
+    </>
   );
 };
 
