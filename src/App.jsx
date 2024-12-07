@@ -31,6 +31,7 @@ const router = createBrowserRouter([
       { path: "/welcomeback", element: <WelcomeBack /> },
       { path: "/detailManga", element: <DetailsManga /> },
       { path: "/new-role", element: <NewRole /> },
+      { path: "/readManga", element: <ReadManga /> },
       { path: "/profile", element: <Profile /> },],
   },
   {
