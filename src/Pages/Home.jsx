@@ -46,7 +46,7 @@ const Home = () => {
 
   return (
     <>
-
+<Carousel />
       <div className="relative m-5 h-3/6">
         <div >
           <img
