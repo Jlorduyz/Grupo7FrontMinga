@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"; // Importa useNavigate
 import React from "react";
 import { login } from "../Store/actions/AuthActions.js";
-import { useNavigate } from "react-router-dom"; // si no funciona devolverse
 
 
 export default function SignIn() {
@@ -12,7 +11,7 @@ export default function SignIn() {
   const dispatch = useDispatch();
   const authStore = useSelector(state => state.authStore);
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
 
   const handleSubmit = async (e) => {
@@ -96,15 +95,12 @@ export default function SignIn() {
             {loading && <p className="text-sm text-gray-600 text-center">Loading...</p>}
             {error && <p className="text-sm text-red-600 text-center">Invalid Credentials</p>}
           </form>
-          
+
           <br />
 
           <button className="flex items-center justify-center w-full py-4 mb-6 text-sm font-medium text-opacity-80 transition duration-300 rounded-2xl border-2 border-grey-500 text-grey-900 bg-grey-300 hover:bg-grey-400 focus:ring-4 focus:ring-grey-300"
-<<<<<<< HEAD
-            onClick={() => loginWithGoogle()}>
-=======
+          
             onClick={loginWithGoogle}>
->>>>>>> david
             <img className="h-5 mr-2" src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/logos/logo-google.png" alt="Google logo" />
             Sign in with Google
           </button>
