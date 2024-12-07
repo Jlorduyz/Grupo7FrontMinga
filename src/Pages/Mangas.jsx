@@ -42,6 +42,8 @@ const Mangas = () => {
     });
     console.log(filteredMangas);
 
+    
+
 
     return (
         <>
@@ -71,12 +73,14 @@ const Mangas = () => {
                     </div>
                     <div className="-mt-12 mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-2xl lg:max-w-7xl relative z-10">
                         <div className="flex flex-wrap justify-center sm:justify-start items-center mb-6 space-x-2">
-                            {/* BotÃ³n para "All" */}
+
+                            {/* Botón para "All" */}
                             <button
-                                className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${filter === "All"
+                                className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${
+                                    filter === "All"
                                         ? "bg-blue-500 text-white"
                                         : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                                    }`}
+                                }`}
                                 onClick={() => dispatch(setFilter("All"))}
                             >
                                 All
@@ -84,10 +88,12 @@ const Mangas = () => {
                             {categories.map((type, index) => (
                                 <button
                                     key={index}
-                                    className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${filter === type.name
+
+                                    className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base transition-colors ${
+                                        filter === type.name
                                             ? "bg-blue-500 text-white"
                                             : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                                        }`}
+                                    }`}
                                     onClick={() => dispatch(setFilter(type._id))}
                                 >
                                     {type.name}
