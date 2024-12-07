@@ -162,11 +162,7 @@ const RegisterForm = () => {
                     </form>
 
                     <button className="flex items-center justify-center w-full py-4 mb-6 text-sm font-medium text-opacity-80 transition duration-300 rounded-2xl border-2 border-grey-500 text-grey-900 bg-grey-300 hover:bg-grey-400 focus:ring-4 focus:ring-grey-300"
-<<<<<<< HEAD
-                        onClick={() => LoginWithGoogle()}>
-=======
                     onClick={LoginWithGoogle}>
->>>>>>> david
                         <img className="h-5 mr-2" src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/logos/logo-google.png" alt="Google logo" />
                         Sign in with Google
                     </button>
