@@ -7,13 +7,10 @@ function Header() {
 
     return (
         <div className="w-full h-auto py-3.5 bg-transparent flex justify-between px-10 fixed top-0 z-50">
-            <SidebarMenu />
-
-            <button
-                onClick={() => navigate("/Home")}
-                className="hover:bg-pink-600"
-            >
-                <img className="h-14" src={logo} alt="Logo" />
+            <SidebarMenu>
+            </SidebarMenu>
+            <button onClick={() => navigate("/Home")} className="hover:bg-pink-600">
+                <img className="h-14" src={logo} alt="" />
             </button>
         </div>
     );
