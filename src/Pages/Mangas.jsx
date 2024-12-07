@@ -12,6 +12,8 @@ const Mangas = () => {
 
     const [searchText, setSearchText] = useState("");
 
+    console.log(mangas);
+    
     useEffect(() => {
         dispatch(fetchMangas());
     }, [dispatch]);
@@ -103,13 +105,14 @@ const Mangas = () => {
                                             className="w-full h-40 sm:h-48 lg:h-full object-cover"
                                         />
                                     </div>
+
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
             </div>
-            <Footer />
+            <Footer/>
         </>
     );
 };
