@@ -98,13 +98,23 @@ const Profile = () => {
                     className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500"
                   />
                 </div>
+                {/* Botón Save */}
                 <button
                   type="submit"
                   className="w-full bg-green-500 text-white py-2 px-4 rounded-lg shadow hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
                 >
                   Save
                 </button>
+                {/* Botón Delete */}
+                <button
+                  type="button"
+                  onClick={handleDelete}
+                  className="w-full bg-red-500 text-white py-2 px-4 rounded-lg shadow hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 mt-2"
+                >
+                  Delete Account
+                </button>
               </form>
+
             </div>
 
             <div className="text-center">
@@ -118,12 +128,7 @@ const Profile = () => {
               </h2>
               <p className="text-gray-500">{formData.city}</p>
               <p className="text-gray-400 text-sm">{formData.birthDate}</p>
-              <button
-                onClick={handleDelete}
-                className="mt-4 w-full bg-red-500 text-white py-2 px-4 rounded-lg shadow hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
-              >
-                Delete Account
-              </button>
+
             </div>
           </div>
         </div>
