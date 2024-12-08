@@ -63,7 +63,9 @@ const RegisterForm = () => {
 
             navigate("/new-role");
 
-            // navigate("/home"); 
+
+            navigate("/new-role"); 
+
 
         } catch (err) {
             console.error("Network error:", err);
