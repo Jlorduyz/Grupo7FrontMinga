@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setData, setFilter } from "../Store/actions/managerActions"; 
-import SidebarMenu from "../Components/SidebarMenu";
 import Footer from "../Components/Footer/Footer";
 
 const Manager = () => {
@@ -31,7 +30,6 @@ const Manager = () => {
     return (
         <>
             <div className="bg-gray-100 min-h-screen relative">
-                <SidebarMenu />
 
                 <div className="relative z-0">
                     <img
@@ -71,7 +69,7 @@ const Manager = () => {
                                 <img
                                     src={item.image}
                                     alt={item.title}
-                                    className="w-full h-40 sm:h-48 object-cover"
+                                    className="object-cover w-full h-full rounded-l-full"
                                 />
                                 <div className="p-4 flex flex-col">
                                     <h3 className="text-lg font-bold text-gray-800">{item.title}</h3>

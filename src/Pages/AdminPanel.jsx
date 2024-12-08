@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSelection } from "../Store/entitiesSlice";
-import SidebarMenu from "../Components/SidebarMenu";
 import Footer from "../Components/Footer/Footer";
 
 const AdminPanel = () => {
@@ -11,8 +10,6 @@ const AdminPanel = () => {
     return (
 <>
         <div className="bg-gray-100 min-h-screen flex">
-            <SidebarMenu />
-
             <div className="flex-1 relative">
                 <div className="relative">
                     <img

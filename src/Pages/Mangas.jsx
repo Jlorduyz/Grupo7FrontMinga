@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import SidebarMenu from "../Components/SidebarMenu";
 import { fetchMangas } from "../Store/reducers/mangaReducer";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer/Footer";
@@ -77,8 +76,7 @@ const Mangas = () => {
     return (
         <>
             <div className="bg-gray-100 min-h-screen flex">
-                <SidebarMenu />
-                <div className="flex-1 relative">
+               <div className="flex-1 relative">
                     <div className="relative">
                         <img
                             src="/images/manga.jpg"

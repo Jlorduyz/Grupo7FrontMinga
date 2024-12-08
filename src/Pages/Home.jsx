@@ -76,7 +76,8 @@ const Home = () => {
       <h3 className="text-lg font-semibold font-poppins text-white">#MingaForever</h3>
     </div>
     <div className="py-2">
-      <button className="bg-pink-600 text-white rounded-md w-[240px] h-[55px] text-[24px] font-medium font-poppins">
+      <button onClick={() => navigate("/welcomeback")}
+       className="bg-pink-600 text-white rounded-md w-[240px] h-[55px] text-[24px] font-medium font-poppins">
         Sign In
       </button>
     </div>
