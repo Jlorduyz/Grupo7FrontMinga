@@ -11,8 +11,10 @@ const SidebarMenu = () => {
 
     return (
         <div>
+            {/* Botón para abrir el menú */}
             <button
                 onClick={toggleMenu}
+
                 className={`fixed top-4 left-4 z-50 focus:outline-none transition-transform duration-300 ${isOpen ? "hidden" : "block"}`}
             >
                 <img
@@ -22,67 +24,37 @@ const SidebarMenu = () => {
                 />
             </button>
 
+            {/* Contenedor del menú */}
             <div
-                className={`fixed top-0 left-0 w-full h-full bg-pink-300 z-40 transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"
-                    } lg:hidden`}
+                className={`fixed top-0 left-0 h-full z-40 bg-pink-300 transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"
+                    } ${window.innerWidth < 768 ? "w-full" : "w-64"}`}
             >
-                <div className="flex flex-col justify-center items-center h-full space-y-6 text-white">
+                {/* Contenido del menú */}
+                <div className="flex flex-col justify-center items-center h-full space-y-8 text-white">
+                    {/* Botón para cerrar el menú */}
                     <button
                         onClick={toggleMenu}
                         className="absolute top-4 right-4 text-white text-3xl"
                     >
                         ×
                     </button>
-                    <button
-                        onClick={() => navigate("/Home")}
-                        className="bg-white text-pink-500 px-6 py-2 rounded-full"
-                    >
-                        Home
-                    </button>
-                    <button
-                        onClick={() => navigate("/welcome")}
-                        className="bg-white text-pink-500 px-6 py-2 rounded-full"
-                    >
-                        Register
-                    </button>
-                    <button
-                        onClick={() => navigate("/welcomeback")}
-                        className="bg-white text-pink-500 px-6 py-2 rounded-full"
-                    >
-                        Sign In
-                    </button>
-                </div>
-            </div>
 
-            <div
-                className={`fixed top-0 left-0 h-full bg-pink-300 z-40 transition-transform duration-300 ${isOpen ? "w-64" : "w-0"
-                    } hidden lg:block`}
-            >
-                <div
-                    className={`p-6 space-y-6 text-white transition-opacity ${isOpen ? "opacity-100" : "opacity-0"
-                        }`}
-                >
-                    <button
-                        onClick={toggleMenu}
-                        className="absolute top-4 right-4 text-white text-3xl"
-                    >
-                        ×
-                    </button>
+                    {/* Botones del menú */}
                     <button
                         onClick={() => navigate("/Home")}
-                        className="bg-white text-pink-500 px-6 py-2 rounded-full"
+                        className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
                     >
                         Home
                     </button>
                     <button
                         onClick={() => navigate("/welcome")}
-                        className="bg-white text-pink-500 px-6 py-2 rounded-full"
+                        className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
                     >
                         Register
                     </button>
                     <button
                         onClick={() => navigate("/welcomeback")}
-                        className="bg-white text-pink-500 px-6 py-2 rounded-full"
+                        className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
                     >
                         Sign In
                     </button>
