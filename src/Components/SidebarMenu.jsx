@@ -14,6 +14,7 @@ const SidebarMenu = () => {
             {/* Botón para abrir el menú */}
             <button
                 onClick={toggleMenu}
+
                 className={`fixed top-4 left-4 z-50 focus:outline-none transition-transform duration-300 ${isOpen ? "hidden" : "block"}`}
             >
                 <img
