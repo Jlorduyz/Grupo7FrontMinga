@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const RegisterForm = () => {
-   
+
     const navigate = useNavigate();
     const LoginWithGoogle = () => {
         window.location.href = "http://localhost:8080/api/auth/signin/google";
@@ -18,7 +18,7 @@ const RegisterForm = () => {
     });
 
 
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
 
     const [error, setError] = useState(null);
 
@@ -49,7 +49,7 @@ const RegisterForm = () => {
                 setError(errorData.message || "Failed to register. if you have an account log in")
                 setLoading(false);
 
-            
+
                 return;
             }
 
@@ -63,7 +63,9 @@ const RegisterForm = () => {
 
             navigate("/new-role");
 
+
             navigate("/new-role"); 
+
 
         } catch (err) {
             console.error("Network error:", err);
@@ -73,11 +75,11 @@ const RegisterForm = () => {
     };
 
     const goToLogin = () => {
-        navigate("/welcomeback"); 
+        navigate("/welcomeback");
     };
 
     const goToHomePage = () => {
-        navigate("/home"); 
+        navigate("/home");
     };
 
     return (
@@ -162,7 +164,7 @@ const RegisterForm = () => {
                     </form>
 
                     <button className="flex items-center justify-center w-full py-4 mb-6 text-sm font-medium text-opacity-80 transition duration-300 rounded-2xl border-2 border-grey-500 text-grey-900 bg-grey-300 hover:bg-grey-400 focus:ring-4 focus:ring-grey-300"
-                    onClick={LoginWithGoogle}>
+                        onClick={LoginWithGoogle}>
                         <img className="h-5 mr-2" src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/logos/logo-google.png" alt="Google logo" />
                         Sign in with Google
                     </button>
