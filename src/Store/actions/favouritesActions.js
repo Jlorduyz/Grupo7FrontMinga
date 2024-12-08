@@ -7,8 +7,8 @@ export const FETCH_FAVOURITES_FAILURE = "FETCH_FAVOURITES_FAILURE";
 export const fetchFavourites = () => async (dispatch) => {
     dispatch({ type: FETCH_FAVOURITES_REQUEST });
     try {
-        const response = await axios.get("http://localhost:8080/api/favourites"); // Cambia la URL si es necesario
-        dispatch({ type: FETCH_FAVOURITES_SUCCESS, payload: response.data });
+        const response = await axios.get("http://localhost:8080/api/reactions/favorite");
+        dispatch({ type: FETCH_FAVOURITES_SUCCESS, payload: response.data.response });
     } catch (error) {
         dispatch({ type: FETCH_FAVOURITES_FAILURE, payload: error.message });
     }
