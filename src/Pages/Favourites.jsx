@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import SidebarMenu from "../Components/SidebarMenu";
 import { fetchFavourites } from "../Store/actions/favouritesActions";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer/Footer";
@@ -26,7 +25,6 @@ const Favourites = () => {
     return (
         <>
             <div className="bg-gray-100 min-h-screen flex">
-                <SidebarMenu />
                 <div className="flex-1 relative">
                     <div className="relative">
                         <img
@@ -54,7 +52,6 @@ const Favourites = () => {
                         {error && <p className="text-center text-red-500">{error}</p>}
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                            {/* Tarjeta quemada */}
                             <div
                                 className="relative bg-white shadow-lg rounded-lg flex items-center cursor-pointer hover:shadow-xl transition-shadow h-48"
                                 onClick={() => handleClick("123")}

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Footer from "../Components/Footer/Footer";
-import Header from "../Components/Header";
 import { updateProfile, deleteAccount } from "../Store/actions/profileActions";
 
 const Profile = () => {
@@ -29,7 +28,6 @@ const Profile = () => {
 
   return (
     <>
-      <Header />
       <div className="bg-gray-100 min-h-screen">
         <div className="relative">
           <img

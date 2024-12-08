@@ -20,7 +20,6 @@ import Favourites from "./Pages/Favourites";
 const router = createBrowserRouter([
   {
     element: <Root />,
-    errorElement: <Error404 />,
     children: [
       { path: "/", element: <Home /> },
       { path: "/home", element: <Home /> },
@@ -34,12 +33,11 @@ const router = createBrowserRouter([
       { path: "/new-role", element: <NewRole /> },
       { path: "/readManga", element: <ReadManga /> },
       { path: "/favourites", element: <Favourites /> },
-      { path: "/profile", element: <Profile /> },],
+      { path: "/profile", element: <Profile /> },
+      {path: "/*", element: <Error404 />},
+    ],
   },
-  {
-    path: "*",
-    element: <Error404 />,
-  },
+
 ]);
 
 const loginWithToken = async (token) => {
