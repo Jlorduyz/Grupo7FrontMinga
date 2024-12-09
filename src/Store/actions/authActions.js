@@ -20,7 +20,7 @@ const login = createAsyncThunk("login", async({email, password}, thunkAPI) => {
     }
 
     try {
-        const response = await axios.post("https://grupo7backminga.onrender.com/api/auth/signIn", credentials)
+        const response = await axios.post("http://localhost:8080/api/auth/signIn", credentials)
         console.log(response.data);
         localStorage.setItem("token", response.data.token)
     

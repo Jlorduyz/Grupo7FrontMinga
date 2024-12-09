@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { setUser } from '../Store/actions/AuthActions.js';
 import Carousel from '../Components/carrousel.jsx';
+import { useSelector } from 'react-redux';
 
 const loginWithToken = async (token) => {
   try {
@@ -43,7 +44,10 @@ const Home = () => {
     navigate("/home");
   }, [dispatch])
 
-
+  const requiredAuth = true
+  const token = useSelector(state => state.authStore.token);
+  console.log("token", token);
+  
   return (
     <>
 <Carousel />
@@ -76,10 +80,20 @@ const Home = () => {
       <h3 className="text-lg font-semibold font-poppins text-white">#MingaForever</h3>
     </div>
     <div className="py-2">
-      <button onClick={() => navigate("/welcomeback")}
-       className="bg-pink-600 text-white rounded-md w-[240px] h-[55px] text-[24px] font-medium font-poppins">
-        Sign In
-      </button>
+      {
+        (!requiredAuth || !token) ? (
+          <button onClick={() => navigate("/welcomeback")}
+          className="bg-pink-600 text-white rounded-md w-[240px] h-[55px] text-[24px] font-medium font-poppins">
+           Sign In
+         </button>
+        ) : (
+          <button onClick={() => navigate("/mangas")}
+          className="bg-pink-600 text-white rounded-md w-[240px] h-[55px] text-[24px] font-medium font-poppins">
+           Mangas
+         </button>
+        )
+      }
+
     </div>
   </div>
 </div>
