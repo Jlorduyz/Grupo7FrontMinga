@@ -10,18 +10,16 @@ const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Obtener el ID y el token del usuario logueado desde authStore
   const id = useSelector((state) => state.authStore.user?._id);
   const token = useSelector((state) => state.authStore.token);
   const { user, loading, error } = useSelector((state) => state.authStore);
-  
 
+  // Estado para almacenar los datos del autor
   const [authors, setAuthors] = useState([]);
   let { _id } = authors?.[0] || {};
 
-  
-  
-  
-
+  // Obtener los datos del autor al montar el componente
   useEffect(() => {
     const fetchAuthorByUserId = async () => {
       try {
@@ -38,30 +36,33 @@ const Profile = () => {
         console.log("Error fetching author:", error);
       }
     };
-    if (id) {
+    if (id && token) {
       fetchAuthorByUserId();
     }
-  }, [token]);
+  }, [id, token]);
 
+  // Función para manejar la actualización del perfil
   const handleSave = async (e) => {
     e.preventDefault();
-
+    
+    // Extraer datos del formulario directamente
+    const name = e.target.name.value;
     const password = e.target.password.value;
     const profileImage = e.target.profileImage.value;
-    const firstName = e.target.firstName.value;
     const lastName = e.target.lastName.value;
     const city = e.target.city.value;
     const country = e.target.country.value;
 
+    // Preparar los datos para enviar
     const updatedData = {
+      name,
       password, 
       photo: profileImage,
-      firstName,
       lastName,
       city,
       country,
     };
-    console.log(id);
+    console.log("Author ID:", _id);
     
     try {
       const config = {
@@ -71,25 +72,29 @@ const Profile = () => {
         },
       };
 
+      // Realizar la solicitud PUT para actualizar el perfil del autor
       const response = await axios.put(
         `http://localhost:8080/api/authors/update/${_id}`,
         updatedData,
         config
       );
 
+      // Manejar la respuesta
       console.log('Profile updated successfully:', response.data);
       alert('Profile updated successfully.');
 
+      // Actualizar los datos del autor en el estado local
       setAuthors([response.data.response]);
       
     } catch (error) {
+      // Manejar errores
       console.error('Error updating profile:', error.response?.data || error.message);
       alert(`Error updating profile: ${error.response?.data?.message || error.message}`);
     }
-    useNavigate("/home");
 
   };
 
+  // Función para manejar la eliminación de la cuenta
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete your account? This action is irreversible.")) {
       try {
@@ -129,22 +134,25 @@ const Profile = () => {
 
         <div className="-mt-20 mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-12 w-full max-w-4xl relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Formulario de Edición */}
             <div>
               <form className="space-y-6" onSubmit={handleSave}>
+                {/* Campo de Name */}
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-                    First Name
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                    Name
                   </label>
                   <input
                     type="text"
-                    name="firstName"
-                    id="firstName"
+                    name="name"
+                    id="name"
                     defaultValue={authors?.[0]?.name || ""}
                     required
                     className="mt-1 block w-full px-4 py-1 border-b border-black shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500"
                   />
                 </div>
 
+                {/* Campo de Last Name */}
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
                     Last Name
@@ -159,8 +167,7 @@ const Profile = () => {
                   />
                 </div>
 
-
-
+                {/* Campo de Password */}
                 <div>
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                     Password
@@ -174,6 +181,7 @@ const Profile = () => {
                   />
                 </div>
 
+                {/* Campo de Profile Image URL */}
                 <div>
                   <label htmlFor="profileImage" className="block text-sm font-medium text-gray-700">
                     Profile Image URL
@@ -188,6 +196,7 @@ const Profile = () => {
                   />
                 </div>
 
+                {/* Campo de City */}
                 <div>
                   <label htmlFor="city" className="block text-sm font-medium text-gray-700">
                     City
@@ -201,6 +210,7 @@ const Profile = () => {
                   />
                 </div>
 
+                {/* Campo de Country */}
                 <div>
                   <label htmlFor="country" className="block text-sm font-medium text-gray-700">
                     Country
@@ -214,7 +224,7 @@ const Profile = () => {
                   />
                 </div>
 
-
+                {/* Botón de Guardar */}
                 <div>
                   <button
                     type="submit"
@@ -224,6 +234,7 @@ const Profile = () => {
                   </button>
                 </div>
 
+                {/* Botón de Eliminar Cuenta */}
                 <div>
                   <button
                     type="button"
@@ -236,6 +247,7 @@ const Profile = () => {
               </form>
             </div>
 
+            {/* Vista Previa del Perfil */}
             <div className="text-center">
               <img
                 src={authors?.[0]?.photo || "https://via.placeholder.com/150"}
@@ -251,6 +263,7 @@ const Profile = () => {
               <p className="text-gray-400 text-sm">Country: {authors?.[0]?.country}</p>
             </div>
           </div>
+          {/* Mostrar mensajes de error */}
           {error && (
             <div className="mt-4 text-center text-red-500">
               {error}
