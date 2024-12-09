@@ -50,6 +50,7 @@ export const updateAuthorActive = createAsyncThunk(
                 }
             });
 
+            // Asumiendo que el autor actualizado se devuelve en response.data.response
             return response.data.response;
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {

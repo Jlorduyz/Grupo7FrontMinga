@@ -61,7 +61,7 @@ const Manager = () => {
         return matchesCategory && matchesAuthor && matchesSearch;
     });
 
-    const headerTitle = role === 1 ? "Author" : role === 2 ? "Company" : "Mangas";
+    const headerTitle = role === 1 ? "Author" : role === 2 ? "Company" : role === 3 ? "Admin" : "Mangas";
 
     return (
         <>
