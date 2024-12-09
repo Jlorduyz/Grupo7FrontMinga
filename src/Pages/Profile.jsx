@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Footer from "../Components/Footer/Footer";
-import Header from "../Components/Header";
 import { updateProfile, deleteAccount } from "../Store/actions/profileActions";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.profile.user);
 
-  // Estados locales para manejar los inputs
   const [formData, setFormData] = useState(user || {});
 
   const handleInputChange = (e) => {
@@ -20,16 +18,15 @@ const Profile = () => {
 
   const handleSave = (e) => {
     e.preventDefault();
-    dispatch(updateProfile(formData)); // Despacha la acción para actualizar el perfil
+    dispatch(updateProfile(formData)); 
   };
 
   const handleDelete = () => {
-    dispatch(deleteAccount()); // Despacha la acción para eliminar la cuenta
+    dispatch(deleteAccount()); 
   };
 
   return (
     <>
-      <Header />
       <div className="bg-gray-100 min-h-screen">
         <div className="relative">
           <img
@@ -98,14 +95,12 @@ const Profile = () => {
                     className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500"
                   />
                 </div>
-                {/* Botón Save */}
                 <button
                   type="submit"
                   className="w-full bg-green-500 text-white py-2 px-4 rounded-lg shadow hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
                 >
                   Save
                 </button>
-                {/* Botón Delete */}
                 <button
                   type="button"
                   onClick={handleDelete}

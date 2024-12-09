@@ -1,24 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import SidebarMenu from "../Components/SidebarMenu";
 import { fetchFavourites } from "../Store/actions/favouritesActions";
+import { fetchMangas } from "../Store/reducers/mangaReducer";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer/Footer";
 
 const Favourites = () => {
     const dispatch = useDispatch();
+    const dispatchManga = useDispatch();
     const { favourites, isLoading, error } = useSelector((state) => state.favourites);
+    const idUser = useSelector((state) => state.authStore.user?._id);
+    
     const [searchText, setSearchText] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(fetchFavourites());
+        dispatchManga(fetchMangas());
     }, [dispatch]);
 
-    const filteredFavourites = favourites.filter((favourite) =>
-        favourite.title.toLowerCase().includes(searchText.toLowerCase())
-    );
+    const mangaIds = favourites.map((manga) => manga.manga_id._id);
+    console.log("mangaIds", mangaIds);
+    console.log("idUser", idUser);
+    console.log("favourites", favourites);
 
+    const filteredFavourites = favourites.filter(
+        (favourite) => favourite.userId === idUser 
+    );
+    console.log("filteredFavourites", filteredFavourites);
+    
     const handleClick = (id) => {
         navigate(`/detailManga?id=${id}`);
     };
@@ -26,7 +36,6 @@ const Favourites = () => {
     return (
         <>
             <div className="bg-gray-100 min-h-screen flex">
-                <SidebarMenu />
                 <div className="flex-1 relative">
                     <div className="relative">
                         <img
@@ -54,50 +63,31 @@ const Favourites = () => {
                         {error && <p className="text-center text-red-500">{error}</p>}
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                            {/* Tarjeta quemada */}
-                            <div
-                                className="relative bg-white shadow-lg rounded-lg flex items-center cursor-pointer hover:shadow-xl transition-shadow h-48"
-                                onClick={() => handleClick("123")}
-                            >
-                                <div className="flex-1 p-4 flex flex-col justify-center">
-                                    <h3 className="text-lg font-bold text-gray-800">Naruto Volume 41</h3>
-                                    <p className="text-sm text-orange-500 mt-1">Shonen</p>
-                                    <button className="mt-2 px-4 py-1 bg-green-200 text-black rounded-full text-sm hover:bg-green-300">
-                                        Read
-                                    </button>
-                                </div>
-                                <div className="w-[45%] h-full">
-                                    <img
-                                        src="https://i.postimg.cc/3J8zGKHt/naruto.jpg" // Imagen quemada
-                                        alt="Naruto Volume 41"
-                                        className="object-cover w-full h-full rounded-l-full"
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Tarjetas dinámicas de favoritos */}
-                            {filteredFavourites.map((favourite) => (
-                                <div
-                                    key={favourite._id}
-                                    className="relative bg-white shadow-lg rounded-lg flex items-center cursor-pointer hover:shadow-xl transition-shadow h-48"
-                                    onClick={() => handleClick(favourite._id)}
-                                >
-                                    <div className="flex-1 p-4 flex flex-col justify-center">
-                                        <h3 className="text-lg font-bold text-gray-800">{favourite.title}</h3>
-                                        <p className="text-sm text-pink-500 mt-1">{favourite.category || "Unknown"}</p>
-                                        <button className="mt-2 px-4 py-1 bg-green-200 text-black rounded-full text-sm hover:bg-green-300">
-                                            Read
-                                        </button>
+                            {filteredFavourites.length === 0 ? (
+                                <p className="text-center text-gray-500">No favourites found</p>
+                            ) : (
+                                filteredFavourites.map((favourite) => (
+                                    <div
+                                        key={favourite._id}
+                                        className="relative bg-white shadow-lg rounded-lg flex items-center cursor-pointer hover:shadow-xl transition-shadow h-48"
+                                    >
+                                        <div className="flex-1 p-4 flex flex-col justify-center">
+                                            <h3 className="text-lg font-bold text-gray-800">{favourite.manga_id.title}</h3>
+                                            <p className="text-sm text-pink-500 mt-1">{favourite.manga_id.category}</p>
+                                            <button className="mt-2 px-4 py-1 bg-green-200 text-black rounded-full text-sm hover:bg-green-300" onClick={() => handleClick(favourite.manga_id._id)}>
+                                                Read
+                                            </button>
+                                        </div>
+                                        <div className="w-[45%] h-full">
+                                            <img
+                                                src={favourite.manga_id.cover_photo} 
+                                                alt={favourite.manga_id.title}
+                                                className="object-cover w-full h-full rounded-l-full"
+                                            />
+                                        </div>
                                     </div>
-                                    <div className="w-[45%] h-full">
-                                        <img
-                                            src={favourite.cover_photo}
-                                            alt={favourite.title}
-                                            className="object-cover w-full h-full rounded-l-full"
-                                        />
-                                    </div>
-                                </div>
-                            ))}
+                                ))
+                            )}
                         </div>
                     </div>
                 </div>

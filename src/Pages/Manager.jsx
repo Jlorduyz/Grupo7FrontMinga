@@ -1,87 +1,114 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setData, setFilter } from "../Store/actions/managerActions"; 
-import SidebarMenu from "../Components/SidebarMenu";
+import { setFilter } from "../Store/actions/managerActions"; 
+import { fetchMangas } from "../Store/reducers/mangaReducer";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import Footer from "../Components/Footer/Footer";
+import Filters from "../Components/Filters"; 
+import { categoryStyles, defaultStyles } from "../Components/Filters";
 
 const Manager = () => {
     const dispatch = useDispatch();
-    const { data, filter } = useSelector((state) => state.manager); 
+    const { mangas, filter, isLoading, error } = useSelector((state) => state.mangas);
+    const idUser = useSelector((state) => state.authStore.user?._id); 
+    const role = useSelector((state) => state.authStore.user?.role); 
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const managerData = [
-                { id: 1, title: "Naruto Volume 41", type: "Shōnen", image: "/images/naruto.jpg" },
-                { id: 2, title: "Attack on Titan", type: "Seinen", image: "/images/manager.jpg" },
-                { id: 3, title: "Sailor Moon", type: "Shōjo", image: "/images/manga.jpg" },
-            ];
-            dispatch(setData(managerData)); 
-            console.log("Fetched data:", managerData);
-        };
+        axios
+            .get("http://localhost:8080/api/categories/all")
+            .then((response) => {
+                setCategories(response.data.response);
+            })
+            .catch((error) => {
+                console.error("Error fetching categories:", error);
+            });
+    }, []);
 
-        fetchData();
+    useEffect(() => {
+        dispatch(fetchMangas());
     }, [dispatch]);
 
-    const filteredData = data.filter((item) =>
-        filter === "All" ? true : item.type === filter
-    );
+    const navigate = useNavigate();
 
-    console.log("Filtered Data:", filteredData);
+    const handleClick = (id) => {
+        navigate(`/detailManga?id=${id}`);
+    };
+
+    const filteredMangas = mangas.filter((manga) => {
+        const matchesCategory = filter === "All" || manga.category_id === filter;
+        const matchesAuthor = manga.author_id === idUser; 
+        return matchesCategory && matchesAuthor;
+    });
+
+    const headerTitle = role === 1 ? "Author" : role === 2 ? "Company" : "Mangas";
 
     return (
         <>
-            <div className="bg-gray-100 min-h-screen relative">
-                <SidebarMenu />
-
-                <div className="relative z-0">
-                    <img
-                        src="/images/manager.jpg"
-                        alt="Manager Banner"
-                        className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover"
-                    />
-                    <div className="absolute inset-0 flex flex-col justify-center items-center px-4 text-center z-10">
-                        <h1 className="text-white text-2xl sm:text-4xl lg:text-5xl font-bold drop-shadow-lg mb-6 sm:mb-8">
-                            Manager Section
-                        </h1>
-                    </div>
-                </div>
-
-                <div className="relative -mt-20 mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-2xl lg:max-w-7xl z-10">
-                    <div className="flex flex-wrap justify-center sm:justify-between items-center mb-6">
-                        {["All", "Shōnen", "Seinen", "Shōjo"].map((type) => (
-                            <button
-                                key={type}
-                                onClick={() => dispatch(setFilter(type))} // Cambia el filtro
-                                className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base ${filter === type
-                                    ? "bg-blue-500 text-white"
-                                    : "bg-gray-200 text-gray-700"
-                                    }`}
-                            >
-                                {type}
-                            </button>
-                        ))}
+            <div className="bg-gray-100 min-h-screen flex">
+                <div className="flex-1 relative">
+                    <div className="relative">
+                        <img
+                            src="/images/manga.jpg"
+                            alt="Manga Banner"
+                            className="w-full h-[300px] sm:h-[400px] lg:h-[644px] object-cover"
+                        />
+                        <div className="absolute inset-0 flex flex-col justify-center items-center px-4 text-center">
+                            <h1 className="text-white text-2xl sm:text-4xl lg:text-5xl font-bold drop-shadow-lg mb-6 sm:mb-8">
+                                {headerTitle}
+                            </h1>
+                        </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                        {filteredData.map((item) => (
-                            <div
-                                key={item.id}
-                                className="bg-white shadow-lg rounded-lg flex flex-col overflow-hidden"
-                            >
-                                <img
-                                    src={item.image}
-                                    alt={item.title}
-                                    className="w-full h-40 sm:h-48 object-cover"
-                                />
-                                <div className="p-4 flex flex-col">
-                                    <h3 className="text-lg font-bold text-gray-800">{item.title}</h3>
-                                    <p className="text-sm text-gray-500">{item.type}</p>
-                                    <button className="mt-4 px-4 py-2 bg-green-500 text-white font-semibold rounded-full hover:bg-green-600 transition text-sm">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
+                    <div className="-mt-12 mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-2xl lg:max-w-7xl relative z-10">
+                        <Filters categories={categories} filter={filter} setFilter={(f) => dispatch(setFilter(f))} />
+
+                        {isLoading && <p className="text-center">Loading mangas...</p>}
+                        {error && <p className="text-center text-red-500">{error}</p>}
+
+                        {filteredMangas.length === 0 && !isLoading && !error && (
+                            <p className="text-center text-gray-500 mt-6">No hay mangas registrados en su perfil.</p>
+                        )}
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                            {filteredMangas.map((manga) => {
+                                const cat = categories.find((cat) => cat._id === manga.category_id);
+                                const catName = cat?.name.toLowerCase() || "unknown";
+                                const styles = categoryStyles[catName] || defaultStyles;
+
+                                return (
+                                    <div
+                                        key={manga._id}
+                                        className="relative bg-white shadow-lg rounded-lg flex items-center cursor-pointer hover:shadow-xl transition-shadow h-48"
+                                        onClick={() => handleClick(manga._id)}
+                                    >
+                                        <span className={`absolute left-0 top-0 bottom-0 w-1 ${styles.line} rounded-l-lg`}></span>
+                                        <div className="flex-1 p-4 flex flex-col justify-center pl-4">
+                                            <h3 className="text-lg font-bold text-gray-800">{manga.title}</h3>
+                                            <p className={`text-sm mt-1 ${styles.categoryText}`}>
+                                                {cat?.name || "Unknown"}
+                                            </p>
+                                            <div className="flex gap-2">
+                                                <button className="mt-2 px-4 py-1 bg-blue-200 text-black rounded-full text-sm hover:bg-blue-300">
+                                                    EDIT
+                                                </button>
+                                                <button className="mt-2 px-4 py-1 bg-red-200 text-black rounded-full text-sm hover:bg-red-300">
+                                                    DELETE
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div className="w-[45%] h-full">
+                                            <img
+                                                src={manga.cover_photo}
+                                                alt={manga.title}
+                                                className="object-cover w-full h-full rounded-l-full"
+                                            />
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -91,3 +118,4 @@ const Manager = () => {
 };
 
 export default Manager;
+

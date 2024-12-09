@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Chapters from "../Components/Chapters";
 import { useNavigate } from "react-router-dom";
+import ReactionButton from "../Components/ReactionButton";
+import { useSelector } from "react-redux";
 
-const DetailsManga = () => {
+const DetailsManga = ({ mangaId, userId, hearth }) => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
-
     const [manga, setManga] = useState(null);
     const navigate = useNavigate();
 
 
+
     useEffect(() => {
+
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
@@ -27,6 +30,9 @@ const DetailsManga = () => {
                 console.log(error);
             });
     }, [id]);
+    const userAuth = useSelector(state => state.authStore?.user);
+    userId = userAuth?._id;
+
 
     if (!manga) {
         return (
@@ -54,37 +60,37 @@ const DetailsManga = () => {
                     </div>
                 </div>
 
-                <div className="p-4 flex flex-col  lg:items-center md:items-center">
+                <div className="p-4 flex flex-col  lg:items-center md:items-center ">
                     <h1 className="text-2xl font-bold text-gray-800 mb-2 w-full">
                         {manga.title}
                     </h1>
 
                     <div className="flex justify-around mb-4 lg:hidden  md:w-[70%]">
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <span className="text-2xl">👍</span>
+                            <ReactionButton reaction="👍" mangaId={manga._id} userId={userId} />
                         </div>
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <span className="text-2xl">👎</span>
+                            <button>👎</button>
                         </div>
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <span className="text-2xl">😮</span>
+                            <button>😮</button>
                         </div>
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <span className="text-2xl">😍</span>
+                            <ReactionButton reaction="👍" mangaId={manga._id} userId={userId} hearth='😍' />
                         </div>
                     </div>
                     <div className=" justify-around mb-4 hidden lg:flex  w-[70%]">
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <span className="text-2xl">👍</span>
+                            <ReactionButton reaction={"👍"} mangaId={manga._id} userId={userId} />
                         </div>
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <span className="text-2xl">👎</span>
+                            <button>👎</button>
                         </div>
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <span className="text-2xl">😮</span>
+                            <button>😮</button>
                         </div>
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <span className="text-2xl">😍</span>
+                            <ReactionButton reaction="👍" mangaId={manga._id} userId={userId} hearth='😍' />
                         </div>
                     </div>
 

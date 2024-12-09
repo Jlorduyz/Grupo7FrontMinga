@@ -11,7 +11,6 @@ export default function Chapters({ manga }) {
     const [chapters, setChapters] = useState([]);
     const token = useSelector((state) => state.authStore.token);
     const navigate = useNavigate();
-    console.log(chapters);
 
 
     const handleChapters = async () => {
