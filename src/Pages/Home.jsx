@@ -39,10 +39,12 @@ const Home = () => {
       localStorage.setItem('token', token);
       loginWithToken(token).then((user) => {
         dispatch(setUser({ user, token }))
+
       })
     }
     navigate("/home");
   }, [dispatch])
+
 
   const requiredAuth = true
   const token = useSelector(state => state.authStore.token);

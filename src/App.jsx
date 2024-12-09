@@ -9,7 +9,7 @@ import Root from "./Layouts/Root.jsx";
 import Home from "./Pages/Home.jsx";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setUser } from "./Store/actions/authActions.js";
+import { setUser } from "./Store/actions/AuthActions.js";
 import DetailsManga from "./Pages/DetailsManga.jsx";
 import ReadManga from "./Pages/ReadManga.jsx";
 import NewRole from "./Pages/NewRole.jsx";
