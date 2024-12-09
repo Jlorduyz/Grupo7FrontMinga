@@ -9,7 +9,7 @@ const NewRole = () => {
         try {
             const config = {
                 method: 'put',
-                url: `http://localhost:8080/api/users/update/${authState.user._id}`,
+                url: `http://localhost:8080/api/users/update/email/${authState.user.email}`,
                 headers: {
                     Authorization: `Bearer ${authState.token}`,
                     'Content-Type': 'application/json'
