@@ -20,7 +20,8 @@ const SidebarMenu = () => {
     const token = useSelector(state => state.authStore?.token);
     const role = useSelector(state => state.authStore.user?.role);
     const user = useSelector(state => state.authStore?.user);
-    console.log("user", user?.photo);
+
+    
 
 
 
@@ -101,7 +102,7 @@ const SidebarMenu = () => {
                             )
                         }
                         {
-                            (!requiredAuth || token) && (
+                            (role === 1 && token) && (
                                 <button
                                     onClick={() => navigate("/profile")}
                                     className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"

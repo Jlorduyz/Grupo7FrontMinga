@@ -18,6 +18,8 @@ const Manager = () => {
     const role = useSelector((state) => state.authStore.user?.role); 
     const [categories, setCategories] = useState([]);
     const [searchText, setSearchText] = useState("");
+    
+    
 
     useEffect(() => {
         axios
@@ -49,17 +51,20 @@ const Manager = () => {
     };
 
     const handleDelete = (id) => {
-        if (window.confirm("¿Estás seguro de que deseas eliminar este manga?")) {
+        if (window.confirm("¿Are you sure you want to delete this manga?")) {
             dispatch(deleteManga(id));
         }
     };
-
+    console.log(mangas);
+    
     const filteredMangas = mangas.filter((manga) => {
         const matchesCategory = filter === "All" || manga.category_id === filter;
         const matchesAuthor = manga.author_id === idUser; 
         const matchesSearch = manga.title.toLowerCase().includes(searchText.toLowerCase());
         return matchesCategory && matchesAuthor && matchesSearch;
     });
+    console.log(filteredMangas);
+    
 
     const headerTitle = role === 1 ? "Author" : role === 2 ? "Company" : role === 3 ? "Admin" : "Mangas";
 
@@ -96,7 +101,7 @@ const Manager = () => {
                         {error && <p className="text-center text-red-500">{error}</p>}
 
                         {filteredMangas.length === 0 && !isLoading && !error && (
-                            <p className="text-center text-gray-500 mt-6">No hay mangas registrados en su perfil.</p>
+                            <p className="text-center text-gray-500 mt-6">No mangas found.</p>
                         )}
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
