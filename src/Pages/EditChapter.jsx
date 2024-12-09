@@ -83,7 +83,7 @@ const EditChapter = () => {
     const handleEditChange = (e) => {
         dispatch(setEditData(e.target.value));
     };
-
+    
     const handleEditSubmit = async (e) => {
         e.preventDefault();
         if (!selectedChapter || !selectedVariable || !editData) {
@@ -220,7 +220,7 @@ const EditChapter = () => {
 
             <div className="hidden sm:flex sm:flex-col sm:items-center sm:w-1/3">
                 <h2 className="text-lg font-semibold text-gray-700 mb-4 text-center">
-                    Chapter #{selectedChapter || "N/A"} - {selectedManga ? selectedManga.title : "Select a manga"}
+                    {selectedManga ? selectedManga.title : "Select a manga"}
                 </h2>
                 <img
                     src={selectedManga ? selectedManga.cover_photo : ""}
