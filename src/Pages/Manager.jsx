@@ -50,6 +50,10 @@ const Manager = () => {
         navigate(`/edit-chapter?id=${id}`);
     };
 
+    const handleNewChapter = (id) => {
+        navigate(`/new-chapter?id=${id}`);
+    };
+
     const handleDelete = (id) => {
         if (window.confirm("¿Are you sure you want to delete this manga?")) {
             dispatch(deleteManga(id));
@@ -112,47 +116,63 @@ const Manager = () => {
 
                                 return (
                                     <div
-                                        key={manga._id}
-                                        className="relative bg-white shadow-lg rounded-lg flex items-center hover:shadow-xl transition-shadow h-48"
-                                    >
-                                        <span className={`absolute left-0 top-0 bottom-0 w-1 ${styles.line} rounded-l-lg`}></span>
-                                        
-                                        <div className="flex-1 p-4 flex flex-col justify-center pl-4">
-                                            <h3 className="text-lg font-bold text-gray-800">{manga.title}</h3>
-                                            <p className={`text-sm mt-1 ${styles.categoryText}`}>
-                                                {cat?.name || "Unknown"}
-                                            </p>
-                                            <div className="flex gap-2 mt-2">
-                                                <button
-                                                    className="px-4 py-1 bg-blue-200 text-black rounded-full text-sm hover:bg-blue-300"
-                                                    onClick={(e) => { 
-                                                        e.stopPropagation(); 
-                                                        handleEdit(manga._id);
-                                                    }}
-                                                >
-                                                    EDIT
-                                                </button>
-                                                <button
-                                                    className="px-4 py-1 bg-red-200 text-black rounded-full text-sm hover:bg-red-300"
-                                                    onClick={(e) => { 
-                                                        e.stopPropagation(); 
-                                                        handleDelete(manga._id);
-                                                    }}
-                                                >
-                                                    DELETE
-                                                </button>
-                                            </div>
-                                        </div>
-                                        
-                                        <div className="w-[45%] h-full">
-                                            <img
-                                                src={manga.cover_photo}
-                                                alt={manga.title}
-                                                className="object-cover w-full h-full rounded-l-full hover:w-[90%] hover:h-[90%] transition-all active:h-[110%] active:w-[110%]"
-                                                onClick={() => handleClick(manga._id)}
-                                            />
-                                        </div>
-                                    </div>
+    key={manga._id}
+    className="relative bg-white shadow-lg rounded-lg flex items-center hover:shadow-xl transition-shadow h-48"
+>
+    <span className={`absolute left-0 top-0 bottom-0 w-1 ${styles.line} rounded-l-lg`}></span>
+    <div className="flex-1 p-4 flex flex-col justify-center pl-4">
+        <div className="absolute top-2 left-2 ml-3">
+            <button onClick={(e) => { 
+                    e.stopPropagation(); 
+                    handleNewChapter(manga._id);
+                }}
+        className=" rounded-full mr-1">
+            <img className="w-[20px]" src="https://www.svgrepo.com/show/379562/plus-circle.svg" alt="plus" />
+        </button>
+        <button onClick={(e) => { 
+                    e.stopPropagation(); 
+                    handleEdit(manga._id);
+                }}
+        className=" rounded-full">
+            <img className="w-[20px]" src="https://www.svgrepo.com/show/379366/edit-circle.svg" alt="plus" />
+        </button>
+            </div>
+        <h3 className="text-lg font-bold text-gray-800">{manga.title}</h3>
+        <p className={`text-sm mt-1 ${styles.categoryText}`}>
+            {cat?.name || "Unknown"}
+        </p>
+        <div className="flex gap-2 mt-2">
+            <button
+                className="px-4 py-1 bg-blue-200 text-black rounded-full text-sm hover:bg-blue-300"
+                onClick={(e) => { 
+                    e.stopPropagation(); 
+                    handleEdit(manga._id);
+                }}
+            >
+                EDIT
+            </button>
+            <button
+                className="px-4 py-1 bg-red-200 text-black rounded-full text-sm hover:bg-red-300"
+                onClick={(e) => { 
+                    e.stopPropagation(); 
+                    handleDelete(manga._id);
+                }}
+            >
+                DELETE
+            </button>
+        </div>
+    </div>
+    
+    <div className="w-[45%] h-full">
+        <img
+            src={manga.cover_photo}
+            alt={manga.title}
+            className="object-cover w-full h-full rounded-l-full hover:w-[90%] hover:h-[90%] transition-all active:h-[110%] active:w-[110%]"
+            onClick={() => handleClick(manga._id)}
+        />
+    </div>
+</div>
+
                                 );
                             })}
                         </div>
