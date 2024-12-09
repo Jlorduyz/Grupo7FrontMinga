@@ -17,13 +17,7 @@ const AdminPanel = () => {
                         alt="Admin Panel Background"
                         className="w-full h-[300px] sm:h-[400px] lg:h-[644px] object-cover"
                     />
-                    <div className="absolute top-4 right-4 z-10">
-                        <img
-                            src="/images/logo.png"
-                            alt="Logo"
-                            className="w-10 h-10 sm:w-16 sm:h-16 lg:w-[88px] lg:h-[88px]"
-                        />
-                    </div>
+                    
                     <div className="absolute inset-0 flex flex-col justify-center items-center px-4 text-center">
                         <h1 className="text-white text-2xl sm:text-4xl lg:text-5xl font-bold drop-shadow-lg mb-6 sm:mb-8">
                             Panel
