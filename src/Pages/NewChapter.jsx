@@ -8,7 +8,7 @@ const NewChapter = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const mangaId = location.state?.manga_id || new URLSearchParams(location.search).get("manga_id") || "";
+  const mangaId = new URLSearchParams(location.search).get("id") || "";
 
   const [formData, setFormData] = useState({
     title: "",
@@ -16,6 +16,7 @@ const NewChapter = () => {
     pages: [],
     manga_id: mangaId, 
   });
+
 
   const [pageInput, setPageInput] = useState("");
 
@@ -45,6 +46,8 @@ const NewChapter = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(createChapter(formData));
+
 
     if (!formData.manga_id || !formData.title || !formData.order || formData.pages.length === 0) {
       alert("All form fields are required");
