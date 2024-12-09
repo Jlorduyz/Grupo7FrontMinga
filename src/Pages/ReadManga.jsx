@@ -12,6 +12,7 @@ export default function ReadManga() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [info, setInfo] = useState({});
+    const [currentPage, setCurrentPage] = useState(0);
 
     const navigate = useNavigate();
 
@@ -30,9 +31,7 @@ export default function ReadManga() {
                 const response = await axios.request(config);
                 setPages(response.data.response[0].pages);
                 setInfo(response.data.response);
-
                 setError(null);
-
             } catch (err) {
                 console.error("Error fetching chapter pages:", err);
                 setError("Failed to load chapter pages.");
@@ -43,62 +42,76 @@ export default function ReadManga() {
 
         fetchChapterPages();
     }, [id, token]);
+
+    const goToNextPage = () => {
+        if (currentPage < pages.length - 1) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const goToPreviousPage = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
     return (
         <div className="bg-gray-100 min-h-screen flex flex-col relative">
-            <div className=" top-0 left-0 w-full z-10 bg-pink-500 text-white flex items-center justify-center py-4 px-4 shadow-md ">
-                <h1 className="font-semibold">Capítulo {info[0] ? info[0].title : ''}</h1>
-                <div className="w-8 h-8"></div>
+            {/* Header */}
+            <div className="fixed top-0 left-0 w-full z-10 bg-pink-500 text-white flex items-center justify-center py-4 shadow-md">
+                <h1 className="font-semibold">Chapter {info[0] ? info[0].title : ''}</h1>
             </div>
-            <div className=" h-20  items-end  hidden lg:flex mt-5">
+
+            {/* Back Button */}
+            <div className="h-20 flex items-end mt-20 px-4">
                 <button
-                    className="text-black font-medium hover:opacity-90  h-[90%] w-[10%] rounded-full bg-gray-300 shadow-md hover:bg-gray-400 active:bg-gray-500"
-                    onClick={() => navigate(-1)}
-                >
-                    Back
-                </button>
-            </div>
-            <div className=" h-20 flex items-end lg:hidden mt-5">
-                <button
-                    className="text-black font-medium hover:opacity-90  h-[90%] w-[20%] rounded-full bg-gray-300 shadow-md hover:bg-gray-400 active:bg-gray-500"
+                    className="text-black font-medium hover:opacity-90 h-[90%] w-[20%] rounded-full bg-gray-300 shadow-md hover:bg-gray-400 active:bg-gray-500"
                     onClick={() => navigate(-1)}
                 >
                     Back
                 </button>
             </div>
 
-
-            <div className="flex-1 overflow-auto pt-16 pb-20 flex flex-col items-center">
-                {loading && (
-                    <div className="flex items-center justify-center h-full">
-                        <p className="text-gray-600">Loading pages...</p>
-                    </div>
-                )}
-                {error && (
-                    <div className="flex items-center justify-center h-full">
-                        <p className="text-red-500">{error}</p>
-                    </div>
-                )}
-
-                {pages && pages.length > 0 && (
-                    <div className="flex flex-col items-center space-y-6 w-full">
-                        {pages.map((page, index) => (
-                            <img
-                                key={index}
-                                src={page || "LOADING.."}
-                                alt={`Page ${index + 1}`}
-                                className="w-full max-w-screen-md h-auto object-contain"
-                            />
-                        ))}
+            {/* Manga Content */}
+            <div className="flex-1 flex items-center justify-center pt-24 pb-20 relative">
+                {loading && <p className="text-gray-600">Loading pages...</p>}
+                {error && <p className="text-red-500">{error}</p>}
+                {pages && pages.length > 0 && !loading && !error && (
+                    <div className="relative w-full max-w-screen-lg">
+                        <img
+                            src={pages[currentPage]}
+                            alt={`Page ${currentPage + 1}`}
+                            className="w-full h-auto object-contain shadow-lg rounded"
+                        />
+                        {/* Navigation Buttons */}
+                        <button
+                            onClick={goToPreviousPage}
+                            disabled={currentPage === 0}
+                            className={`absolute left-0 top-1/2 transform -translate-y-1/2 bg-pink-500 text-white px-3 py-1 rounded opacity-70 hover:opacity-100 ${currentPage === 0 ? 'hidden' : 'block'}`}
+                        >
+                            &#8592;
+                        </button>
+                        <button
+                            onClick={goToNextPage}
+                            disabled={currentPage === pages.length - 1}
+                            className={`absolute right-0 top-1/2 transform -translate-y-1/2 bg-pink-500 text-white px-3 py-1 rounded opacity-70 hover:opacity-100 ${currentPage === pages.length - 1 ? 'hidden' : 'block'}`}
+                        >
+                            &#8594;
+                        </button>
+                        {/* Messages Button */}
+                        <button
+                            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white border border-gray-300 text-pink-500 rounded-full px-6 py-3 shadow hover:bg-gray-100"
+                            onClick={() => { /* Funcionalidad de mensajes */ }}
+                        >
+                            Messages
+                        </button>
+                        {/* Page Indicator for Large Screens */}
+                        <span className="absolute bottom-4 right-4 text-gray-700">
+                            Page {currentPage + 1} of {pages.length}
+                        </span>
                     </div>
                 )}
             </div>
-
-            <button
-                className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white border border-gray-300 text-pink-500 rounded-full px-4 py-2 shadow hover:bg-gray-100"
-                onClick={() => { }}
-            >
-                Messages
-            </button>
         </div>
     );
 }

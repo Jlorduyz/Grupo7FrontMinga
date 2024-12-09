@@ -61,7 +61,6 @@ const RegisterForm = () => {
             setLoading(false);
 
 
-            navigate("/new-role");
 
 
             navigate("/new-role"); 
