@@ -112,6 +112,23 @@ export const updateChapter = (chapterId, variable, newData) => async (dispatch) 
     }
 };
 
+export const createChapter = (newChapterData) => async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+        await axios.post(
+            "http://localhost:8080/api/chapters/create",
+            newChapterData,
+            { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+        );
+        alert("Capítulo creado exitosamente.");
+    } catch (error) {
+        dispatch(setError("Failed to create chapter."));
+        throw error;
+    } finally {
+        dispatch(setLoading(false));
+    }
+};
+
 export const deleteChapter = (chapterId) => async (dispatch) => {
     dispatch(setLoading(true));
     try {
