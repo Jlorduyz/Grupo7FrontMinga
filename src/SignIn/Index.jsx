@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom"; // Importa useNavigate
+import { useNavigate } from "react-router-dom"; 
 import React from "react";
-import { login } from "../Store/actions/authActions";
+import { login } from "../Store/actions/authActions.js";
 
 
 export default function SignIn() {
@@ -21,7 +21,6 @@ export default function SignIn() {
 
     const resultAction = await dispatch(login({ email, password }));
     if (login.fulfilled.match(resultAction)) {
-      // Si el inicio de sesión es exitoso, redirige a "/home"
       navigate("/home");
     }
   };

@@ -45,7 +45,6 @@ const Mangas = () => {
     <>
       <div className="bg-gray-100 min-h-screen flex">
         <div className="flex-1 relative">
-          {/* Banner */}
           <div className="relative">
             <img
               src="/images/manga.jpg"
@@ -68,11 +67,10 @@ const Mangas = () => {
             </div>
           </div>
 
-          {/* Filtros reutilizables */}
           <div className="-mt-12 mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-2xl lg:max-w-7xl relative z-10">
             <Filters categories={categories} filter={filter} setFilter={(f) => dispatch(setFilter(f))} />
 
-            {isLoading && <p className="text-center">Loading mangas...</p>}
+            {isLoading && <p className="text-center">Loading mangas... <img className="flex items-center justify-center " src="https://giffiles.alphacoders.com/170/170278.gif" alt="" /></p>}
             {error && <p className="text-center text-red-500">{error}</p>}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">

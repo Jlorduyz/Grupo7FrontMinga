@@ -28,7 +28,7 @@ export const mangaReducer = createReducer(initialState, (builder) => {
       state.error = null;
     })
     .addCase(fetchMangas.fulfilled, (state, action) => {
-      console.log("Fetched Mangas from API:", action.payload.response); // Verifica los datos
+      console.log("Fetched Mangas from API:", action.payload.response); 
       state.mangas = action.payload.response;
       state.isLoading = false;
     })
@@ -37,7 +37,7 @@ export const mangaReducer = createReducer(initialState, (builder) => {
       state.error = action.error.message;
     })
     .addCase("manga/setFilter", (state, action) => {
-      console.log("Filter updated to:", action.payload); // Verifica el nuevo valor del filtro
+      console.log("Filter updated to:", action.payload); 
       state.filter = action.payload;
     })
     .addCase("manga/setSearch", (state, action) => {

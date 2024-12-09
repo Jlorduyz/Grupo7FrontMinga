@@ -11,7 +11,7 @@ const initialState = {
 
 const authReducer = createReducer(initialState, (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
-        console.log("se ejecuto correctamente el login");
+        console.log("the login was executed correctly");
         console.log(action);
 
         state.loading = false,
@@ -20,7 +20,7 @@ const authReducer = createReducer(initialState, (builder) => {
             state.token = action.payload.token
     })
         .addCase(login.pending, (state, action) => {
-            console.log("se inicio el sign in  ");
+            console.log("the sign in started ");
 
             state.loading = true,
                 state.error = false,
@@ -28,7 +28,7 @@ const authReducer = createReducer(initialState, (builder) => {
                 state.token = null
         })
         .addCase(login.rejected, (state, action) => {
-            console.log("error en el sign in  ");
+            console.log("sign in error");
 
             state.loading = false,
                 state.error = action.error.message,
