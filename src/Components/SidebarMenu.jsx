@@ -69,7 +69,7 @@ const SidebarMenu = () => {
                     {
                         (!requiredAuth || token) && (
                             <button
-                                onClick={() => navigate("/manager")}
+                                onClick={() => navigate(`/manager`)}
                                 className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
                             >
                                 Manager

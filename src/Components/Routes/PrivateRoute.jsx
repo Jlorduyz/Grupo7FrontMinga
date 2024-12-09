@@ -3,7 +3,13 @@ import { Navigate, useFetcher } from "react-router-dom";
 
 function PrivateRoute({children}) {
     const token = useSelector(state => state.authStore?.token);
-    if (!token) 
+    const loading = useSelector(state => state.authStore?.loading);
+
+
+    
+    
+
+    if (!token && loading === false) 
         return <Navigate to="/welcomeback" replace></Navigate>
     
     else 

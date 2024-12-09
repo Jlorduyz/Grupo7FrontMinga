@@ -10,7 +10,8 @@ const DetailsManga = ({ mangaId, userId, hearth }) => {
     const id = params.get("id");
     const [manga, setManga] = useState(null);
     const navigate = useNavigate();
-
+    const token = useSelector((state) => state.authStore.token);
+    console.log(token);
 
 
     useEffect(() => {

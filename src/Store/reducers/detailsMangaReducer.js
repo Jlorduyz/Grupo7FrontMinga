@@ -9,7 +9,7 @@ const detailsMangaSlice = createSlice({
     initialState,
     reducers: {
         setMangaDetails: (state, action) => {
-            state.manga = action.payload; 
+            state.manga = action?.payload; 
         },
     },
 });

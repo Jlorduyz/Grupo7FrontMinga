@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+
 import managerReducer from "./reducers/managerReducer";
 import { mangaReducer } from "./reducers/mangaReducer";
 import editChapterReducer from "./reducers/editChapterReducer";

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"; 
 import React from "react";
-import { login } from "../Store/actions/authActions.js";
+import { login } from "../Store/actions/AuthActions";
 
 
 export default function SignIn() {
