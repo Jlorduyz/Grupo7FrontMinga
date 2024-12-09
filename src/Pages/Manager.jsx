@@ -36,11 +36,7 @@ const Manager = () => {
         dispatch(fetchMangas());
     }, [dispatch]);
 
-    useEffect(() => {
-        if (!idUser) {
-            navigate("/"); 
-        }
-    }, [idUser, navigate]);
+ 
 
     const handleClick = (id) => {
         navigate(`/detailManga?id=${id}`);
@@ -66,9 +62,7 @@ const Manager = () => {
         const matchesAuthor = manga.author_id === idUser; 
         const matchesSearch = manga.title.toLowerCase().includes(searchText.toLowerCase());
         return matchesCategory && matchesAuthor && matchesSearch;
-    });
-    console.log(filteredMangas);
-    
+    });    
 
     const headerTitle = role === 1 ? "Author" : role === 2 ? "Company" : role === 3 ? "Admin" : "Mangas";
 
@@ -110,7 +104,7 @@ const Manager = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                             {filteredMangas.map((manga) => {
-                                const cat = categories.find((cat) => cat._id === manga?.category_id);
+                                const cat = categories.find((cat) => cat?._id === manga?.category_id);
                                 const catName = cat?.name.toLowerCase() || "unknown";
                                 const styles = categoryStyles[catName] || defaultStyles;
 
