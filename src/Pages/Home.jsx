@@ -69,8 +69,6 @@ const Home = () => {
 
   const requiredAuth = true
   const token = useSelector(state => state.authStore.token);
-  console.log("token", token);
-  console.log("userId", token?.userId);
   
   
   return (
