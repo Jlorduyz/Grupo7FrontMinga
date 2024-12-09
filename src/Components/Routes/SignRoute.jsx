@@ -5,8 +5,10 @@ function SignRoute({children}) {
     const token = useSelector(state => state.authStore?.token);
     if (token) 
         return <Navigate to="/home" replace></Navigate>
+        
     
     else 
+
         return children
 
 }
