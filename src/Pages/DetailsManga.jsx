@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ReactionButton from "../Components/ReactionButton";
 import { useSelector } from "react-redux";
 
-const DetailsManga = ({ mangaId, userId }) => {
+const DetailsManga = ({ mangaId, userId, hearth }) => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     const [manga, setManga] = useState(null);
@@ -30,7 +30,7 @@ const DetailsManga = ({ mangaId, userId }) => {
                 console.log(error);
             });
     }, [id]);
-    const userAuth = useSelector(state => state.authStore.user);
+    const userAuth = useSelector(state => state.authStore?.user);
     userId = userAuth?._id;
 
 
@@ -60,7 +60,7 @@ const DetailsManga = ({ mangaId, userId }) => {
                     </div>
                 </div>
 
-                <div className="p-4 flex flex-col  lg:items-center md:items-center">
+                <div className="p-4 flex flex-col  lg:items-center md:items-center ">
                     <h1 className="text-2xl font-bold text-gray-800 mb-2 w-full">
                         {manga.title}
                     </h1>
@@ -70,27 +70,27 @@ const DetailsManga = ({ mangaId, userId }) => {
                             <ReactionButton reaction="👍" mangaId={manga._id} userId={userId} />
                         </div>
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <ReactionButton reaction="👎" mangaId={manga._id} userId={userId} />
+                            <button>👎</button>
                         </div>
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <ReactionButton reaction="😮" mangaId={manga._id} userId={userId} />
+                            <button>😮</button>
                         </div>
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <ReactionButton reaction="😍" mangaId={manga._id} userId={userId} />
+                            <ReactionButton reaction="👍" mangaId={manga._id} userId={userId} hearth='😍' />
                         </div>
                     </div>
                     <div className=" justify-around mb-4 hidden lg:flex  w-[70%]">
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <ReactionButton reaction="👍" mangaId={manga._id} userId={userId} />
+                            <ReactionButton reaction={"👍"} mangaId={manga._id} userId={userId} />
                         </div>
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <ReactionButton reaction="👎" mangaId={manga._id} userId={userId} />
+                            <button>👎</button>
                         </div>
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <ReactionButton reaction="😮" mangaId={manga._id} userId={userId} />
+                            <button>😮</button>
                         </div>
                         <div className="bg-white shadow-md p-2 rounded-full">
-                            <ReactionButton reaction="😍" mangaId={manga._id} userId={userId} />
+                            <ReactionButton reaction="👍" mangaId={manga._id} userId={userId} hearth='😍' />
                         </div>
                     </div>
 

@@ -7,7 +7,8 @@ const Error404 = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="min-h-screen flex flex-col bg-white">
+        <>
+        <div className="min-h-screen flex flex-col bg-white h-full ">
 
 
             <div className="flex-grow flex flex-col justify-center items-center mb-10">
@@ -32,8 +33,12 @@ const Error404 = () => {
                 </button>
             </div>
 
-            <Footer />
         </div>
+        <Footer />
+
+        </>
+        
+
     );
 };
 
