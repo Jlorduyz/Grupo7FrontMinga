@@ -19,9 +19,7 @@ const SidebarMenu = () => {
     };
     const token = useSelector(state => state.authStore?.token);
     const role = useSelector(state => state.authStore.user?.role);
-    console.log("role", role);
     
-    console.log("token", token);
 
     const requiredAuth = true
     const unrequiredAuth = false
@@ -104,7 +102,7 @@ const SidebarMenu = () => {
                     {
                         (role === 3 && token) && (
                             <button
-                                onClick={() => navigate("/manager")}
+                                onClick={() => navigate("/admin-panel")}
                                 className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
                             >
                                 Admin-Panel
