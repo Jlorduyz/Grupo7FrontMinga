@@ -7,7 +7,6 @@ const ReactionButton = ({ reaction, mangaId, userId, hearth }) => {
     const dispatch = useDispatch();
     const favorites = useSelector(state => state.favourites.favourites);
     let userfavorites = favorites.filter(favourite => favourite?.userId === userId && favourite.manga_id?._id === mangaId);
-    // console.log("userfavorites", userfavorites);
 
 
 
@@ -17,7 +16,6 @@ const ReactionButton = ({ reaction, mangaId, userId, hearth }) => {
         console.log(active);
 
     }, [active])
-    // console.log("favorites", favorites);
 
 
     const handleClick = async () => {

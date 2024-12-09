@@ -9,7 +9,7 @@ const initialState = {
         birthDate: "28/12/2022",
         profileImage: "https://via.placeholder.com/150",
     },
-    isAccountDeleted: false, // Estado para verificar si la cuenta fue eliminada
+    isAccountDeleted: false, 
 };
 
 const profileReducer = createReducer(initialState, (builder) => {
