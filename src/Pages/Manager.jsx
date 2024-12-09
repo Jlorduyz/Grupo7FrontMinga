@@ -1,91 +1,109 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setData, setFilter } from "../Store/actions/managerActions"; 
+import { fetchMangas } from "../Store/reducers/mangaReducer";
+import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer/Footer";
+import Filters from "../Components/Filters"; 
+import { categoryStyles, defaultStyles } from "../Components/Filters";
+import axios from "axios";
+
 
 const Manager = () => {
     const dispatch = useDispatch();
-    const { data, filter } = useSelector((state) => state.manager); 
+    const { mangas, filter, isLoading, error } = useSelector((state) => state.mangas);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const managerData = [
-                { id: 1, title: "Naruto Volume 41", type: "Shōnen", image: "/images/naruto.jpg" },
-                { id: 2, title: "Attack on Titan", type: "Seinen", image: "/images/manager.jpg" },
-                { id: 3, title: "Sailor Moon", type: "Shōjo", image: "/images/manga.jpg" },
-            ];
-            dispatch(setData(managerData)); 
-            console.log("Fetched data:", managerData);
-        };
+        axios
+          .get("http://localhost:8080/api/categories/all")
+          .then((response) => {
+            setCategories(response.data.response);
+          })
+          .catch((error) => {
+            console.error("Error fetching categories:", error);
+          });
+      }, []);
 
-        fetchData();
-    }, [dispatch]);
+    useEffect(() => {
+        dispatch(fetchMangas());
+      }, [dispatch]);
+    
+      const navigate = useNavigate();
+    
+      const handleClick = (id) => {
+        navigate(`/detailManga?id=${id}`);
+      };
 
-    const filteredData = data.filter((item) =>
-        filter === "All" ? true : item.type === filter
-    );
-
-    console.log("Filtered Data:", filteredData);
+    const filteredMangas = mangas.filter((manga) => {
+        const matchesCategory = filter === "All" || manga.category_id === filter;
+        return matchesCategory;
+      });
 
     return (
         <>
-            <div className="bg-gray-100 min-h-screen relative">
-
-                <div className="relative z-0">
-                    <img
-                        src="/images/manager.jpg"
-                        alt="Manager Banner"
-                        className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover"
-                    />
-                    <div className="absolute inset-0 flex flex-col justify-center items-center px-4 text-center z-10">
-                        <h1 className="text-white text-2xl sm:text-4xl lg:text-5xl font-bold drop-shadow-lg mb-6 sm:mb-8">
-                            Manager Section
-                        </h1>
-                    </div>
+          <div className="bg-gray-100 min-h-screen flex">
+            <div className="flex-1 relative">
+              {/* Banner */}
+              <div className="relative">
+                <img
+                  src="/images/manga.jpg"
+                  alt="Manga Banner"
+                  className="w-full h-[300px] sm:h-[400px] lg:h-[644px] object-cover"
+                />
+                <div className="absolute inset-0 flex flex-col justify-center items-center px-4 text-center">
+                  <h1 className="text-white text-2xl sm:text-4xl lg:text-5xl font-bold drop-shadow-lg mb-6 sm:mb-8">
+                    Mangas
+                  </h1>
                 </div>
-
-                <div className="relative -mt-20 mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-2xl lg:max-w-7xl z-10">
-                    <div className="flex flex-wrap justify-center sm:justify-between items-center mb-6">
-                        {["All", "Shōnen", "Seinen", "Shōjo"].map((type) => (
-                            <button
-                                key={type}
-                                onClick={() => dispatch(setFilter(type))} // Cambia el filtro
-                                className={`px-3 py-2 rounded-full text-xs sm:text-sm lg:text-base ${filter === type
-                                    ? "bg-blue-500 text-white"
-                                    : "bg-gray-200 text-gray-700"
-                                    }`}
-                            >
-                                {type}
-                            </button>
-                        ))}
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                        {filteredData.map((item) => (
-                            <div
-                                key={item.id}
-                                className="bg-white shadow-lg rounded-lg flex flex-col overflow-hidden"
-                            >
-                                <img
-                                    src={item.image}
-                                    alt={item.title}
-                                    className="object-cover w-full h-full rounded-l-full"
-                                />
-                                <div className="p-4 flex flex-col">
-                                    <h3 className="text-lg font-bold text-gray-800">{item.title}</h3>
-                                    <p className="text-sm text-gray-500">{item.type}</p>
-                                    <button className="mt-4 px-4 py-2 bg-green-500 text-white font-semibold rounded-full hover:bg-green-600 transition text-sm">
-                                        View Details
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+              </div>
+    
+              {/* Filtros reutilizables */}
+              <div className="-mt-12 mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 w-full max-w-sm sm:max-w-2xl lg:max-w-7xl relative z-10">
+                <Filters categories={categories} filter={filter} setFilter={(f) => dispatch(setFilter(f))} />
+    
+                {isLoading && <p className="text-center">Loading mangas...</p>}
+                {error && <p className="text-center text-red-500">{error}</p>}
+    
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                  {filteredMangas.map((manga) => {
+                    const cat = categories.find((cat) => cat._id === manga.category_id);
+                    const catName = cat?.name.toLowerCase() || 'unknown';
+                    const styles = categoryStyles[catName] || defaultStyles;
+    
+                    return (
+                      <div
+                        key={manga._id}
+                        className="relative bg-white shadow-lg rounded-lg flex items-center cursor-pointer hover:shadow-xl transition-shadow h-48"
+                        onClick={() => handleClick(manga._id)}
+                      >
+                        <span className={`absolute left-0 top-0 bottom-0 w-1 ${styles.line} rounded-l-lg`}></span>
+                        <div className="flex-1 p-4 flex flex-col justify-center pl-4">
+                          <h3 className="text-lg font-bold text-gray-800">{manga.title}</h3>
+                          <p className={`text-sm mt-1 ${styles.categoryText}`}>
+                            {cat?.name || "Unknown"}
+                          </p>
+                          <button className="mt-2 px-4 py-1 bg-green-200 text-black rounded-full text-sm hover:bg-green-300">
+                            Read
+                          </button>
+                        </div>
+                        <div className="w-[45%] h-full">
+                          <img
+                            src={manga.cover_photo}
+                            alt={manga.title}
+                            className="object-cover w-full h-full rounded-l-full"
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
+              </div>
             </div>
-            <Footer />
+          </div>
+          <Footer />
         </>
-    );
-};
+      );
+    };  
 
 export default Manager;

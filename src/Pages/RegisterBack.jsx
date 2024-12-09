@@ -53,7 +53,6 @@ function WelcomeBack() {
                             <p className="text-sm font-normal text-gray-600 mb-7">Discover manga and comics, track your progress, have fun, read manga.</p>
                         </div>
 
-                        {/* Email Input */}
                         <div className="relative mb-4">
                             <div className="absolute top-[-8px] left-3 text-sm text-custom-pink bg-white px-1 ">Email</div>
                             <div className="border-2 border-solid border-gray-400 rounded-2xl px-3 py-2 pt-6">

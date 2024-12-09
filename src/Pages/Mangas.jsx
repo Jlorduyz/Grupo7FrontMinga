@@ -3,9 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchMangas } from "../Store/reducers/mangaReducer";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer/Footer";
-import Filters from "../Components/Filters"; // Importa el nuevo componente
-import { categoryStyles } from "../Components/Filters";
-import { defaultStyles } from "../Components/Filters";
+import Filters from "../Components/Filters"; 
+import { categoryStyles, defaultStyles } from "../Components/Filters";
 import { setFilter } from "../Store/actions/mangaActions";
 import axios from "axios";
 
