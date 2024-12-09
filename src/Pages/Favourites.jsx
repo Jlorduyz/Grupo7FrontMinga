@@ -24,9 +24,8 @@ const Favourites = () => {
     console.log("idUser", idUser);
     console.log("favourites", favourites);
 
-    // Filtrar los mangas favoritos para solo mostrar los del usuario logueado
     const filteredFavourites = favourites.filter(
-        (favourite) => favourite.userId === idUser // Compara el userId de la reacción con el id del usuario logueado
+        (favourite) => favourite.userId === idUser 
     );
     console.log("filteredFavourites", filteredFavourites);
     
@@ -64,7 +63,6 @@ const Favourites = () => {
                         {error && <p className="text-center text-red-500">{error}</p>}
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                            {/* Tarjetas dinámicas de favoritos filtrados */}
                             {filteredFavourites.length === 0 ? (
                                 <p className="text-center text-gray-500">No favourites found</p>
                             ) : (
@@ -82,7 +80,7 @@ const Favourites = () => {
                                         </div>
                                         <div className="w-[45%] h-full">
                                             <img
-                                                src={favourite.manga_id.cover_photo} // Usar la imagen del manga
+                                                src={favourite.manga_id.cover_photo} 
                                                 alt={favourite.manga_id.title}
                                                 className="object-cover w-full h-full rounded-l-full"
                                             />

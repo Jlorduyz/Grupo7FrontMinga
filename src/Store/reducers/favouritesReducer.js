@@ -23,5 +23,4 @@ const favouritesReducer = (state = initialState, action) => {
     }
 };
 
-// Exportación por defecto
 export default favouritesReducer;

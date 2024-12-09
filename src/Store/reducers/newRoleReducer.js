@@ -1,5 +1,5 @@
 const initialState = {
-    selectedRole: null, // Almacena el rol seleccionado (Author o Company)
+    selectedRole: null, 
 };
 
 const newRoleReducer = (state = initialState, action) => {
