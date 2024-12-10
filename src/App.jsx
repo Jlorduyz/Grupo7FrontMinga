@@ -20,6 +20,7 @@ import PrivateRoute from "./Components/Routes/PrivateRoute.jsx";
 import SignRoute from "./Components/Routes/SignRoute.jsx";
 import NewChapter from "./Pages/NewChapter.jsx"
 import PrivateUpdAuthor from "./Components/Routes/PrivateUpdAuthor.jsx";
+import NewAuthor from "./Pages/NewAuthor.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
       { path: "/favourites", element: <Favourites /> },
       { path: "/profile", element: <PrivateUpdAuthor><Profile/></PrivateUpdAuthor> },
       { path: "/new-chapter", element: <NewChapter /> },
+      { path: "/new-author", element: <NewAuthor /> },
 
       { path: "/*", element: <Error404 /> },
     ],
