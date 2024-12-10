@@ -18,7 +18,6 @@ const Mangas = () => {
   const [searchText, setSearchText] = useState("");
 
 
-
   useEffect(() => {
     axios
       .get("http://localhost:8080/api/categories/all")
@@ -75,6 +74,7 @@ const Mangas = () => {
 
             {isLoading && <p className="text-center">Loading mangas... <img className="flex items-center justify-center" src="https://giffiles.alphacoders.com/170/170278.gif" alt="Loading" /></p>}
             {error && <p className="text-center text-red-500">{error}</p>}
+
             {filteredMangas.length === 0 && !isLoading && !error && (
               <div className="text-center bg-gray-100 py-8 px-4 rounded-lg shadow-md border border-gray-200">
                 <p className="text-pink-600 text-2xl font-bold mb-4">Manga not found</p>

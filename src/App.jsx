@@ -22,6 +22,7 @@ import NewChapter from "./Pages/NewChapter.jsx"
 import PrivateUpdAuthor from "./Components/Routes/PrivateUpdAuthor.jsx";
 import NewManga from "./Pages/NewManga.jsx";
 
+
 const router = createBrowserRouter([
   {
     element: <Root />,
@@ -38,10 +39,14 @@ const router = createBrowserRouter([
       { path: "/new-role", element: <NewRole /> },
       { path: "/readManga", element: <PrivateRoute><ReadManga /></PrivateRoute> },
       { path: "/favourites", element: <Favourites /> },
+
       { path: "/profile", element: <PrivateUpdAuthor><Profile /></PrivateUpdAuthor> },
       { path: "/new-chapter", element: <NewChapter /> },
       { path: "/new-manga", element: <NewManga /> },
 
+
+
+    
 
 
       { path: "/*", element: <Error404 /> },

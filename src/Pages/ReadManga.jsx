@@ -57,6 +57,7 @@ export default function ReadManga() {
 
     return (
         <div className="bg-gray-100 min-h-screen flex flex-col relative">
+
             <div
                 style={{ height: '100px' }}
                 className="fixed top-0 left-0 w-full z-10 bg-pink-500 text-white flex items-center justify-center px-4 shadow-md"
@@ -65,6 +66,7 @@ export default function ReadManga() {
             </div>
 
             <div className="h-20 flex items-end mt-24 px-4">
+
                 <button
                     className="text-black font-medium hover:opacity-90 h-[70%] w-[5%] rounded-full bg-gray-300 shadow-md hover:bg-gray-400 active:bg-gray-500"
                     onClick={() => navigate(-1)}
@@ -73,7 +75,9 @@ export default function ReadManga() {
                 </button>
             </div>
 
+
             <div className="flex-1 flex items-center justify-center pt-1 pb-20 relative">
+
                 {loading && <p className="text-gray-600">Loading pages...</p>}
                 {error && <p className="text-red-500">{error}</p>}
                 {pages && pages.length > 0 && !loading && !error && (

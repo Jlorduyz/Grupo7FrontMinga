@@ -12,9 +12,11 @@ import categoriesReducer from "./actions/carrouselSlice";
 import newRoleReducer from "./reducers/newRoleReducer";
 import profileReducer from "./reducers/profileReducer";
 import favouritesReducer from "./reducers/favouritesReducer";
+
 import companyReducer from "./reducers/companyReducer";
 import authorReducer from "./reducers/AuthorReducer";
 import newMangaReducer from "./reducers/newMangaReducer";
+
 
 const store = configureStore({
     reducer: {
