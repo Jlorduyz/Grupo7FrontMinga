@@ -102,6 +102,7 @@ export default function ReadManga() {
                 )}
                 <button
                     className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white border border-pink-500 text-pink-500 rounded-full px-6 py-3 shadow hover:bg-gray-100"
+
                     onClick={() => {/**/ }}
                 >
                     Messages
