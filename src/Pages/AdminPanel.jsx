@@ -53,7 +53,7 @@ const AdminPanel = () => {
                         alt="Admin Panel Background"
                         className="w-full h-[300px] sm:h-[400px] lg:h-[644px] object-cover"
                     />
-                    
+
                     <div className="absolute inset-0 flex flex-col justify-center items-center px-4 text-center">
                         <h1 className="text-white text-2xl sm:text-4xl lg:text-5xl font-bold drop-shadow-lg mb-6 sm:mb-8">
                             Admin-Panel

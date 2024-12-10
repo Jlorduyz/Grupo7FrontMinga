@@ -1,28 +1,42 @@
+
 import { createReducer } from "@reduxjs/toolkit";
 import { updateProfile, deleteAccount } from "../actions/profileActions";
 
 const initialState = {
-    user: {
-        firstName: "Lucas Ezequiel",
-        lastName: "Silva",
-        city: "Caseros, Buenos Aires",
-        birthDate: "28/12/2022",
-        profileImage: "https://via.placeholder.com/150",
-    },
-    isAccountDeleted: false, 
+  user: null,
+  loading: false,
+  error: null,
 };
 
 const profileReducer = createReducer(initialState, (builder) => {
-    builder
-        .addCase(updateProfile, (state, action) => {
-            // Actualiza los datos del usuario
-            state.user = { ...state.user, ...action.payload };
-        })
-        .addCase(deleteAccount, (state) => {
-            // Elimina la cuenta (resetea el estado del usuario)
-            state.user = null;
-            state.isAccountDeleted = true;
-        });
+  builder
+    .addCase(updateProfile.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(updateProfile.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = action.payload.user; 
+      state.error = null;
+    })
+    .addCase(updateProfile.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    })
+
+    .addCase(deleteAccount.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(deleteAccount.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = null;
+      state.error = null;
+    })
+    .addCase(deleteAccount.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
 });
 
 export default profileReducer;

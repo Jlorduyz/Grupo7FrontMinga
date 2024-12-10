@@ -40,34 +40,35 @@ const NewRole = () => {
                         />
                     </div>
                     <div className="space-y-4">
-                        <div 
-                            className="flex items-center bg-gray-100 hover:bg-gray-200 rounded-lg shadow-md p-4 cursor-pointer"
+                        <div
+                            className="flex  bg-gray-100 hover:bg-gray-200 rounded-lg shadow-md p-4 cursor-pointer "
                             onClick={() => handleChangeRole(1)}
                         >
-                            <div className="flex-shrink-0 mr-4">
+                            <div className="flex items-center w-[15%] mr-2">
                                 <img
-                                    src="/images/authors.jpg"
+                                    src="https://image.cdn2.seaart.me/2023-06-28/39391279968325/723b5e2c287e0b72c41974bdc3dc98f68c2d56e2_high.webp"
                                     alt="Authors"
-                                    className="w-12 h-12 rounded-full object-cover"
+                                    className="w-auto h-auto lg:w-[60%] rounded-full object-cover"
                                 />
+
                             </div>
-                            <div className="text-left">
+                            <div className="text-left  w-[65%]">
                                 <p className="text-gray-800 font-bold">Join as an Author!</p>
                                 <p className="text-gray-500 text-sm">I'm a reader writing a manga</p>
                             </div>
                         </div>
-                        <div 
-                            className="flex items-center border border-pink-500 hover:bg-pink-100 rounded-lg shadow-md p-4 cursor-pointer"
+                        <div
+                            className="flex items-center  hover:border-pink-500 hover:bg-pink-100 rounded-lg shadow-md p-4 cursor-pointer"
                             onClick={() => handleChangeRole(2)}
                         >
-                            <div className="flex-shrink-0 mr-4">
+                            <div className="flex items-center w-[15%] mr-2">
                                 <img
-                                    src="/images/company.jpg"
+                                    src="https://image.cdn2.seaart.me/2023-06-28/39391279968325/723b5e2c287e0b72c41974bdc3dc98f68c2d56e2_high.webp"
                                     alt="Company"
-                                    className="w-12 h-12 rounded-full object-cover"
+                                    className="w-auto h-auto lg:w-[60%] rounded-full object-cover"
                                 />
                             </div>
-                            <div className="text-left">
+                            <div className="text-left w-[65%]">
                                 <p className="text-pink-500 font-bold">Join as a Company!</p>
                                 <p className="text-gray-500 text-sm">
                                     I'm a company and I want to publish my comics

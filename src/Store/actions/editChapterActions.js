@@ -112,30 +112,50 @@ export const updateChapter = (chapterId, variable, newData) => async (dispatch) 
     }
 };
 
-export const deleteChapter = (chapterId) => async (dispatch) => {
+export const createChapter = (newChapterData) => async (dispatch) => {
     dispatch(setLoading(true));
     try {
-        const response = await axios.get("http://localhost:8080/api/chapters/all");
-        const allChapters = response.data.response;
-        const chapterToDelete = allChapters.find(ch => ch._id === chapterId);
-        if (!chapterToDelete) {
-            throw new Error("Chapter not found.");
+        await axios.post(
+            "http://localhost:8080/api/chapters/create",
+            newChapterData,
+            { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+        );
+        alert("Capítulo creado exitosamente.");
+    } catch (error) {
+        dispatch(setError("Failed to create chapter."));
+        throw error;
+    } finally {
+        dispatch(setLoading(false));
+    }
+};
+
+
+export const deleteChapter = (chapterId) => async (dispatch, getState) => {
+    dispatch(setLoading(true));
+    try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            dispatch(setError("No token found. Please log in again."));
+            return;
         }
 
-        await axios.delete(`http://localhost:8080/api/chapters/delete/${chapterId}`, {
+        const config = {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`
-            }
-        });
+                Authorization: `Bearer ${token}`,
+            },
+        };
 
-        dispatch(setLoading(false));
+        await axios.delete(`http://localhost:8080/api/chapters/delete/${chapterId}`, config);
+
         alert("Capítulo eliminado exitosamente.");
 
-        dispatch(fetchChapters(chapterToDelete.manga_id));
+        const { manga_id } = getState().editChapter.chapterList.find(ch => ch._id === chapterId);
+
+        dispatch(fetchChapters(manga_id));
     } catch (error) {
         console.error("Error deleting chapter:", error);
         dispatch(setError("Failed to delete chapter."));
+    } finally {
         dispatch(setLoading(false));
-        throw error; 
     }
 };

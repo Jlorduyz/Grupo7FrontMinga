@@ -57,12 +57,10 @@ export default function ReadManga() {
 
     return (
         <div className="bg-gray-100 min-h-screen flex flex-col relative">
-            {/* Header */}
             <div className="fixed top-0 left-0 w-full z-10 bg-pink-500 text-white flex items-center justify-center py-4 shadow-md">
                 <h1 className="font-semibold">Chapter {info[0] ? info[0].title : ''}</h1>
             </div>
 
-            {/* Back Button */}
             <div className="h-20 flex items-end mt-20 px-4">
                 <button
                     className="text-black font-medium hover:opacity-90 h-[90%] w-[20%] rounded-full bg-gray-300 shadow-md hover:bg-gray-400 active:bg-gray-500"
@@ -72,7 +70,6 @@ export default function ReadManga() {
                 </button>
             </div>
 
-            {/* Manga Content */}
             <div className="flex-1 flex items-center justify-center pt-24 pb-20 relative">
                 {loading && <p className="text-gray-600">Loading pages...</p>}
                 {error && <p className="text-red-500">{error}</p>}
@@ -83,7 +80,6 @@ export default function ReadManga() {
                             alt={`Page ${currentPage + 1}`}
                             className="w-full h-auto object-contain shadow-lg rounded"
                         />
-                        {/* Navigation Buttons */}
                         <button
                             onClick={goToPreviousPage}
                             disabled={currentPage === 0}
@@ -98,14 +94,12 @@ export default function ReadManga() {
                         >
                             &#8594;
                         </button>
-                        {/* Messages Button */}
                         <button
                             className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white border border-gray-300 text-pink-500 rounded-full px-6 py-3 shadow hover:bg-gray-100"
-                            onClick={() => { /* Funcionalidad de mensajes */ }}
+                            onClick={() => {/**/ }}
                         >
                             Messages
                         </button>
-                        {/* Page Indicator for Large Screens */}
                         <span className="absolute bottom-4 right-4 text-gray-700">
                             Page {currentPage + 1} of {pages.length}
                         </span>

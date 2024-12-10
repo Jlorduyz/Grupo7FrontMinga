@@ -2,14 +2,14 @@ import { useSelector } from "react-redux"
 import { Navigate, useFetcher } from "react-router-dom";
 
 function PrivateRoute({children}) {
-    const token = useSelector(state => state.authStore?.token);
     const loading = useSelector(state => state.authStore?.loading);
+    const tokenStorage = localStorage.getItem("token");
 
 
     
     
 
-    if (!token && loading === false) 
+    if (!tokenStorage) 
         return <Navigate to="/welcomeback" replace></Navigate>
     
     else 

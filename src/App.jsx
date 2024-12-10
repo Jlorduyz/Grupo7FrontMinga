@@ -18,6 +18,8 @@ import Profile from "./Pages/Profile";
 import Favourites from "./Pages/Favourites";
 import PrivateRoute from "./Components/Routes/PrivateRoute.jsx";
 import SignRoute from "./Components/Routes/SignRoute.jsx";
+import NewChapter from "./Pages/NewChapter.jsx"
+import PrivateUpdAuthor from "./Components/Routes/PrivateUpdAuthor.jsx";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +37,9 @@ const router = createBrowserRouter([
       { path: "/new-role", element: <NewRole /> },
       { path: "/readManga", element: <PrivateRoute><ReadManga /></PrivateRoute> },
       { path: "/favourites", element: <Favourites /> },
-      { path: "/profile", element: <PrivateRoute><Profile /></PrivateRoute> },
+      { path: "/profile", element: <PrivateUpdAuthor><Profile/></PrivateUpdAuthor> },
+      { path: "/new-chapter", element: <NewChapter /> },
+
       { path: "/*", element: <Error404 /> },
     ],
   },
