@@ -44,6 +44,7 @@ const authReducer = createReducer(initialState, (builder) => {
             state.user = null
             state.token = null
             localStorage.removeItem("token")
+            localStorage.removeItem("user")
         })
 })
 

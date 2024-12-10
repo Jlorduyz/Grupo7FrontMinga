@@ -1,4 +1,3 @@
-// src/Store/actions/mangaActions.js
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createAction } from "@reduxjs/toolkit";
@@ -8,8 +7,7 @@ export const setSearch = createAction("manga/setSearch");
 
 
 /**
- * Acción para eliminar un manga.
- * @param {string} mangaId - ID del manga a eliminar.
+ * @param {string} mangaId
  */
 export const deleteManga = createAsyncThunk(
     "mangas/deleteManga",
@@ -26,7 +24,7 @@ export const deleteManga = createAsyncThunk(
                 }
             });
 
-            return response.data.response; // Asumiendo que la API devuelve el manga eliminado
+            return response.data.response; 
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
                 return rejectWithValue(error.response.data.message);
