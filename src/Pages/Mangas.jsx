@@ -75,7 +75,7 @@ const Mangas = () => {
 
             {isLoading && <p className="text-center">Loading mangas... <img className="flex items-center justify-center" src="https://giffiles.alphacoders.com/170/170278.gif" alt="Loading" /></p>}
             {error && <p className="text-center text-red-500">{error}</p>}
-
+            {filteredMangas.length === 0 && <p className="text-center"><img className="flex items-center justify-center col-span-1" src="https://c.tenor.com/_VjgyzCjP_EAAAAd/tenor.gif" alt="" /></p>}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {filteredMangas.map((manga) => (
                 <MangaCard
