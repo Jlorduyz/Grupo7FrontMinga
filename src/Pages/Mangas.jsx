@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchMangas } from "../Store/reducers/mangaReducer";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer/Footer";
-import Filters from "../Components/Filters"; 
+import Filters from "../Components/Filters";
 import { categoryStyles, defaultStyles } from "../Components/Filters";
 import { setFilter } from "../Store/actions/mangaActions";
 import axios from "axios";
@@ -17,7 +17,7 @@ const Mangas = () => {
   const [categories, setCategories] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  
+
 
   useEffect(() => {
     axios
@@ -75,7 +75,26 @@ const Mangas = () => {
 
             {isLoading && <p className="text-center">Loading mangas... <img className="flex items-center justify-center" src="https://giffiles.alphacoders.com/170/170278.gif" alt="Loading" /></p>}
             {error && <p className="text-center text-red-500">{error}</p>}
-            {filteredMangas.length === 0 && <p className="text-center"><img className="flex items-center justify-center col-span-1" src="https://c.tenor.com/_VjgyzCjP_EAAAAd/tenor.gif" alt="" /></p>}
+            {filteredMangas.length === 0 && !isLoading && !error && (
+              <div className="text-center bg-gray-100 py-8 px-4 rounded-lg shadow-md border border-gray-200">
+                <p className="text-pink-600 text-2xl font-bold mb-4">Manga not found</p>
+                <p className="text-gray-500 text-lg mb-6">
+                  Sorry, we couldnt find any manga matching your search criteria.
+                </p>
+                <img
+                  className="mx-auto mt-4 w-48 h-48 object-contain"
+                  src="https://c.tenor.com/_VjgyzCjP_EAAAAd/tenor.gif"
+                  alt="Not Found"
+                />
+                <button
+                  onClick={() => setSearchText("")} // Limpia el campo de búsqueda
+                  className="mt-6 bg-pink-500 hover:bg-pink-600 text-white font-medium py-2 px-6 rounded-lg transition duration-300"
+                >
+                  Reset Search
+                </button>
+              </div>
+            )}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {filteredMangas.map((manga) => (
                 <MangaCard
