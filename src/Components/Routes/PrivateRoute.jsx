@@ -4,7 +4,6 @@ import { Navigate, useFetcher } from "react-router-dom";
 function PrivateRoute({children}) {
     const loading = useSelector(state => state.authStore?.loading);
     const tokenStorage = localStorage.getItem("token");
-    const online = (JSON.parse(localStorage.getItem("user")).online)
 
 
     

@@ -94,7 +94,7 @@ export default function SignIn() {
               Sign in
             </button>
             {loading && <p className="text-sm text-gray-600 text-center">Loading...</p>}
-            {error && <p className="text-sm text-red-600 text-center">Invalid Credentials</p>}
+            {error && <p className="text-sm text-red-600 text-center"></p>}
           </form>
 
           <br />

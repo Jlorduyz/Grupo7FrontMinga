@@ -1,9 +1,7 @@
-// src/Store/actions/profileActions.js
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Acción asíncrona para actualizar el perfil del usuario
 export const updateProfile = createAsyncThunk(
   "profile/updateProfile",
   async (formData, { getState, rejectWithValue }) => {
@@ -19,7 +17,7 @@ export const updateProfile = createAsyncThunk(
           },
         }
       );
-      return response.data; // Asumiendo que el backend devuelve los datos actualizados del usuario
+      return response.data; 
     } catch (error) {
       console.error("Error actualizando el perfil:", error);
       return rejectWithValue(
@@ -29,7 +27,6 @@ export const updateProfile = createAsyncThunk(
   }
 );
 
-// Acción asíncrona para eliminar la cuenta del usuario
 export const deleteAccount = createAsyncThunk(
   "profile/deleteAccount",
   async (_, { getState, rejectWithValue }) => {
@@ -44,7 +41,7 @@ export const deleteAccount = createAsyncThunk(
           },
         }
       );
-      return response.data; // Asumiendo que el backend devuelve una confirmación
+      return response.data; 
     } catch (error) {
       console.error("Error eliminando la cuenta:", error);
       return rejectWithValue(

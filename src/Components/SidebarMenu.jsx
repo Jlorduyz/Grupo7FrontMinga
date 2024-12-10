@@ -21,7 +21,7 @@ const SidebarMenu = () => {
     const role = useSelector(state => state.authStore.user?.role);
     const user = useSelector(state => state.authStore?.user);
 
-    
+
 
 
 
@@ -58,22 +58,22 @@ const SidebarMenu = () => {
                     {(user) ? (
                         <div className="flex  items-start justify-start space-y-2 w-full py-4  h-[10%]">
                             <div className="flex w-full h-full ">
-                            <img
-                                className="w-16 h-16 rounded-full object-cover"
-                                src={user.photo || "/images/defaultProfile.png"}
-                                alt="User Profile"
-                            />
-                            <div>
-                            <p className="text-md text-center ">{user.email}</p>
+                                <img
+                                    className="w-16 h-16 rounded-full object-cover"
+                                    src={user.photo || "/images/defaultProfile.png"}
+                                    alt="User Profile"
+                                />
+                                <div>
+                                    <p className="text-md text-center ">{user.email}</p>
 
-                            </div>
+                                </div>
                             </div>
 
                         </div>
                     ) : (
                         <div className="flex  items-start justify-start space-y-2 w-full py-4  h-[25%]">
 
-                    </div>
+                        </div>
                     )
                     }
 
@@ -119,6 +119,17 @@ const SidebarMenu = () => {
                                     className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
                                 >
                                     Favorites
+                                </button>
+
+                            )
+                        }
+                        {
+                            (token && role === 0) && (
+                                <button
+                                    onClick={() => navigate("/new-role")}
+                                    className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
+                                >
+                                    Select-Role
                                 </button>
 
                             )
