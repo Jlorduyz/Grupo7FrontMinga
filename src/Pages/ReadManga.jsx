@@ -94,17 +94,18 @@ export default function ReadManga() {
                         >
                             &#8594;
                         </button>
-                        <button
-                            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white border border-gray-300 text-pink-500 rounded-full px-6 py-3 shadow hover:bg-gray-100"
-                            onClick={() => {/**/ }}
-                        >
-                            Messages
-                        </button>
+
                         <span className="absolute bottom-4 right-4 text-gray-700">
                             Page {currentPage + 1} of {pages.length}
                         </span>
                     </div>
                 )}
+                <button
+                    className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white border border-pink-500 text-pink-500 rounded-full px-6 py-3 shadow hover:bg-gray-100"
+                    onClick={() => {/**/ }}
+                >
+                    Messages
+                </button>
             </div>
         </div>
     );
