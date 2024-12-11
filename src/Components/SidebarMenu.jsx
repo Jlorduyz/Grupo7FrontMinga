@@ -45,8 +45,8 @@ const SidebarMenu = () => {
             </button>
 
             <div
-                className={`fixed top-0 left-0 h-full z-40 bg-pink-300 transition-transform duration-300  flex justify-center ${isOpen ? "translate-x-0" : "-translate-x-full"
-                    } ${window.innerWidth < 768 ? "w-full" : "w-64"}`}
+                className={`fixed top-0 left-0 h-full z-40  bg-pink-300 transition-transform duration-300  flex justify-center ${isOpen ? "translate-x-0" : "-translate-x-[120%]"
+                    } ${window.innerWidth < 768 ? "w-full" : "w-[350px]"}`}
             >
                 <div className="flex flex-col justify-start  items-center h-full space-y-8 text-white w-full">
                     <button
