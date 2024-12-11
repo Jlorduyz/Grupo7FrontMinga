@@ -65,28 +65,28 @@ export default function ReadManga() {
                 <h1 className="font-semibold">Chapter {info[0] ? info[0].title : ''}</h1>
             </div>
 
-            <div className="h-20 flex items-end mt-24 px-4">
 
-                <button
-                    className="text-black font-medium hover:opacity-90 h-[70%] w-[5%] rounded-full bg-gray-300 shadow-md hover:bg-gray-400 active:bg-gray-500"
-                    onClick={() => navigate(-1)}
-                >
-                    Back
-                </button>
-            </div>
 
 
             <div className="flex-1 flex items-center justify-center pt-1 pb-20 relative">
 
                 {loading && <p className="text-gray-600">Loading pages...</p>}
                 {error && <p className="text-red-500">{error}</p>}
-                {pages && pages.length > 0 && !loading && !error && (
-                    <div className="relative w-full max-w-screen-lg">
+                {pages && pages.length > 0 && !loading && !error && window.innerWidth < 800 && (
+
+
+                    <div className="relative w-full max-w-screen-lg ">
+                        <div className=" bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-semibold border-2 mt-32 w-[100px] items-center  justify-center flex">
+                            <button onClick={() => navigate(-1)}>
+                                Return
+                            </button>
+                        </div>
                         <img
                             src={pages[currentPage]}
                             alt={`Page ${currentPage + 1}`}
                             className="w-full h-auto object-contain shadow-lg rounded"
                         />
+
                         <button
                             onClick={goToPreviousPage}
                             disabled={currentPage === 0}
@@ -107,13 +107,59 @@ export default function ReadManga() {
                         </span>
                     </div>
                 )}
-                <button
-                    className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white border border-pink-500 text-pink-500 rounded-full px-6 py-3 shadow hover:bg-gray-100"
+                {pages && pages.length > 0 && !loading && !error && window.innerWidth > 800 && (
 
-                    onClick={() => {/**/ }}
-                >
-                    Messages
-                </button>
+
+                    <div className="relative w-full max-w-screen-lg ">
+                        <div className=" bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-semibold border-2 mt-32 w-[100px] items-center  justify-center flex">
+                            <button onClick={() => navigate(-1)}>
+                                Return
+                            </button>
+                        </div>
+                        <img
+                            src={pages[currentPage]}
+                            alt={`Page ${currentPage + 1}`}
+                            className="w-full h-auto object-contain shadow-lg rounded"
+                        />
+
+                        <span className="absolute bottom-4 right-4 text-gray-700">
+                            Page {currentPage + 1} of {pages.length}
+                        </span>
+                    </div>
+                )}
+
+                <div className="border-2 border-blue-500">
+                    <button
+                        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white border border-pink-500 text-pink-500 rounded-full px-6 py-3 shadow hover:bg-gray-100"
+
+                        onClick={() => {/**/ }}
+                    >
+                        Messages
+
+                    </button>
+                    {pages && pages.length > 0 && !loading && !error && window.innerWidth > 800 && (
+
+
+                        <div className="flex items-center justify-center w-full h-full">
+                            <button
+                                onClick={goToPreviousPage}
+                                disabled={currentPage === 0}
+                                className={` absolute bottom-4 left-1/3 transform -translate-x-1/2 bg-pink-500 text-white px-3 py-1 rounded opacity-70 hover:opacity-100 ${currentPage === 0 ? 'hidden' : 'block'}`}
+                            >
+                                &#8592;
+                            </button>
+                            <button
+                                onClick={goToNextPage}
+                                disabled={currentPage === pages.length - 1}
+                                className={`absolute bottom-4 right-1/3 transform -translate-x-1/2  bg-pink-500 text-white px-3 py-1 rounded opacity-70 hover:opacity-100 ${currentPage === pages.length - 1 ? 'hidden' : 'block'}`}
+                            >
+                                &#8594;
+                            </button>
+                        </div>
+                    )}
+
+                </div>
+
             </div>
         </div>
     );

@@ -67,7 +67,7 @@ export default function Chapters({ manga }) {
                         chapters.map((chapter) => (
                             <div
                                 key={chapter._id}
-                                className="flex items-center justify-between bg-white shadow-md rounded-lg p-2  h-[100px]"
+                                className="flex items-center justify-between bg-white shadow-md rounded-lg p-2  h-[150px]"
                             >
                                 <div className="flex items-center space-x-3  w-[65%] h-full ">
                                     <img
@@ -88,7 +88,7 @@ export default function Chapters({ manga }) {
                                         Read
                                     </button>
                                 </div>
-                                <div className=" h-full w-[35%] md:flex justify-center items-center sm:block hidden"> 
+                                <div className=" h-[65%] w-[35%] md:flex justify-center items-center sm:block hidden"> 
                                     <button
                                         className="bg-pink-500 text-white px-4 py-1 rounded-full hover:bg-pink-600 text-2xl font-semibold  w-[90%] h-[90%]"
                                         onClick={() => handleToRead(chapter._id)}
