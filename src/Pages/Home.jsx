@@ -34,6 +34,7 @@ const loginWithToken = async (token) => {
         }
       });
       return response.data.response;
+
     } catch (error) {
       console.log("error", error);
     }
