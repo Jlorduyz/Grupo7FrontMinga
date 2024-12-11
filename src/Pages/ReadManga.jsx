@@ -87,25 +87,20 @@ export default function ReadManga() {
                             alt={`Page ${currentPage + 1}`}
                             className="w-full h-auto object-contain shadow-lg rounded"
                         />
-                        <div className="fixed bottom-0 left-0 w-full bg-white py-4 shadow-md flex justify-between items-center px-8">
-                            <button
-                                onClick={goToPreviousPage}
-                                disabled={currentPage === 0}
-                                className={`px-4 py-2 bg-pink-500 text-white rounded-full shadow-md hover:bg-pink-600 ${currentPage === 0 ? "opacity-50 cursor-not-allowed" : ""
-                                    }`}
-                            >
-                                Previous
-                            </button>
-                            <button
-                                onClick={goToNextPage}
-                                disabled={currentPage === pages.length - 1}
-                                className={`px-4 py-2 bg-pink-500 text-white rounded-full shadow-md hover:bg-pink-600 ${currentPage === pages.length - 1 ? "opacity-50 cursor-not-allowed" : ""
-                                    }`}
-                            >
-                                Next
-                            </button>
-                        </div>
-
+                        <button
+                            onClick={goToPreviousPage}
+                            disabled={currentPage === 0}
+                            className={`absolute left-0 top-1/2 transform -translate-y-1/2 bg-pink-500 text-white px-3 py-1 rounded opacity-70 hover:opacity-100 ${currentPage === 0 ? 'hidden' : 'block'}`}
+                        >
+                            &#8592;
+                        </button>
+                        <button
+                            onClick={goToNextPage}
+                            disabled={currentPage === pages.length - 1}
+                            className={`absolute right-0 top-1/2 transform -translate-y-1/2 bg-pink-500 text-white px-3 py-1 rounded opacity-70 hover:opacity-100 ${currentPage === pages.length - 1 ? 'hidden' : 'block'}`}
+                        >
+                            &#8594;
+                        </button>
 
                         <span className="absolute bottom-4 right-4 text-gray-700">
                             Page {currentPage + 1} of {pages.length}
