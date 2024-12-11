@@ -10,51 +10,37 @@ import { useSelector } from 'react-redux';
 const loginWithToken = async (token) => {
   const role = useSelector(state => state.authStore.user?.role);
 
-console.log("role", role);
-if (role === 1 && token) {
-  try {
-    console.log("se ejecuto loginWithToken");
-    
-    const response = await axios.get("http://localhost:8080/api/authors/validateauthor",
-      {
+  console.log("role", role);
+  if (role === 1 && token) {
+    try {
+      console.log("se ejecutó loginWithToken");
+
+      const response = await axios.get("http://localhost:8080/api/authors/validateauthor", {
         headers: {
           Authorization: `Bearer ${token}`,
         }
-      })
-    return response.data.response
+      });
+      return response.data.response;
+    } catch (error) {
+      console.log("error", error);
+    }
+  } else if (role === 0 && token) {
+    try {
+      console.log("se ejecutó loginWithToken");
 
-  } catch (error) {
-    console.log("error", error);
-  }
-  
-} if (role === 0 && token) {
-  try {
-    console.log("se ejecuto loginWithToken");
-
-    const response = await axios.get("http://localhost:8080/api/users/validationToken",
-      {
+      const response = await axios.get("http://localhost:8080/api/users/validationToken", {
         headers: {
           Authorization: `Bearer ${token}`,
         }
-      })
-    return response.data.response
-
-      const response = await axios.get("http://localhost:8080/api/users/validationToken",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          }
-        })
-      return response.data.response
-
+      });
+      return response.data.response;
     } catch (error) {
       console.log("error", error);
     }
   }
+};
 
-}
 
-}
 
 
 
