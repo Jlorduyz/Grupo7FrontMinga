@@ -15,7 +15,7 @@ const Footer = () => {
                 <img
                     src="/images/footer.png"
                     alt="Footer Background"
-                    className="w-full h-auto"
+                    className="w-full px-5 h-auto"
                 />
             </div>
 
