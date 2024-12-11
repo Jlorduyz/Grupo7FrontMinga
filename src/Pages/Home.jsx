@@ -20,21 +20,21 @@ const role = useSelector(state => state.authStore.user?.role)
         headers: {
           Authorization: `Bearer ${token}`,
         },
+
       });
       return response.data.response;
     } catch (error) {
       console.log("error", error);
     }
-  }
 
-  if (role === 0 && token) {
+  } else if (role === 0 && token) {
     try {
-      console.log("se ejecuto loginWithToken");
+      console.log("se ejecutó loginWithToken");
 
       const response = await axios.get("http://localhost:8080/api/users/validationToken", {
         headers: {
           Authorization: `Bearer ${token}`,
-        },
+        }
       });
       return response.data.response;
     } catch (error) {
