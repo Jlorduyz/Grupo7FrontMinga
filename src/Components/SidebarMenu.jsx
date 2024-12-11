@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../Store/actions/AuthActions.js";
 import { useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 
 
 const SidebarMenu = () => {
+
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -30,12 +31,10 @@ const SidebarMenu = () => {
 
     return (
         <div>
-
-
             <button
                 onClick={toggleMenu}
-
                 className={`fixed top-4 left-4 z-50 focus:outline-none transition-transform duration-300 ${isOpen ? "hidden" : "block"}`}
+                aria-label="Abrir menú"
             >
                 <img
                     src="/images/MenuImage.png"
@@ -45,144 +44,121 @@ const SidebarMenu = () => {
             </button>
 
             <div
-                className={`fixed top-0 left-0 h-full z-40  bg-pink-300 transition-transform duration-300  flex justify-center ${isOpen ? "translate-x-0" : "-translate-x-[120%]"
-                    } ${window.innerWidth < 768 ? "w-full" : "w-[350px]"}`}
+                className={`fixed top-0 left-0 h-full z-40 bg-gradient-to-b from-pink-500 to-pink-700 transition-transform duration-300 flex flex-col items-center ${isOpen ? "translate-x-0" : "-translate-x-full"} ${window.innerWidth < 768 ? "w-full" : "w-80"}`}
             >
-                <div className="flex flex-col justify-start  items-center h-full space-y-8 text-white w-full">
+                <div className="flex flex-col justify-start items-center h-full w-full p-6 text-white relative">
+
                     <button
                         onClick={toggleMenu}
-                        className="absolute top-4 right-4 text-white  text-3xl bg-pink-400  w-8 h-8 flex justify-center items-center pb-2 rounded-full hover:bg-pink-600"
+                        className="absolute top-4 right-4 text-white text-2xl hover:text-gray-200 transition-colors"
+                        aria-label="Cerrar menú"
                     >
-                        x
+                        &times;
                     </button>
-                    {(user) ? (
-                        <div className="flex  items-start justify-start space-y-2 w-full py-4  h-[10%]">
-                            <div className="flex w-full h-full ">
-                                <img
-                                    className="w-16 h-16 rounded-full object-cover"
-                                    src={user.photo || "/images/defaultProfile.png"}
-                                    alt="User Profile"
-                                />
-                                <div>
-                                    <p className="text-md text-center ">{user.email}</p>
 
-                                </div>
+                    {user ? (
+                        <div className="flex items-center space-x-4 mb-8">
+                            <img
+                                className="w-16 h-16 rounded-full object-cover border-2 border-white"
+                                src={user.photo || "/images/defaultProfile.png"}
+                                alt="User Profile"
+                            />
+                            <div className="flex flex-col">
+                                <span className="text-xl font-semibold">{user.name || "User"}</span>
+                                <span className="text-sm">{user.email}</span>
                             </div>
-
                         </div>
                     ) : (
-                        <div className="flex  items-start justify-start space-y-2 w-full py-4  h-[25%]">
+                        <div className="flex items-center space-x-4  mb-[80%]">
 
+                            <div className="flex flex-col">
+                                <span className="text-xl font-semibold">Guest</span>
+                                <span className="text-sm">Please, login or register </span>
+                            </div>
                         </div>
-                    )
-                    }
+                    )}
 
-                    <div className=" w-[75%] h-[70%] flex flex-col space-y-8 mt-10">
+                    <nav className="flex flex-col items-center w-full space-y-4">
                         <button
                             onClick={() => navigate("/Home")}
-                            className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
+                            className="w-full text-left text-lg transition-colors flex items-center  justify-center hover:bg-rose-50 hover:text-black"
                         >
                             Home
                         </button>
                         <button
                             onClick={() => navigate("/mangas")}
-                            className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
+                            className="w-full text-left text-lg transition-colors flex items-center  justify-center hover:bg-rose-50 hover:text-black"
                         >
                             Mangas
                         </button>
-                        {
-                            (!requiredAuth || token) && (
-                                <button
-                                    onClick={() => navigate(`/manager`)}
-                                    className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
+                        {(!requiredAuth || token) && (
+                            <button
+                                onClick={() => navigate(`/manager`)}
+                                className="w-full text-left text-lg transition-colors flex items-center  justify-center hover:bg-rose-50 hover:text-black"
                                 >
-                                    Manager
-                                </button>
+                                Manager
+                            </button>
+                        )}
+                        {(role === 1 && token) && (
+                            <button
+                                onClick={() => navigate("/profile")}
+                                className="w-full text-left text-lg transition-colors flex items-center  justify-center hover:bg-rose-50 hover:text-black"
+                                >
+                                Profile
+                            </button>
+                        )}
+                        {(!requiredAuth || token) && (
+                            <button
+                                onClick={() => navigate("/favourites")}
+                                className="w-full text-left text-lg transition-colors flex items-center justify-center hover:bg-rose-50 hover:text-black"
+                                >
+                                Favorites
+                            </button>
+                        )}
+                        {(token && role === 0) && (
+                            <button
+                                onClick={() => navigate("/new-role")}
+                                className="w-full text-left text-lg transition-colors flex items-center  justify-center hover:bg-rose-50 hover:text-black"
+                                >
+                                Select-Role
+                            </button>
+                        )}
+                        {(role === 3 || role === 1 && token) && (
+                            <button
+                                onClick={() => navigate("/admin-panel")}
+                                className="w-full text-left text-lg transition-colors flex items-center  justify-center hover:bg-rose-50 hover:text-black"
+                                >
+                                Admin-Panel
+                            </button>
+                        )}
+                        {(unrequiredAuth || !token) && (
+                            <button
+                                onClick={() => navigate("/welcome")}
+                                className="w-full text-left text-lg transition-colors flex items-center  justify-center hover:bg-rose-50 hover:text-black"
+                                >
+                                Register
+                            </button>
+                        )}
+                        {(unrequiredAuth || !token) && (
+                            <button
+                                onClick={() => navigate("/welcomeback")}
+                                className="w-full text-left text-lg transition-colors flex items-center  justify-center hover:bg-rose-50 hover:text-black"
+                                >
+                                Sign In
+                            </button>
+                        )}
+                    </nav>
 
-                            )
-                        }
-                        {
-                            (role === 1 && token) && (
-                                <button
-                                    onClick={() => navigate("/profile")}
-                                    className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
-                                >
-                                    Profile
-                                </button>
-
-                            )
-                        }
-                        {
-                            (!requiredAuth || token) && (
-                                <button
-                                    onClick={() => navigate("/favourites")}
-                                    className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
-                                >
-                                    Favorites
-                                </button>
-
-                            )
-                        }
-                        {
-                            (token && role === 0) && (
-                                <button
-                                    onClick={() => navigate("/new-role")}
-                                    className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
-                                >
-                                    Select-Role
-                                </button>
-
-                            )
-                        }
-                        {
-                            (role === 3 && token) && (
-                                <button
-                                    onClick={() => navigate("/admin-panel")}
-                                    className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
-                                >
-                                    Admin-Panel
-                                </button>
-
-                            )
-                        }
-
-                        {
-                            (unrequiredAuth || !token) && (
-                                <button
-                                    onClick={() => navigate("/welcome")}
-                                    className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
-                                >
-                                    Register
-                                </button>
-                            )
-                        }
-                        {
-                            (unrequiredAuth || !token) && (
-                                <button
-                                    onClick={() => navigate("/welcomeback")}
-                                    className="bg-white text-pink-500 px-10 py-3 rounded-full text-lg shadow-md hover:shadow-lg hover:bg-pink-100"
-                                >
-                                    Sign In
-                                </button>
-                            )
-                        }
+                    <div className="mt-auto w-full flex justify-end">
+                        {(!requiredAuth || token) && (
+                            <button
+                                onClick={handleLogout}
+                                className="w-auto text-left text-lg text-white hover:text-black transition-colors flex items-center justify-end hover:bg-slate-50 p-2 rounded-lg"
+                            >
+                                Logout
+                            </button>
+                        )}
                     </div>
-
-
-                    <div className="">
-                        {
-                            (!requiredAuth || token) && (
-                                <button
-                                    onClick={handleLogout}
-                                    className="bg-red-200 text-black px-10 py-3 rounded-lg text-lg shadow-lg hover:shadow-lg hover:bg-pink-100 text-pretty"
-                                >
-                                    Logout
-                                </button>
-                            )
-                        }
-                    </div>
-
-
                 </div>
             </div>
         </div>

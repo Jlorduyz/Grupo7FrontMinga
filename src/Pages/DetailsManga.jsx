@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import ReactionButton from "../Components/ReactionButton";
 import { useSelector } from "react-redux";
 
-const DetailsManga = ({ mangaId, userId, hearth }) => {
+const DetailsManga = () => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     const [manga, setManga] = useState(null);
     const navigate = useNavigate();
-    const token = useSelector((state) => state.authStore.token);
+    const token = useSelector((state) => state.authStore?.token);
     console.log(token);
 
 
@@ -31,8 +31,10 @@ const DetailsManga = ({ mangaId, userId, hearth }) => {
                 console.log(error);
             });
     }, [id]);
-    const userAuth = useSelector(state => state.authStore?.user);
-    userId = userAuth?._id;
+    
+        const userAuth = useSelector(state => state.authStore?.user);
+       const  userId = userAuth?._id;
+        console.log("userId", userId);
 
 
     if (!manga) {

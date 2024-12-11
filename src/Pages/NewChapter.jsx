@@ -14,7 +14,8 @@ const NewChapter = () => {
     title: "",
     order: "",
     pages: [],
-    manga_id: mangaId, 
+    manga_id: mangaId,
+    cover_photo: "",
   });
 
 
@@ -49,12 +50,11 @@ const NewChapter = () => {
     dispatch(createChapter(formData));
 
 
-    if (!formData.manga_id || !formData.title || !formData.order || formData.pages.length === 0) {
+    if (!formData.manga_id || !formData.title || !formData.order || formData.pages.length === 0 || !formData.cover_photo) {
       alert("All form fields are required");
       return;
     }
 
-    dispatch(createChapter(formData));
   };
 
   return (
@@ -75,6 +75,17 @@ const NewChapter = () => {
 
         <div className="-mt-20 mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-12 w-full max-w-4xl relative z-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
+          <div>
+              <label className="block text-sm font-medium text-gray-700">Insert Cover Photo</label>
+              <input
+                type="text"
+                name="cover_photo"
+                value={formData.cover_photo}
+                onChange={handleInputChange}
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500"
+                required
+              />
+            </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Insert Title</label>
               <input

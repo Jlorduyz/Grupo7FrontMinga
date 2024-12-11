@@ -52,11 +52,12 @@ const Home = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const tokenFromParams = params.get('token');
+    // const role = params.getItem('role');
 
     if (tokenFromParams) {
       localStorage.setItem('token', tokenFromParams);
       loginWithToken(tokenFromParams, role).then((user) => {
-        dispatch(setUser({ user, token: tokenFromParams }));
+        dispatch(setUser({ user, tokenFromParams }));
       });
     }
     navigate("/home");
