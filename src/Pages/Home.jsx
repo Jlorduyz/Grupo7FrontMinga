@@ -39,13 +39,6 @@ if (role === 1 && token) {
       })
     return response.data.response
 
-      const response = await axios.get("http://localhost:8080/api/users/validationToken",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          }
-        })
-      return response.data.response
 
     } catch (error) {
       console.log("error", error);
@@ -54,7 +47,7 @@ if (role === 1 && token) {
 
 }
 
-}
+
 
 
 
