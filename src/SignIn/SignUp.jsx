@@ -53,6 +53,8 @@ const RegisterForm = () => {
 
             const loginResult = await dispatch(login({ email: formData.email, password: formData.password }));
 
+
+
             if (login.fulfilled.match(loginResult)) {
                 navigate("/new-role");
             } else {
@@ -110,7 +112,7 @@ const RegisterForm = () => {
                                 <div className="flex items-center justify-between">
                                     <input
                                         type="text"
-                                        placeholder="Photo Url"    
+                                        placeholder="Photo Url"
                                         name="photo"
                                         value={formData.photo}
                                         onChange={handleChange}
@@ -193,6 +195,7 @@ const RegisterForm = () => {
                 }}
             ></div>
         </div>
-    )};
+    )
+};
 
 export default RegisterForm;

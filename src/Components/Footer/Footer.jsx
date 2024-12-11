@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faTwitter, faVimeoV, faYoutube, } from "@fortawesome/free-brands-svg-icons";
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+
 
 
 const Footer = () => {
@@ -44,20 +46,51 @@ const Footer = () => {
                     </button>
                 </div>
 
-                <div className="footer-social-donate flex flex-col items-center lg:items-end space-y-6">
-                    <div className="footer-social flex space-x-4 sm:space-x-6 text-gray-500 text-lg sm:text-xl">
-                        <a href="#facebook" className="hover:text-pink-500">
-                            <FontAwesomeIcon icon={faFacebookF} />
-                        </a>
-                        <a href="#twitter" className="hover:text-pink-500">
-                            <FontAwesomeIcon icon={faTwitter} />
-                        </a>
-                        <a href="#vimeo" className="hover:text-pink-500">
-                            <FontAwesomeIcon icon={faVimeoV} />
-                        </a>
-                        <a href="#youtube" className="hover:text-pink-500">
-                            <FontAwesomeIcon icon={faYoutube} />
-                        </a>
+                <div className="footer-social-donate flex flex-col items-center lg:items-center space-y-6">
+                    <div className="footer-social-donate flex flex-col items-center lg:items-end space-y-6">
+                        <div className="footer-social flex space-x-4 sm:space-x-6 text-gray-500 text-lg sm:text-xl">
+                            <a
+                                href="https://www.facebook.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-pink-500"
+                            >
+                                <FontAwesomeIcon icon={faFacebookF} />
+                            </a>
+                            <a
+                                href="https://twitter.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-pink-500"
+                            >
+                                <FontAwesomeIcon icon={faTwitter} />
+                            </a>
+                            <a
+                                href="https://vimeo.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-pink-500"
+                            >
+                                <FontAwesomeIcon icon={faVimeoV} />
+                            </a>
+                            <a
+                                href="https://www.youtube.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-pink-500"
+                            >
+                                <FontAwesomeIcon icon={faYoutube} />
+                            </a>
+
+                            <a
+                                href="https://github.com/Jlorduyz/Grupo7FrontMinga"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-pink-500"
+                            >
+                                <FontAwesomeIcon icon={faGithub} />
+                            </a>
+                        </div>
                     </div>
 
                     <button

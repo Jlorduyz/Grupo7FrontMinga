@@ -21,6 +21,7 @@ import SignRoute from "./Components/Routes/SignRoute.jsx";
 import NewChapter from "./Pages/NewChapter.jsx"
 import PrivateUpdAuthor from "./Components/Routes/PrivateUpdAuthor.jsx";
 import NewAuthor from "./Pages/NewAuthor.jsx";
+import NewManga from "./Pages/NewManga.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,8 @@ const router = createBrowserRouter([
       { path: "/profile", element: <PrivateUpdAuthor><Profile/></PrivateUpdAuthor> },
       { path: "/new-chapter", element: <NewChapter /> },
       { path: "/new-author", element: <NewAuthor /> },
+      { path: "/new-manga", element: <NewManga /> },
+
 
       { path: "/*", element: <Error404 /> },
     ],
