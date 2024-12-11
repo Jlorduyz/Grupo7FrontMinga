@@ -1,78 +1,68 @@
 import React, { useEffect } from 'react';
 import Footer from '../Components/Footer/Footer.jsx';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setUser } from '../Store/actions/AuthActions.js';
 import Carousel from '../Components/carrousel.jsx';
-import { useSelector } from 'react-redux';
+
+
 
 const loginWithToken = async (token) => {
-  const role = useSelector(state => state.authStore.user?.role);
+const role = useSelector(state => state.authStore.user?.role)
+  console.log("role", role);
 
-console.log("role", role);
-if (role === 1 && token) {
-  try {
-    console.log("se ejecuto loginWithToken");
-    
-    const response = await axios.get("http://localhost:8080/api/authors/validateauthor",
-      {
+  if (role === 1 && token) {
+    try {
+      console.log("se ejecuto loginWithToken");
+
+      const response = await axios.get("http://localhost:8080/api/authors/validateauthor", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+
+      });
+      return response.data.response;
+    } catch (error) {
+      console.log("error", error);
+    }
+
+  } else if (role === 0 && token) {
+    try {
+      console.log("se ejecutó loginWithToken");
+
+      const response = await axios.get("http://localhost:8080/api/users/validationToken", {
         headers: {
           Authorization: `Bearer ${token}`,
         }
-      })
-    return response.data.response
-
-  } catch (error) {
-    console.log("error", error);
-  }
-  
-} if (role === 0 && token) {
-  try {
-    console.log("se ejecuto loginWithToken");
-
-    const response = await axios.get("http://localhost:8080/api/users/validationToken",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      })
-    return response.data.response
-
-
+      });
+      return response.data.response;
     } catch (error) {
       console.log("error", error);
     }
   }
-
-}
-
-
-
-
-
+};
 
 const Home = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const role = useSelector((state) => state.authStore.user?.role);
+  const token = useSelector((state) => state.authStore?.token);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const token = params.get('token');
-    if (token) {
-      localStorage.setItem('token', token);
-      loginWithToken(token).then((user) => {
-        dispatch(setUser({ user, token }))
+    const tokenFromParams = params.get('token');
 
-      })
+    if (tokenFromParams) {
+      localStorage.setItem('token', tokenFromParams);
+      loginWithToken(tokenFromParams, role).then((user) => {
+        dispatch(setUser({ user, token: tokenFromParams }));
+      });
     }
     navigate("/home");
-  }, [dispatch])
+  }, [dispatch, role, navigate]);
 
-
-  const requiredAuth = true
-  const token = useSelector(state => state.authStore.token);
+  const requiredAuth = true;
 
   return (
     <>
@@ -87,7 +77,7 @@ const Home = () => {
           <img
             src="/images/home.jpg"
             alt="Responsive Banner"
-            className="hidden sm:block w-full  h-[600px]  brightness-50 object-cover"
+            className="hidden sm:block w-full h-[600px] brightness-50 object-cover"
           />
         </div>
 
@@ -106,25 +96,26 @@ const Home = () => {
             <h3 className="text-lg font-semibold font-poppins text-white">#MingaForever</h3>
           </div>
           <div className="py-2">
-            {
-              (!requiredAuth || !token) ? (
-                <button onClick={() => navigate("/welcomeback")}
-                  className="bg-pink-600 text-white rounded-md w-[240px] h-[55px] text-[24px] font-medium font-poppins">
-                  Sign In
-                </button>
-              ) : (
-                <button onClick={() => navigate("/mangas")}
-                  className="bg-pink-600 text-white rounded-md w-[240px] h-[55px] text-[24px] font-medium font-poppins">
-                  Mangas
-                </button>
-              )
-            }
-
+            {(!requiredAuth || !token) ? (
+              <button
+                onClick={() => navigate("/welcomeback")}
+                className="bg-pink-600 text-white rounded-md w-[240px] h-[55px] text-[24px] font-medium font-poppins"
+              >
+                Sign In
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate("/mangas")}
+                className="bg-pink-600 text-white rounded-md w-[240px] h-[55px] text-[24px] font-medium font-poppins"
+              >
+                Mangas
+              </button>
+            )}
           </div>
         </div>
       </div>
 
-      <div className='sm:block hidden'>
+      <div className="sm:block hidden">
         <Footer />
       </div>
     </>
